@@ -434,48 +434,164 @@
 
 
 
+    <!--Cadeira-->
+    <node id="cadeira">    
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+
+        <translation x="8.0" y="0.0" z="2.0" />
+               
+        </transformations>
+
+        <descendants>
+            <noderef id="tampoCadeira"/>
+            <noderef id="pernasCadeira"/>
+        </descendants>
+    
+    </node>
 
 
 
-        <!--Cadeira-->
-        <node id="cadeira">    
-            <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
 
-            <texture id="clear"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
-                <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
-            </texture>
+    <node id="pernasCadeira">            
+        <material id="null" />
 
-            <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
-            <transformations>
-                <translation x="2" y="0.0" z="2.0" />
-            </transformations>
+        <texture id="clear">
+            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+        </texture>
 
-            <!-- declaring descendants, at least one node or one leaf must be present
-             descendants may be mixed, nodes and leafs -->
-            <descendants>
-				<noderef id="tampo"/>
-				<noderef id="perna"/>
-            </descendants>
-		
-        </node>
-
-		<!--TODO-->
-		<!-- Declarar as posições e transformações -->
+        <!-- declaring descendants, at least one node or one leaf must be present
+            descendants may be mixed, nodes and leafs -->
+        <descendants>
+            <noderef id="pernaCadeira1" />
+            <noderef id="pernaCadeira2" />
+            <noderef id="pernaCadeira3" />
+            <noderef id="pernaCadeira4" />
+            <!-- x y z coordinates of each vertex -->
+        </descendants>
+    </node>
 
 
-		<!--Perna-->
-		<node id="perna"/>
-			<descendants>
-				<leaf type="cylinder" x1="ff" y1="ff" x2="ff" y2="ff" x3="ff" y3="ff" z3="ff"/>
-			</descendants>
-		</node>		
+    <node id="pernaCadeira1">           
+        <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
 
-		<!--Tampo-->
-		<node id="tampo"/>
-			<descendants>
-				<leaf type="rectangle" x1="0" y1="1" x2="1" y2="0"/>	
-			</descendants>
-		</node>
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+        </texture>
+
+        <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
+        <transformations>
+            <translation x="0.0" y="0.0" z="0.0" />
+        </transformations>
+
+        <!-- declaring descendants, at least one node or one leaf must be present
+            descendants may be mixed, nodes and leafs -->
+        <descendants>
+            <noderef id="pernaCadeira" />
+            
+            <!-- x y z coordinates of each vertex -->
+        </descendants>
+    </node>
+
+
+
+        
+    <node id="pernaCadeira2">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+        </texture>
+
+        <transformations>
+            <translation x="4.0" y="0.0" z="0.0" />
+        </transformations>
+
+        <descendants>
+            <noderef id="pernaCadeira" />
+            
+        </descendants>
+    </node>
+
+        
+    <node id="pernaCadeira3">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="0.0" z="3.0" />
+        </transformations>
+
+        <descendants>
+            <noderef id="pernaCadeira" />
+            
+        </descendants>
+    </node>
+
+        
+    <node id="pernaCadeira4">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+        </texture>
+
+        <transformations>
+            <translation x="4.0" y="0.0" z="3.0" />
+        </transformations>
+
+        <descendants>
+            <noderef id="pernaCadeira" />
+            
+        </descendants>
+    </node>
+
+        
+    <node id="pernaCadeira">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+        </texture>
+
+        <descendants>
+                <leaf type="cylinder" height="4" topRadius="0.4" bottomRadius="0.4" stacks="8" slices="16"/>
+            
+        </descendants>
+    </node>
+
+
+        
+    <node id="tampoCadeira">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+        </texture>
+
+        <transformations>
+
+            <translation x="0.5" y="4.0" z="0.5" />
+            <scale sx="4.0" sy="0.5" sz="3.0" />
+        </transformations>
+
+        <descendants>
+                <noderef id="cubo" />
+            
+        </descendants>
+    </node>
+
+
+
+
+
 
 
 		<!--Porta-->
