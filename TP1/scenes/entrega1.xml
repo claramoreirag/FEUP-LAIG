@@ -82,8 +82,10 @@
 
             
             <descendants>
-            <noderef id="Mesa" />
-               
+            <noderef id="mesa" />
+            <noderef id="cadeira"/>
+            <noderef id="estruturaSala" />
+            <noderef id="Cadeira"/>
             </descendants>
         </node> 
 
@@ -596,57 +598,196 @@
 
 		<!--Porta-->
 		<node id="porta"/>
+
+            <material id="null" />
+            <texture id="clear">
+            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+        <transformations>
+                <translation x="15" y="7.5" z="0.0" />
+                <scale x="0.0" y="15.0" z="5.0"/>
+                <rotation axis="yy" angle="-90" />
+               
+        </transformations>
+
+
 			<descendants>
-				<noderef id="macaneta"/>
-				<leaf type="rectangle"/>
+				<leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
 			</descendants>
 		</node>
 
-		<!--Maçaneta-->
-		<node id="macaneta"/>
-			<descendants>
-				<leaf type="sphere"/>
-				<leaf type="cylinder"/>
-				<leaf type="rectangle"/>
-			</descendants>
 
-		</node>
-
-		<!--Dobradica-->
-		<node id="dobradica"/>
-			<descendants>
-				<leaf type="cylinder"/>
-			</descendants>
-		</node>
 
 		<!--Chão-->
 		<node id="chao"/>
-			<descendants>
-				<leaf type="rectangle"/>
-			</descendants>
+			  
+            <material id="null" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+                <transformations>
+
+                <translation x="10.0" y="0.0" z="10.0" />
+                <scale x="20.0" y="0.0" z="20.0"/>
+                <rotation axis="xx" angle="-90" />
+                
+            </transformations>
+
+
+            <descendants>
+                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+                
+            </descendants>
 		</node>
 
 		<!--Teto-->
 		<node id="teto"/>
-			<descendants>
-				<leaf type="rectangle"/>
-			</descendants>
+			 <material id="null" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+                <transformations>
+
+                <translation x="10.0" y="20.0" z="10.0" />
+                <scale x="20.0" y="0.0" z="20.0"/>
+                <rotation axis="xx" angle="90" />
+                
+            </transformations>
+
+
+            <descendants>
+                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+                
+            </descendants>
 		</node>
 
-		<!--Parede-->
-		<node id="parede"/>
-			<descendants>
-				<leaf type= "rectangle"/>
-			<descendants>
+	<!--Parede -->
+		<node id="paredeTras"/>
+			 <material id="null" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+                <transformations>
+
+                <translation x="10.0" y="10.0" z="0.0" />
+                <scale x="20.0" y="20.0" z="0.0"/>
+                
+                
+            </transformations>
+
+
+            <descendants>
+                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+                
+            </descendants>
 		</node>
 
-		<!--Caderno-->
-		<node id="caderno"/>
-			<descendants>
-				<leaf type="cylinder"/>
-				<leaf type="rectangle"/>
-			</descendants>
-		</nodes>
+
+        <!--Parede -->
+		<node id="paredeFrente"/>
+			 <material id="null" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+                <transformations>
+
+                <translation x="10.0" y="10.0" z="20.0" />
+                <scale x="20.0" y="20.0" z="0.0"/>
+                
+                
+            </transformations>
+
+
+            <descendants>
+                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+                
+            </descendants>
+		</node>
+
+
+        <!--Parede -->
+		<node id="paredeDireita"/>
+			 <material id="null" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+                <transformations>
+
+                <translation x="20.0" y="10.0" z="10.0" />
+                <scale x="0.0" y="20.0" z="20.0"/>
+                  <rotation axis="yy" angle="90" />
+                
+            </transformations>
+
+
+            <descendants>
+                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+                
+            </descendants>
+		</node>
+
+        <!--Parede -->
+		<node id="paredeEsquerda"/>
+			 <material id="null" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+                <transformations>
+
+                <translation x="0.0" y="10.0" z="10.0" />
+                <scale x="0.0" y="20.0" z="20.0"/>
+                  <rotation axis="yy" angle="-90" />
+                
+            </transformations>
+
+
+            <descendants>
+                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+                
+            </descendants>
+		</node>
+
+          <!--chao teto e paredes -->
+		<node id="estruturaSala"/>
+			 <material id="null" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+
+            <descendants>
+                        <noderef id="paredes" />
+                        <noderef id="chao" />
+                        <noderef id="teto" />
+                
+            </descendants>
+		</node>
+
+    <!--chao teto e paredes -->
+		<node id="paredes"/>
+			 <material id="null" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+
+            <descendants>
+                        <noderef id="paredeFrente" />
+                        <noderef id="paredeTras" />
+                        <noderef id="paredeDireita" />
+                        <noderef id="paredeEsquerda" />
+                        
+                
+            </descendants>
+		</node>
+
 		
 		<!--Teclado-->
 		<node id="teclado"/>
