@@ -1,11 +1,11 @@
 # LAIG 2020/2021 - TP1
 
-## Group: T0xG0y
+## Group: T3xG03
 
-| Name             | Number    | E-Mail             |
-| ---------------- | --------- | ------------------ |
-| John Doe         | 201801010 | ...                |
-| Jane Doe         | 201801011 | ...                |
+| Name             | Number    | E-Mail               |
+| ---------------- | --------- | -------------------- |
+| João Fernandes   | 201806724 | up201806724@fe.up.pt |
+| Clara Gadelho    | 201806309 | up201806309@fe.up.pt |
 
 ----
 ## Project information
