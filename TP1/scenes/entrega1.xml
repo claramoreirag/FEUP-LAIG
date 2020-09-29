@@ -84,7 +84,7 @@
             </descendants>
         </node> 
 
-
+	</nodes>
 
     <node id="mesa">            <!-- defines one intermediate node; may be repeated as necessary -->
         <!-- next two lines are mandatory -->
@@ -270,7 +270,7 @@
         </descendants>
     </node>
 
-    <node id="faceFrenteEcra" />
+    <node id="faceFrenteEcra" >
 		 <material id="null" />
 		 <texture id="screenTexture">
 			 <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
@@ -427,7 +427,7 @@
 
     
     <!--Donut-->
-    <node id="donut"/>
+    <node id="donut">
 
         <material id="null" />
         <texture id="donutTexture">
@@ -644,7 +644,7 @@
 
 
 		<!--Porta-->
-		<node id="porta"/>
+		<node id="porta">
 
             <material id="null" />
             <texture id="doorTexture.png">
@@ -667,7 +667,7 @@
 
 
 		<!--Chão-->
-		<node id="chao"/>
+		<node id="chao">
 			  
             <material id="null" />
             <texture id="clear">
@@ -690,7 +690,7 @@
 		</node>
 
 		<!--Teto-->
-		<node id="teto"/>
+		<node id="teto">
 			 <material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
@@ -712,7 +712,7 @@
 		</node>
 
 	<!--Parede -->
-		<node id="paredeTras"/>
+		<node id="paredeTras">
 			 <material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
@@ -735,7 +735,7 @@
 
 
         <!--Parede -->
-		<node id="paredeFrente"/>
+		<node id="paredeFrente">
 			 <material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
@@ -758,7 +758,7 @@
 
 
         <!--Parede -->
-		<node id="paredeDireita"/>
+		<node id="paredeDireita">
 			 <material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
@@ -780,7 +780,7 @@
 		</node>
 
         <!--Parede -->
-		<node id="paredeEsquerda"/>
+		<node id="paredeEsquerda">
 			 <material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
@@ -802,7 +802,7 @@
 		</node>
 
           <!--chao teto e paredes -->
-		<node id="estruturaSala"/>
+		<node id="estruturaSala">
 			 <material id="wallTexture.jpg" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
@@ -818,7 +818,7 @@
 		</node>
 
     <!--chao teto e paredes -->
-		<node id="paredes"/>
+		<node id="paredes">
 			 <material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
@@ -837,14 +837,14 @@
 
 		
 		<!--Teclado-->
-		<node id="keyboardTexture.jpg"/>
+		<node id="keyboardTexture.jpg">
 			<descendants>
 				<leaf type="rectangle"/>
-			<descendants>
+			</descendants>
 		</node>
 
 		<!--Lampada-->
-		<node id="lampada"/>
+		<node id="lampada">
 			<descendants>
 				<leaf type="sphere"/>
 			</descendants>
@@ -852,7 +852,7 @@
 
 
  <!--Esquadro -->
-		<node id="esquadro"/>
+		<node id="esquadro">
 			 <material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
