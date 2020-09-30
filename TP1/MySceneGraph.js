@@ -27,6 +27,13 @@ class MySceneGraph {
         scene.graph = this;
 
         this.nodes = [];
+        
+        /** new */
+        this.materialList = new Materials();
+        this.textureList = [];
+        this.materialStack = new Stack();
+        this.textureStack = new Stack();
+        /** */
 
         this.idRoot = null; // The id of the root element.
 
@@ -406,10 +413,40 @@ class MySceneGraph {
                 return "ID must be unique for each light (conflict: ID = " + materialID + ")";
 
             //Continue here
-            this.onXMLMinorError("To do: Parse materials.");
+            grandChildren = children[i].children;
+
+            nodeNames = [];
+            for (var j = 0; j < grandChildren.length; j++) {
+                nodeNames.push(grandChildren[j].nodeName);
+            }
+            
+            var shininessIndex = nodeNames.indexOf("shininess");
+            var ambientIndex = nodeNames.indexOf("ambient");
+            var diffuseIndex = nodeNames.indexOf("diffuse");
+            var specularIndex = nodeNames.indexOf("specular");
+            var emissiveIndex = nodeNames.indexOf("emissive");
+            
+            
+            var shininessValue = this.reader.getFloat(grandChildren[shininessIndex],"value");
+            var ambientColor = this.parseColor(grandChildren[ambientIndex]);
+            var diffuseColor = this.parseColor(grandChildren[diffuseIndex]);
+            var specularColor = this.parseColor(grandChildren[specularIndex]);
+            var emissiveColor = this.parseColor(grandChildren[emissiveIndex]);
+            
+            this.appearance = new CGFappearance(this.scene)
+            this.appearance.setShininess(shininessValue);
+            this.appearance.setAmbient(ambientColor[0],ambientColor[1],ambientColor[2],ambientColor[3]);
+            this.appearance.setDiffuse(diffuseColor[0],diffuseColor[1],diffuseColor[2],diffuseColor[3]);
+            this.appearance.setSpecular(specularColor[0],specularColor[1],specularColor[2],specularColor[3]);
+            this.appearance.setEmission(emissiveColor[0],emissiveColor[1],emissiveColor[2],emissiveColor[3]);
+            //this.onXMLMinorError("To do: Parse materials.");
+            
+            this.newMaterial = new Material(materialID,this.appearance);
+            this.materialList.addMaterial(this.newMaterial);
         }
 
-        //this.log("Parsed materials");
+        this.log("Parsed materials");
+        //this.log(this.materialList.getMaterial("demoMaterial").getMaterial().ambient[0]);
         return null;
     }
 
@@ -418,7 +455,7 @@ class MySceneGraph {
    * @param {nodes block element} nodesNode
    */
   parseNodes(nodesNode) {
-        var children = nodesNode.children;
+        var children = nodesNode.children; //children = <node>
 
         this.nodes = [];
 
@@ -438,6 +475,8 @@ class MySceneGraph {
             var nodeID = this.reader.getString(children[i], 'id');
             if (nodeID == null)
                 return "no ID defined for nodeID";
+
+            console.log("NAME: " + nodeID);
 
             // Checks for repeated IDs.
             if (this.nodes[nodeID] != null)

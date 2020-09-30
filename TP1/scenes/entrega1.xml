@@ -2,7 +2,7 @@
     <initials>
         <reference length="2" />
         <!-- axis length; "0" means no axis displayed -->
-        <root id="demoRoot" />
+        <root id="root" />
         <!-- identifier of root node of the scene graph; this node -->
         <!-- must be defined in one of the following NODE declarations -->
     </initials>
@@ -56,7 +56,7 @@
         <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
          requires a distinct "id". At least one material should be present. -->
         <material id="demoMaterial">
-            <shininess value="ff" />
+            <shininess value="0.8" />
             <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
             <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
             <specular r="0.6" g="0.0" b="0.0" a="1.0" />
@@ -73,8 +73,6 @@
             <texture id="demoTexture"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
                 <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
-
-
             
             <descendants>
             <noderef id="mesa" />
@@ -83,8 +81,6 @@
             <noderef id="Cadeira"/>
             </descendants>
         </node> 
-
-	</nodes>
 
     <node id="mesa">            <!-- defines one intermediate node; may be repeated as necessary -->
         <!-- next two lines are mandatory -->
@@ -830,8 +826,6 @@
                         <noderef id="paredeTras" />
                         <noderef id="paredeDireita" />
                         <noderef id="paredeEsquerda" />
-                        
-                
             </descendants>
 		</node>
 
@@ -846,7 +840,7 @@
 		<!--Lampada-->
 		<node id="lampada">
 			<descendants>
-				<leaf type="sphere"/>
+				<leaf type="sphere" radius="10" slices="12" stacks="10"/>
 			</descendants>
 		</node>
 
@@ -870,5 +864,6 @@
                 
             </descendants>
 		</node>
+        
     </nodes>
 </lsf>
