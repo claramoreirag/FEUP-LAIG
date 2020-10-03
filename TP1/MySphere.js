@@ -55,5 +55,4 @@ class MySphere extends CGFobject {
       this.initGLBuffers();
   }
 
-  updateTexCoords(length_s, length_t) {}
 }
