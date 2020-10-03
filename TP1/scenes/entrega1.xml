@@ -78,7 +78,6 @@
             <noderef id="mesa" />
             <noderef id="cadeira"/>
             <noderef id="estruturaSala" />
-            <noderef id="Cadeira"/>
             </descendants>
         </node> 
 
@@ -221,7 +220,6 @@
 
         <descendants>
                 <leaf type="cylinder" height="7" topRadius="0.4" bottomRadius="0.4" stacks="8" slices="16"/>
-            
         </descendants>
     </node>
 
@@ -815,7 +813,7 @@
 
     <!--chao teto e paredes -->
 		<node id="paredes">
-			 <material id="null" />
+			<material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
@@ -831,9 +829,9 @@
 
 		
 		<!--Teclado-->
-		<node id="keyboardTexture.jpg">
+		<node id="keyboardTexture">
 			<descendants>
-				<leaf type="rectangle"/>
+				<leaf type="rectangle" x1="0.5" y1="0.5" x2="2.5" y2="0.5"/>
 			</descendants>
 		</node>
 

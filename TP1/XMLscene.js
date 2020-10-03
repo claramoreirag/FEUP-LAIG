@@ -125,6 +125,9 @@ class XMLscene extends CGFscene {
             this.defaultAppearance.apply();
 
             // Displays the scene (MySceneGraph function).
+            //let app = new CGFappearance(this);
+            //app.loadTexture("scenes/images/black.jpg");
+            
             this.graph.displayScene();
         }
         else
