@@ -74,7 +74,8 @@
 
             <descendants>
                
-                <leaf type="rectangle" x1="0" y1="1" x2="1" y2="0" />
+            
+                <leaf type="torus" inner="1" outer="2" slices="50" loops="40" />      
                 
             </descendants>
         
