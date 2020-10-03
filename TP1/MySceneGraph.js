@@ -31,7 +31,7 @@ class MySceneGraph {
         /** new */
         this.graph = new Graph();
         this.materialList = new Materials();
-        this.textureList = [];
+        this.textureList = new Textures();
         this.materialStack = new Stack();
         this.textureStack = new Stack();
         /** */
@@ -383,9 +383,38 @@ class MySceneGraph {
      * @param {textures block element} texturesNode
      */
     parseTextures(texturesNode) {
+        let children = texturesNode.children;
 
         //For each texture in textures block, check ID and file URL
-        this.onXMLMinorError("To do: Parse textures.");
+        //this.onXMLMinorError("To do: Parse textures.");
+
+        // Any number of textures.
+        for(let i=0; i < children.length; i++){
+
+            if(children[i].nodeName != "texture"){
+                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                continue;
+            }
+
+            // Get id of the current texture.
+            let textureID = this.reader.getString(children[i], "id");
+            if (textureID == null)
+                return "no ID defined for texture";
+
+            // Get path of the current texture.
+            
+            let texturePath = this.reader.getString(children[i], 'path');
+            if (texturePath == null)
+                return "no path defined for texture";
+
+            let newTexture = new CGFtexture(this.scene,texturePath);
+            let newTextureObject = new Texture(textureID,newTexture);
+
+            this.textureList.addTexture(newTextureObject);
+        }
+
+        this.log("Parsed textures");
+    
         return null;
     }
 

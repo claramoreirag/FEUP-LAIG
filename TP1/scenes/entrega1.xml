@@ -44,7 +44,7 @@
 		<texture id="donutTexture" path="./scenes/images/donut.jpg" />
 		<texture id="doorTexture" path="./scenes/images/door.png" />
 		<texture id="keyboardTexture" path="./scenes/images/keyboard.png" />
-		<texture id="windowTexture" path="./scenes/images/windows.jpg" />
+		<texture id="windowTexture" path="./scenes/images/window.jpg" />
 		<texture id="woodTexture1" path="./scenes/images/wood/wood1.jpg" />
 		<texture id="woodTexture2" path="./scenes/images/wood/wood2.jpg" />
 		<texture id="screenTexture" path="./scenes/images/screen.jpg" />
@@ -55,11 +55,11 @@
     <materials>
         <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
          requires a distinct "id". At least one material should be present. -->
-        <material id="demoMaterial">
-            <shininess value="0.8" />
-            <ambient r="1.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.6" g="0.0" b="0.0" a="1.0" />
-            <specular r="0.6" g="0.0" b="0.0" a="1.0" />
+        <material id="materialPreto">
+            <shininess value="0.5" />
+            <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
@@ -78,7 +78,7 @@
     <nodes>
         <node id="root">            <!-- defines one intermediate node; may be repeated as necessary -->
             <!-- next two lines are mandatory -->
-            <material id="demoMaterial" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
+            <material id="materialPreto" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
 
             <texture id="demoTexture"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
                 <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->

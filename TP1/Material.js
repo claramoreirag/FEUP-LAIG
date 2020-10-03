@@ -11,7 +11,7 @@ class Material{
         return this.appearance;
     }
 
-    getId(){
+    getID(){
         return this.id;
     }
 }
@@ -35,7 +35,7 @@ class Materials{
 
     getMaterial(id){
         for(var x of this.materials){
-            if(x.getId()==id)
+            if(x.getID()==id)
                 return x;
         }
         return null;
