@@ -79,13 +79,14 @@ class Leaf{
                 return new MyRectangle(scene,args[0],args[1],args[2],args[3]);
             case "triangle":
                 //return new MyTriangle(scene,args[0],args[1],args[2],args[3],args[4],args[5]);
-            case "sphere":
-                //return new MySphere(scene,args[0],args[1],args[2]);
-            case "torus":
-                //return new MyTorus(scene,args[0],args[1],args[2],args[3]);
-            case "cylinder":
-                //return new MyCylinder(scene,args[0],args[1],args[2],args[3],args[4]);
                 return null;
+            case "sphere":
+                return new MySphere(scene,args[0],args[1],args[2]);
+            case "torus":
+                return new MyTorus(scene,args[0],args[1],args[2],args[3]);
+            case "cylinder":
+                return new MyCylinder(scene,args[0],args[1],args[2],args[3],args[4]);
+                
         }
 
     }
@@ -135,10 +136,6 @@ class Node{
      */
     addLeaf(leaf){
         this.descendants.push(leaf);
-    }
-
-    isVisited(){
-        return this.visited;
     }
 
     //changeTexture(texture);
