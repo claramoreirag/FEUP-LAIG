@@ -299,7 +299,7 @@
             <transformations>
 
             <translation x="0.0" y="0.5" z="0.0" />
-                <rotation axis="xx" angle="-90" />
+                <rotation axis="x" angle="-90" />
             
         </transformations>
 
@@ -322,7 +322,7 @@
             <transformations>
 
             <translation x="0.0" y="-0.5" z="0.0" />
-                <rotation axis="xx" angle="90" />
+                <rotation axis="x" angle="90" />
             
         </transformations>
 
@@ -368,7 +368,7 @@
             <transformations>
 
             <translation x="0.0" y="0.0" z="-0.5" />
-                <rotation axis="yy" angle="180" />
+                <rotation axis="y" angle="180" />
             
         </transformations>
 
@@ -392,7 +392,7 @@
             <transformations>
 
             <translation x="-0.5" y="0.0" z="0.0" />
-                <rotation axis="yy" angle="-90" />
+                <rotation axis="y" angle="-90" />
             
         </transformations>
 
@@ -414,7 +414,7 @@
             <transformations>
 
             <translation x="0.5" y="0.0" z="0.0" />
-                <rotation axis="yy" angle="90" />
+                <rotation axis="y" angle="90" />
             
         </transformations>
 
@@ -654,7 +654,7 @@
         <transformations>
                 <translation x="15" y="7.5" z="0.0" />
                 <scale x="0.0" y="15.0" z="5.0"/>
-                <rotation axis="yy" angle="-90" />
+                <rotation axis="y" angle="-90" />
                
         </transformations>
 
@@ -678,7 +678,7 @@
 
                 <translation x="10.0" y="0.0" z="10.0" />
                 <scale x="20.0" y="0.0" z="20.0"/>
-                <rotation axis="xx" angle="-90" />
+                <rotation axis="x" angle="-90" />
                 
             </transformations>
 
@@ -700,7 +700,7 @@
 
                 <translation x="10.0" y="20.0" z="10.0" />
                 <scale x="20.0" y="0.0" z="20.0"/>
-                <rotation axis="xx" angle="90" />
+                <rotation axis="x" angle="90" />
                 
             </transformations>
 
@@ -768,7 +768,7 @@
 
                 <translation x="20.0" y="10.0" z="10.0" />
                 <scale x="0.0" y="20.0" z="20.0"/>
-                  <rotation axis="yy" angle="90" />
+                  <rotation axis="y" angle="90" />
                 
             </transformations>
 
@@ -790,7 +790,7 @@
 
                 <translation x="0.0" y="10.0" z="10.0" />
                 <scale x="0.0" y="20.0" z="20.0"/>
-                  <rotation axis="yy" angle="-90" />
+                  <rotation axis="y" angle="-90" />
                 
             </transformations>
 
@@ -844,7 +844,7 @@
 
                 <transformations>
                 <translation x="7.0" y="0.5" z="2.0" />
-                  <rotation axis="xx" angle="-90" />
+                  <rotation axis="x" angle="-90" />
                 
             </transformations>
 
