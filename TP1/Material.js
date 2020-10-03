@@ -19,7 +19,7 @@ class Material{
 
 class Materials{
     constructor(){
-        this.materials = []
+        this.materials = [];
     }
 
     /**

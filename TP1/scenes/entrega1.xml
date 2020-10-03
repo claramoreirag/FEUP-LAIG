@@ -88,7 +88,6 @@
             <noderef id="mesa" />
             <noderef id="cadeira"/>
             <noderef id="estruturaSala" />
-            <noderef id="Cadeira"/>
             </descendants>
         </node> 
 
@@ -116,7 +115,7 @@
 
 
 
-
+    <node id="pernaMesa">
         <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
 
         <texture id="clear"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
@@ -225,7 +224,6 @@
 
         <descendants>
                 <leaf type="cylinder" height="7" topRadius="0.4" bottomRadius="0.4" stacks="8" slices="16"/>
-            
         </descendants>
     </node>
 

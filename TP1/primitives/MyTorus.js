@@ -4,13 +4,13 @@
  {
      constructor(scene, inner, outer, slices, loops)
      {
-         super(scene);
-         this.inner = inner;
-         this.outer = outer;
-             this.slices = slices;
-             this.loops = loops;
-         
-         this.initBuffers();
+        super(scene);
+        this.inner = inner;
+        this.outer = outer;
+        this.slices = slices;
+        this.loops = loops;
+        
+        this.initBuffers();
      };
  
      initBuffers() 
@@ -30,7 +30,7 @@
      for(let slice = 0; slice <= this.slices; slice++) {
        
        theta=0;
-             for(let loop = 0; loop <= this.loops; loop++) {
+        for(let loop = 0; loop <= this.loops; loop++) {
              
                  this.vertices.push((this.outer+this.inner*Math.cos(theta))*Math.cos(phi),(this.outer+this.inner*Math.cos(theta))*Math.sin(phi),this.inner*Math.sin(theta));
  
@@ -41,17 +41,13 @@
          
        }
        phi+=phiInc;
-         }
+        }
  
      // indexes
          for (let slice = 0; slice < this.slices; slice++) {
              for(let loop = 0; loop < this.loops; loop++) {
      
-                 this.indices.push(
-           (slice+1)*(this.loops+1) + loop, 
-           slice*(this.loops+1) + loop+1, slice*(this.loops+1) + loop,
-                     slice*(this.loops+1) + loop+1, (slice+1)*(this.loops+1) + loop, (slice+1)*(this.loops+1) + loop+1
-                 );
+                 this.indices.push((slice+1)*(this.loops+1) + loop, slice*(this.loops+1) + loop+1, slice*(this.loops+1) + loop,slice*(this.loops+1) + loop+1, (slice+1)*(this.loops+1) + loop, (slice+1)*(this.loops+1) + loop+1);
              }
          }	
  
@@ -59,6 +55,8 @@
          this.initGLBuffers();
      }
  
+     
+
      
  };
  

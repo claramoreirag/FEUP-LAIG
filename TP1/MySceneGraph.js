@@ -29,6 +29,7 @@ class MySceneGraph {
         this.nodes = [];
         
         /** new */
+        this.graph = new Graph();
         this.materialList = new Materials();
         this.textureList = [];
         this.materialStack = new Stack();
@@ -230,6 +231,11 @@ class MySceneGraph {
             return "No root id defined for scene.";
 
         this.idRoot = id;
+        /**new*/
+        var rootNode = new Node(this.idRoot);
+        this.graph.addNode(rootNode);
+        this.graph.setRootNode(rootNode);
+        /*****/
 
         // Get axis length        
         if(referenceIndex == -1)
@@ -476,7 +482,15 @@ class MySceneGraph {
             if (nodeID == null)
                 return "no ID defined for nodeID";
 
+            /*new*/
             console.log("NAME: " + nodeID);
+
+            var fatherNode = this.graph.findNode(nodeID);
+            if(fatherNode==null){
+                fatherNode = new Node(nodeID);
+                this.graph.addNode(fatherNode);
+            }
+            /*****/
 
             // Checks for repeated IDs.
             if (this.nodes[nodeID] != null)
@@ -494,7 +508,7 @@ class MySceneGraph {
             var textureIndex = nodeNames.indexOf("texture");
             var descendantsIndex = nodeNames.indexOf("descendants");
 
-            this.onXMLMinorError("To do: Parse nodes.");
+            //this.onXMLMinorError("To do: Parse nodes.");
             // Transformations
 
             // Material
@@ -502,7 +516,66 @@ class MySceneGraph {
             // Texture
 
             // Descendants
+            this.descendants = grandChildren[descendantsIndex].children;
+
+            this.leafDescendants = [];
+            this.nodeDescendants = [];
+
+            
+            for(var k=0; k<this.descendants.length; k++){
+                var name=this.descendants[k].nodeName;
+                if(name=="leaf"){
+                    this.leafDescendants.push(this.descendants[k]);
+                }
+                else if(name=="noderef") {
+                    this.nodeDescendants.push(this.descendants[k]);
+                }
+            }
+
+            for(var k=0; k<this.nodeDescendants.length; k++){
+                let id = this.reader.getString(this.nodeDescendants[k],"id");
+
+                var wantedNode = this.graph.findNode(id);
+                
+                if(wantedNode == null){
+                    wantedNode = new Node(id);
+                    this.graph.addNode(wantedNode);
+                }
+                
+                fatherNode.addEdge(wantedNode);
+            }
+
+            for(var k=0; k<this.leafDescendants.length;k++){
+                let type= this.reader.getString(this.leafDescendants[k],"type");
+                let primitive = this.leafDescendants[k];
+
+                var args;
+
+                switch(type){
+                    case "rectangle":
+                        args = this.parseRectangle(primitive);
+                        break;
+                    case "triangle":
+                        args = this.parseTriangle(primitive);
+                        break;
+                    case "sphere":
+                        args = this.parseSphere(primitive);
+                        break;
+                    case "torus":
+                        args = this.parseTorus(primitive);
+                        break;
+                    case "cylinder":
+                        args = this.parseCylinder(primitive);
+                        break;
+                }
+
+                let leaf = new Leaf(this.scene,type,args);
+
+                fatherNode.addEdge(leaf);
+            }
+
         }
+        
     }
 
 
@@ -600,13 +673,69 @@ class MySceneGraph {
         return color;
     }
 
+    parseRectangle(primitive){
+        let x1 = this.reader.getFloat(primitive,"x1");
+        let y1 = this.reader.getFloat(primitive,"y1");
+        let x2 = this.reader.getFloat(primitive,"x2");
+        let y2 = this.reader.getFloat(primitive,"y2");
+
+        let args=[x1,y1,x2,y2];
+        
+        return args;
+    }
+
+    parseTriangle(primitive){
+        let x1 = this.reader.getFloat(primitive,"x1");
+        let y1 = this.reader.getFloat(primitive,"y1");
+        let x2 = this.reader.getFloat(primitive,"x2");
+        let y2 = this.reader.getFloat(primitive,"y2");
+        let x3 = this.reader.getFloat(primitive,"x3");
+        let y3 = this.reader.getFloat(primitive,"y3");
+
+        let args=[x1,y1,x2,y2,x3,y3];
+
+        return args;
+    }
+
+    parseSphere(primitive){
+        let radius = this.reader.getFloat(primitive,"radius");
+        let slices = this.reader.getInteger(primitive,"slices");
+        let stacks = this.reader.getInteger(primitive,"stacks");
+
+        let args=[radius,slices,stacks];
+
+        return args;
+    }
+
+    parseTorus(primitive){
+        let inner = this.reader.getFloat(primitive,"inner");
+        let outer = this.reader.getFloat(primitive,"outer");
+        let slices = this.reader.getInteger(primitive,"slices");
+        let loops = this.reader.getInteger(primitive,"loops");
+
+        let args=[inner,outer,slices,loops];
+
+        return args;
+    }
+
+    parseCylinder(primitive){
+        let height = this.reader.getFloat(primitive,"height");
+        let topRadius = this.reader.getFloat(primitive,"topRadius");
+        let bottomRadius = this.reader.getFloat(primitive,"bottomRadius");
+        let stacks = this.reader.getInteger(primitive,"stacks");
+        let slices = this.reader.getInteger(primitive,"slices");
+
+        let args=[height,topRadius,bottomRadius,stacks,slices];
+
+        return args;
+    }
+
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
-        
-        //To do: Create display loop for transversing the scene graph, calling the root node's display function
-        
-        //this.nodes[this.idRoot].display()
+        this.scene.pushMatrix();
+        this.nodes[this.idRoot].display();
+        this.scene.popMatrix();
     }
 }
