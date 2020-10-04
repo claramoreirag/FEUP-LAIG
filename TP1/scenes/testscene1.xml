@@ -75,7 +75,7 @@
             <descendants>
                
             
-                <leaf type="torus" inner="1" outer="2" slices="50" loops="40" />      
+                     <leaf type="sphere" radius="1" slices="31" stacks="20"/>
                 
             </descendants>
         

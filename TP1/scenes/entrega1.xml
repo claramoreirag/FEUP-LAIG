@@ -651,7 +651,7 @@
 
         <transformations>
                 <translation x="15" y="7.5" z="0.0" />
-                <scale x="0.0" y="15.0" z="5.0"/>
+                <scale sx="0.0" sy="15.0" sz="5.0"/>
                 <rotation axis="y" angle="-90" />
                
         </transformations>
@@ -675,7 +675,7 @@
                 <transformations>
 
                 <translation x="10.0" y="0.0" z="10.0" />
-                <scale x="20.0" y="0.0" z="20.0"/>
+                <scale sx="20.0" sy="0.0" sz="20.0"/>
                 <rotation axis="x" angle="-90" />
                 
             </transformations>
@@ -697,7 +697,7 @@
                 <transformations>
 
                 <translation x="10.0" y="20.0" z="10.0" />
-                <scale x="20.0" y="0.0" z="20.0"/>
+                <scale sx="20.0" sy="0.0" sz="20.0"/>
                 <rotation axis="x" angle="90" />
                 
             </transformations>
@@ -719,7 +719,7 @@
                 <transformations>
 
                 <translation x="10.0" y="10.0" z="0.0" />
-                <scale x="20.0" y="20.0" z="0.0"/>
+                <scale sx="20.0" sy="20.0" sz="0.0"/>
                 
                 
             </transformations>
@@ -742,7 +742,7 @@
                 <transformations>
 
                 <translation x="10.0" y="10.0" z="20.0" />
-                <scale x="20.0" y="20.0" z="0.0"/>
+                <scale sx="20.0" sy="20.0" sz="0.0"/>
                 
                 
             </transformations>
@@ -765,7 +765,7 @@
                 <transformations>
 
                 <translation x="20.0" y="10.0" z="10.0" />
-                <scale x="0.0" y="20.0" z="20.0"/>
+                <scale sx="0.0" sy="20.0" sz="20.0"/>
                   <rotation axis="y" angle="90" />
                 
             </transformations>
@@ -787,7 +787,7 @@
                 <transformations>
 
                 <translation x="0.0" y="10.0" z="10.0" />
-                <scale x="0.0" y="20.0" z="20.0"/>
+                <scale sx="0.0" sy="20.0" sz="20.0"/>
                   <rotation axis="y" angle="-90" />
                 
             </transformations>
