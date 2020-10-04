@@ -91,6 +91,8 @@
             <noderef id="mesa" />
             <noderef id="cadeira"/>
             <noderef id="estruturaSala" />
+            <noderef id="porta"/>
+            <noderef id="janela"/>
             </descendants>
         </node> 
 
@@ -113,6 +115,7 @@
             <noderef id="tampoMesa" />
             <noderef id="donut" />
 			<noderef id="ecra" />
+            <noderef id="esquadro"/>
         </descendants>
     </node>
 
@@ -424,7 +427,7 @@
         </transformations>
 
         <descendants>
-            <leaf type="torus" inner="0.3" outer="1" slices="16" loops="16" />
+            <leaf type="torus" inner="0.3" outer="0.7" slices="16" loops="20" />
         </descendants>
     </node>
 
@@ -593,6 +596,9 @@
          </texture>
  
          <transformations>
+            <translation x="12" y="0.5" z="1.0" />
+            <scale sx="3" sy="2.5" sz="0.4"/>
+            <rotation axis="y" angle="-90" />
          </transformations>
  
          <descendants>
@@ -645,6 +651,22 @@
 		</node>
 
 
+<!--Porta-->
+		<node id="janela">
+
+            <material id="null" />
+            <texture id="windowTexture">
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
+
+        <transformations>
+            
+        </transformations>
+		<descendants>
+			<leaf type="rectangle" x1="7" y1="11" x2="13" y2="16" />
+		</descendants>
+
+		</node>
 
 		<!--Chão-->
 		<node id="chao">
