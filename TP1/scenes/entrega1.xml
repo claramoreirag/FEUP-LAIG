@@ -1,13 +1,11 @@
 <lsf>
     <initials>
         <reference length="2" />
-        <!-- axis length; "0" means no axis displayed -->
         <root id="root" />
-        <!-- identifier of root node of the scene graph; this node -->
-        <!-- must be defined in one of the following NODE declarations -->
+       
     </initials>
     <views default="defaultCamera">
-        <!-- at least one of the following type of cameras must be declared -->
+       
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
             <from x="19" y="15" z="19" />
             <to x="0" y="-2" z="0" />
@@ -48,7 +46,6 @@
 		<texture id="woodTexture1" path="./scenes/images/wood/wood1.jpg" />
 		<texture id="woodTexture2" path="./scenes/images/wood/wood2.jpg" />
 		<texture id="screenTexture" path="./scenes/images/screen.jpg" />
-		<texture id="blackTexture" path="./scenes/images/black.jpg" />
     </textures>
 
 
@@ -76,12 +73,12 @@
 
 
     <nodes>
-        <node id="root">            <!-- defines one intermediate node; may be repeated as necessary -->
-            <!-- next two lines are mandatory -->
-            <material id="materialPreto" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
+        <node id="root">           
+           
+            <material id="materialPreto" />
 
-            <texture id="demoTexture"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
-                <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <texture id="demoTexture">
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -97,19 +94,15 @@
         </node> 
 
     <node id="mesa">           
-        <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
-
+        <material id="null" />
         <texture id="woodTexture1">
-          <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+          <amplification afs="1.0" aft="1.0" />
         </texture>
 
-        <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
         <transformations>
             <translation x="5.0" y="0.0" z="0.0" />
         </transformations>
 
-        <!-- declaring descendants, at least one node or one leaf must be present
-            descendants may be mixed, nodes and leafs -->
         <descendants>
             <noderef id="pernasMesa" />
             <noderef id="tampoMesa" />
@@ -122,10 +115,10 @@
 
 
     <node id="pernaMesa">
-        <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
+        <material id="null" />
 
-        <texture id="clear"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -142,36 +135,30 @@
     </node>
 
 
-    <node id="pernaMesa1">            <!-- defines one intermediate node; may be repeated as necessary -->
-        <!-- next two lines are mandatory -->
-        <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
+    <node id="pernaMesa1">            
+        <material id="null" />
 
-        <texture id="clear"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
-        <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
         <transformations>
             <translation x="0.0" y="0.0" z="0.0" />
         </transformations>
 
-        <!-- declaring descendants, at least one node or one leaf must be present
-            descendants may be mixed, nodes and leafs -->
+
         <descendants>
             <noderef id="pernaMesa" />
-            
-            <!-- x y z coordinates of each vertex -->
+        
         </descendants>
     </node>
-
-
 
         
     <node id="pernaMesa2">         
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -180,7 +167,6 @@
 
         <descendants>
             <noderef id="pernaMesa" />
-            
         </descendants>
     </node>
 
@@ -189,7 +175,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -207,7 +193,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -225,7 +211,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -241,7 +227,7 @@
     <node id="tampoMesa">         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -261,7 +247,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -281,7 +267,7 @@
     <node id="faceFrenteEcra" >
 		 <material id="null" />
 		 <texture id="screenTexture">
-			 <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+			 <amplification afs="1.0" aft="1.0" />
 		 </texture>
  
 		 <transformations>
@@ -300,7 +286,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -320,7 +306,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -339,7 +325,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -359,7 +345,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -380,7 +366,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -399,7 +385,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -419,7 +405,7 @@
 
         <material id="null" />
         <texture id="donutTexture">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -459,7 +445,7 @@
         <material id="null" />
 
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -481,7 +467,7 @@
         <material id="null" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
 
         <texture id="clear">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
@@ -503,7 +489,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -521,7 +507,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -538,7 +524,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -555,7 +541,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -572,7 +558,7 @@
         
         <material id="null" />
         <texture id="clear">
-            <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            <amplification afs="1.0" aft="1.0" />
         </texture>
 
         <transformations>
@@ -590,9 +576,9 @@
  
      <node id="ecra">
  
-         <material id="null" />
-         <texture id="blackTexture">
-             <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+         <material id="materialPreto" />
+         <texture id="null">
+             <amplification afs="1.0" aft="1.0" />
          </texture>
  
          <transformations>
@@ -612,7 +598,7 @@
  
      <material id="null"/>
          <texture id="null">
-             <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+             <amplification afs="1.0" aft="1.0" />
          </texture>
  
          <transformations>
@@ -634,7 +620,7 @@
 
             <material id="null" />
             <texture id="doorTexture">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
         <transformations>
@@ -656,7 +642,7 @@
 
             <material id="null" />
             <texture id="windowTexture">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
         <transformations>
@@ -673,7 +659,7 @@
 			  
             <material id="materialChao" />
             <texture id="clear">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -692,7 +678,7 @@
 		<node id="teto">
 			<material id="null" />
             <texture id="wallTexture">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -711,7 +697,7 @@
 		<node id="paredeTras">
 			<material id="null" />
             <texture id="clear">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -730,7 +716,7 @@
 		<node id="paredeFrente">
 			 <material id="null" />
             <texture id="clear">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -749,7 +735,7 @@
 		<node id="paredeDireita">
 			 <material id="null" />
             <texture id="clear">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -768,7 +754,7 @@
 		<node id="paredeEsquerda">
 			 <material id="null" />
             <texture id="clear">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -787,7 +773,7 @@
 		<node id="estruturaSala">
 			 <material id="null" />
             <texture id="clear">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -805,7 +791,7 @@
 		<node id="paredes">
 			<material id="null" />
             <texture id="wallTexture">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
@@ -825,7 +811,7 @@
 		<node id="esquadro">
 			 <material id="null" />
             <texture id="clear">
-                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" />
             </texture>
 
             <transformations>
