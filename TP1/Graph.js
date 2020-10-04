@@ -58,10 +58,10 @@ class Graph{
                 let matrix= desc[i].getTransformations();
 
                 //UNCOMMENT TO TEST TRANSFORMATIONS
-                //this.scene.pushMatrix();
-                //this.scene.multMatrix(matrix);
+                this.scene.pushMatrix();
+                this.scene.multMatrix(matrix);
                 this.dfs(desc[i]);
-                //this.scene.popMatrix();
+                this.scene.popMatrix();
             }
             else if(desc[i] instanceof Leaf){
                 // console.log("AM LEAF: " + desc[i].type);

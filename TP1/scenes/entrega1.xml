@@ -82,6 +82,7 @@
             </texture>
 
             <transformations>
+             <scale sx="0.10" sy="0.10" sz="0.10" />
             </transformations>
             
             <descendants>
