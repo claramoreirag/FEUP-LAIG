@@ -34,10 +34,10 @@ class MyRectangle extends CGFobject {
 
 		//Facing Z positive
 		this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1
+			0, 0, -1,
+			0, 0,- 1,
+			0, 0, -1,
+			0, 0, -1
 		];
 		
 		/*

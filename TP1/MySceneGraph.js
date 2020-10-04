@@ -818,7 +818,12 @@ class MySceneGraph {
      */
     displayScene() {
         //this.scene.pushMatrix();
+        let rootTransformations = this.graph.findNode("root").getTransformations();
+
+        this.scene.pushMatrix();
+        this.scene.multMatrix(rootTransformations);
         this.graph.dfs(null);
+        this.scene.popMatrix();
         //this.nodes[this.idRoot].display();
         //this.scene.popMatrix();
     }
