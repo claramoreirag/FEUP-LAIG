@@ -48,7 +48,6 @@
 		<texture id="woodTexture1" path="./scenes/images/wood/wood1.jpg" />
 		<texture id="woodTexture2" path="./scenes/images/wood/wood2.jpg" />
 		<texture id="screenTexture" path="./scenes/images/screen.jpg" />
-		<texture id="blackTexture" path="./scenes/images/black.jpg" />
     </textures>
 
 
@@ -88,9 +87,9 @@
             </transformations>
             
             <descendants>
-            <noderef id="mesa" />
-            <noderef id="cadeira"/>
-            <noderef id="estruturaSala" />
+                <noderef id="mesa" />
+                <noderef id="cadeira"/>
+                <noderef id="estruturaSala" />
             </descendants>
         </node> 
 
@@ -177,7 +176,6 @@
 
         <descendants>
             <noderef id="pernaMesa" />
-            
         </descendants>
     </node>
 
@@ -587,8 +585,8 @@
  
      <node id="ecra">
  
-         <material id="null" />
-         <texture id="blackTexture">
+         <material id="materialPreto" />
+         <texture id="null">
              <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
          </texture>
  
