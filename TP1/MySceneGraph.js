@@ -29,7 +29,7 @@ class MySceneGraph {
         this.nodes = [];
         
         /** new */
-        this.graph = new Graph();
+        this.graph = new Graph(scene);
         this.materialList = new Materials();
         this.textureList = new Textures();
         this.materialStack = new Stack();
@@ -514,7 +514,7 @@ class MySceneGraph {
             /*new*/
             console.log("NAME: " + nodeID);
 
-            var fatherNode = this.graph.findNode(nodeID);
+            let fatherNode = this.graph.findNode(nodeID);
             if(fatherNode==null){
                 fatherNode = new Node(nodeID);
                 this.graph.addNode(fatherNode);
@@ -539,32 +539,52 @@ class MySceneGraph {
 
             //this.onXMLMinorError("To do: Parse nodes.");
             // Transformations
+            let transformations = grandChildren[transformationsIndex].children;
+
+            for(let transformation of transformations){
+                let name = transformation.nodeName;
+                let args;
+
+                switch(name){
+                    case "translation":
+                        args = this.parseCoordinates3D(transformation);
+                        break;
+                    case "scale":
+                        args = this.parseCoordinatesScale3D(transformation);
+                        break;
+                    case "rotation":
+                        args = this.parseRotation(transformation);
+                        break;
+                }
+                
+                fatherNode.addTransformation(name,args);
+            }
 
             // Material
 
             // Texture
 
             // Descendants
-            this.descendants = grandChildren[descendantsIndex].children;
+            let descendants = grandChildren[descendantsIndex].children;
 
-            this.leafDescendants = [];
-            this.nodeDescendants = [];
+            let leafDescendants = [];
+            let nodeDescendants = [];
 
             
-            for(var k=0; k<this.descendants.length; k++){
-                var name=this.descendants[k].nodeName;
+            for(let k=0; k<descendants.length; k++){
+                let name=descendants[k].nodeName;
                 if(name=="leaf"){
-                    this.leafDescendants.push(this.descendants[k]);
+                    leafDescendants.push(descendants[k]);
                 }
                 else if(name=="noderef") {
-                    this.nodeDescendants.push(this.descendants[k]);
+                    nodeDescendants.push(descendants[k]);
                 }
             }
 
-            for(var k=0; k<this.nodeDescendants.length; k++){
-                let id = this.reader.getString(this.nodeDescendants[k],"id");
+            for(var k=0; k<nodeDescendants.length; k++){
+                let id = this.reader.getString(nodeDescendants[k],"id");
 
-                var wantedNode = this.graph.findNode(id);
+                let wantedNode = this.graph.findNode(id);
                 
                 if(wantedNode == null){
                     wantedNode = new Node(id);
@@ -574,9 +594,9 @@ class MySceneGraph {
                 fatherNode.addEdge(wantedNode);
             }
 
-            for(var k=0; k<this.leafDescendants.length;k++){
-                let type= this.reader.getString(this.leafDescendants[k],"type");
-                let primitive = this.leafDescendants[k];
+            for(var k=0; k<leafDescendants.length;k++){
+                let type= this.reader.getString(leafDescendants[k],"type");
+                let primitive = leafDescendants[k];
 
                 var args;
 
@@ -638,6 +658,33 @@ class MySceneGraph {
         var z = this.reader.getFloat(node, 'z');
         if (!(z != null && !isNaN(z)))
             return "unable to parse z-coordinate of the " + messageError;
+
+        position.push(...[x, y, z]);
+
+        return position;
+    }
+    /**
+     * Parse the coordinates from a node with ID = id
+     * @param {block element} node
+     * @param {message to be displayed in case of error} messageError
+     */
+    parseCoordinatesScale3D(node,messageError){
+        var position = [];
+
+        // sx
+        var x = this.reader.getFloat(node, 'sx');
+        if (!(x != null && !isNaN(x)))
+            return "unable to parse sx-coordinate of the " + messageError;
+
+        // sy
+        var y = this.reader.getFloat(node, 'sy');
+        if (!(y != null && !isNaN(y)))
+            return "unable to parse sy-coordinate of the " + messageError;
+
+        // sz
+        var z = this.reader.getFloat(node, 'sz');
+        if (!(z != null && !isNaN(z)))
+            return "unable to parse sz-coordinate of the " + messageError;
 
         position.push(...[x, y, z]);
 
@@ -759,14 +806,19 @@ class MySceneGraph {
         return args;
     }
 
+    parseRotation(transformation){
+        let axis = this.reader.getString(transformation,"axis");
+        let angle = this.reader.getFloat(transformation,"angle");
+
+        return [axis,angle];
+    }
+
     /**
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
-
-        this.graph.dfs(null);
-        
         //this.scene.pushMatrix();
+        this.graph.dfs(null);
         //this.nodes[this.idRoot].display();
         //this.scene.popMatrix();
     }
