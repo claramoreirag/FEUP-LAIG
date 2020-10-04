@@ -83,6 +83,9 @@
             <texture id="demoTexture"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
                 <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
+
+            <transformations>
+            </transformations>
             
             <descendants>
             <noderef id="mesa" />
@@ -222,6 +225,9 @@
             <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
+        <transformations>
+        </transformations>
+
         <descendants>
                 <leaf type="cylinder" height="7" topRadius="0.4" bottomRadius="0.4" stacks="8" slices="16"/>
         </descendants>
@@ -230,14 +236,12 @@
 
         
     <node id="tampoMesa">         
-        
         <material id="null" />
         <texture id="clear">
             <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
         <transformations>
-
             <translation x="0.5" y="7.0" z="0.5" />
             <scale sx="10" sy="0.5" sz="5" />
         </transformations>
@@ -257,6 +261,9 @@
             <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
+        <transformations>
+        </transformations>
+
         <descendants>
                 <noderef id="faceCima" />
                 <noderef id="faceBaixo" />
@@ -275,7 +282,6 @@
 		 </texture>
  
 		 <transformations>
- 
 		 </transformations>
  
 		 <descendants>
@@ -294,17 +300,14 @@
             <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
-            <transformations>
-
+        <transformations>
             <translation x="0.0" y="0.5" z="0.0" />
-                <rotation axis="x" angle="-90" />
-            
+            <rotation axis="x" angle="-90" />
         </transformations>
 
 
         <descendants>
                 <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            
         </descendants>
     </node>
 
@@ -317,17 +320,14 @@
             <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
-            <transformations>
-
+        <transformations>
             <translation x="0.0" y="-0.5" z="0.0" />
-                <rotation axis="x" angle="90" />
-            
+            <rotation axis="x" angle="90" />
         </transformations>
 
 
         <descendants>
-                    <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
         </descendants>
     </node>
 
@@ -339,17 +339,13 @@
             <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
-            <transformations>
-
+        <transformations>
             <translation x="0.0" y="0.0" z="0.5" />
-            
-            
         </transformations>
 
 
         <descendants>
-                    <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
         </descendants>
     </node>
 
@@ -363,17 +359,14 @@
             <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
-            <transformations>
-
+        <transformations>
             <translation x="0.0" y="0.0" z="-0.5" />
-                <rotation axis="y" angle="180" />
-            
+            <rotation axis="y" angle="180" />
         </transformations>
 
 
         <descendants>
-                    <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
         </descendants>
     </node>
 
@@ -387,17 +380,14 @@
             <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
-            <transformations>
-
+        <transformations>
             <translation x="-0.5" y="0.0" z="0.0" />
-                <rotation axis="y" angle="-90" />
-            
+            <rotation axis="y" angle="-90" />
         </transformations>
 
 
         <descendants>
-                    <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />  
         </descendants>
     </node>
 
@@ -409,17 +399,14 @@
             <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
-            <transformations>
-
+        <transformations>
             <translation x="0.5" y="0.0" z="0.0" />
-                <rotation axis="y" angle="90" />
-            
+            <rotation axis="y" angle="90" /> 
         </transformations>
 
 
         <descendants>
-                    <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
         </descendants>
     </node>
 
@@ -433,12 +420,11 @@
         </texture>
 
         <transformations>
-
-        <translation x="1.0" y="0.5" z="2.0" />
-               
+            <translation x="1.0" y="0.5" z="2.0" />   
         </transformations>
+
         <descendants>
-            <leaf type="torus" inner="0.3" outer="1" slices="16" loops="8" />
+            <leaf type="torus" inner="0.3" outer="1" slices="16" loops="16" />
         </descendants>
     </node>
 
@@ -453,9 +439,7 @@
         </texture>
 
         <transformations>
-
-        <translation x="8.0" y="0.0" z="2.0" />
-               
+            <translation x="8.0" y="0.0" z="2.0" />     
         </transformations>
 
         <descendants>
@@ -474,6 +458,9 @@
         <texture id="clear">
             <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
+
+        <transformations>
+        </transformations>
 
         <!-- declaring descendants, at least one node or one leaf must be present
             descendants may be mixed, nodes and leafs -->
@@ -503,8 +490,6 @@
             descendants may be mixed, nodes and leafs -->
         <descendants>
             <noderef id="pernaCadeira" />
-            
-            <!-- x y z coordinates of each vertex -->
         </descendants>
     </node>
 
@@ -542,7 +527,6 @@
 
         <descendants>
             <noderef id="pernaCadeira" />
-            
         </descendants>
     </node>
 
@@ -560,7 +544,6 @@
 
         <descendants>
             <noderef id="pernaCadeira" />
-            
         </descendants>
     </node>
 
@@ -572,9 +555,11 @@
             <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
         </texture>
 
+        <transformations>
+        </transformations>
+
         <descendants>
-                <leaf type="cylinder" height="4" topRadius="0.4" bottomRadius="0.4" stacks="8" slices="16"/>
-            
+            <leaf type="cylinder" height="4" topRadius="0.4" bottomRadius="0.4" stacks="8" slices="16"/>
         </descendants>
     </node>
 
@@ -588,14 +573,12 @@
         </texture>
 
         <transformations>
-
             <translation x="0.5" y="4.0" z="0.5" />
             <scale sx="4.0" sy="0.5" sz="3.0" />
         </transformations>
 
         <descendants>
-                <noderef id="cubo" />
-            
+            <noderef id="cubo" />
         </descendants>
     </node>
 
@@ -610,11 +593,10 @@
          </texture>
  
          <transformations>
- 
          </transformations>
  
          <descendants>
-                 <noderef id="cuboEcra" />
+            <noderef id="cuboEcra" />
          </descendants>
      </node>
  
@@ -646,20 +628,20 @@
 
             <material id="null" />
             <texture id="doorTexture">
-            <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
+                <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
         <transformations>
-                <translation x="15" y="7.5" z="0.0" />
-                <scale sx="0.0" sy="15.0" sz="5.0"/>
-                <rotation axis="y" angle="-90" />
-               
+            <translation x="15" y="7.5" z="0.0" />
+            <scale sx="0.0" sy="15.0" sz="5.0"/>
+            <rotation axis="y" angle="-90" />
         </transformations>
 
 
-			<descendants>
-				<leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-			</descendants>
+		<descendants>
+			<leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+		</descendants>
+
 		</node>
 
 
@@ -672,62 +654,52 @@
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
-                <transformations>
-
+            <transformations>
                 <translation x="10.0" y="0.0" z="10.0" />
                 <scale sx="20.0" sy="0.0" sz="20.0"/>
                 <rotation axis="x" angle="-90" />
-                
             </transformations>
 
 
             <descendants>
-                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-                
+                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" /> 
             </descendants>
 		</node>
 
 		<!--Teto-->
 		<node id="teto">
-			 <material id="null" />
+			<material id="null" />
             <texture id="wallTexture">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
-                <transformations>
-
+            <transformations>
                 <translation x="10.0" y="20.0" z="10.0" />
                 <scale sx="20.0" sy="0.0" sz="20.0"/>
                 <rotation axis="x" angle="90" />
-                
             </transformations>
 
 
             <descendants>
-                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-                
+                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
             </descendants>
 		</node>
 
 	<!--Parede -->
 		<node id="paredeTras">
-			 <material id="null" />
+			<material id="null" />
             <texture id="clear">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
-                <transformations>
-
+            <transformations>
                 <translation x="10.0" y="10.0" z="0.0" />
                 <scale sx="20.0" sy="20.0" sz="0.0"/>
-                
-                
             </transformations>
 
 
             <descendants>
-                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-                
+                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
             </descendants>
 		</node>
 
@@ -739,18 +711,14 @@
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
-                <transformations>
-
+            <transformations>
                 <translation x="10.0" y="10.0" z="20.0" />
                 <scale sx="20.0" sy="20.0" sz="0.0"/>
-                
-                
             </transformations>
 
 
             <descendants>
-                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-                
+                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
             </descendants>
 		</node>
 
@@ -762,18 +730,15 @@
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
-                <transformations>
-
+            <transformations>
                 <translation x="20.0" y="10.0" z="10.0" />
                 <scale sx="0.0" sy="20.0" sz="20.0"/>
-                  <rotation axis="y" angle="90" />
-                
+                <rotation axis="y" angle="90" />
             </transformations>
 
 
             <descendants>
-                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-                
+                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
             </descendants>
 		</node>
 
@@ -784,18 +749,15 @@
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
-                <transformations>
-
+            <transformations>
                 <translation x="0.0" y="10.0" z="10.0" />
                 <scale sx="0.0" sy="20.0" sz="20.0"/>
-                  <rotation axis="y" angle="-90" />
-                
+                <rotation axis="y" angle="-90" />
             </transformations>
 
 
             <descendants>
-                        <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-                
+                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
             </descendants>
 		</node>
 
@@ -806,28 +768,32 @@
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
+            <transformations>
+            </transformations>
+
 
             <descendants>
-                        <noderef id="paredes" />
-                        <noderef id="chao" />
-                        <noderef id="teto" />
-                
+                <noderef id="paredes" />
+                <noderef id="chao" />
+                <noderef id="teto" />
             </descendants>
 		</node>
 
     <!--chao teto e paredes -->
 		<node id="paredes">
-			 <material id="null" />
+			<material id="null" />
             <texture id="wallTexture">
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
+            <transformations>
+            </transformations>
 
             <descendants>
-                        <noderef id="paredeFrente" />
-                        <noderef id="paredeTras" />
-                        <noderef id="paredeDireita" />
-                        <noderef id="paredeEsquerda" />
+                <noderef id="paredeFrente" />
+                <noderef id="paredeTras" />
+                <noderef id="paredeDireita" />
+                <noderef id="paredeEsquerda" />
             </descendants>
 		</node>
 
@@ -840,16 +806,14 @@
                 <amplification afs="1.0" aft="1.0" /><!-- for primitives = dx/afs, dy/aft -->
             </texture>
 
-                <transformations>
+            <transformations>
                 <translation x="7.0" y="0.5" z="2.0" />
-                  <rotation axis="x" angle="-90" />
-                
+                <rotation axis="x" angle="-90" />
             </transformations>
 
 
             <descendants>
-                        <leaf type="triangle" x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5"  x3="0" y3="0.3"/>
-                
+                <leaf type="triangle" x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5"  x3="0" y3="0.3"/>
             </descendants>
 		</node>
         

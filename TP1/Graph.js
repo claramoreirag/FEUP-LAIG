@@ -3,6 +3,7 @@ class Graph{
         this.rootNode=null;
         this.nodes=[];
         this.rootIsSet=false;
+        this.scene=scene;
     }
 
     /**
@@ -53,11 +54,17 @@ class Graph{
 
         for(var i=0; i<desc.length; i++){
             if(desc[i] instanceof Node){
-                console.log("AM NODE: " + desc[i].getID());
+                // console.log("AM NODE: " + desc[i].getID());
+                let matrix= desc[i].getTransformations();
+
+                //UNCOMMENT TO TEST TRANSFORMATIONS
+                //this.scene.pushMatrix();
+                //this.scene.multMatrix(matrix);
                 this.dfs(desc[i]);
+                //this.scene.popMatrix();
             }
             else if(desc[i] instanceof Leaf){
-                console.log("AM LEAF: " + desc[i].type);
+                // console.log("AM LEAF: " + desc[i].type);
                 desc[i].render();
             }
         }
@@ -94,7 +101,7 @@ class Leaf{
     render(){
         if(this.leaf!=null)
             this.leaf.display();
-            console.log("RENDER: "+ this.type);
+            //console.log("RENDER: "+ this.type);
     }
 
     isSet(){
@@ -108,9 +115,10 @@ class Node{
         this.material=null;
         this.texture=null;
         this.amplification=1; 
-        this.transformations=[];
+        this.transformations=[]; //final transformation matrix after all multiplications
         this.descendants=[];
         this.visited = false;
+        mat4.identity(this.transformations);
     }
 
     getID(){
@@ -140,6 +148,33 @@ class Node{
 
     //changeTexture(texture);
     //changeAmplification(amplification);
-    //addTransformation(transformation);
+
+    addTransformation(name,args){
+        switch(name){
+            case "translation":
+                mat4.translate(this.transformations,this.transformations,vec3.fromValues(args[0],args[1],args[2]));
+            case "scale":
+                mat4.scale(this.transformations,this.transformations,vec3.fromValues(args[0],args[1],args[2]));
+
+            case "rotation":
+                let angleRad = args[1]*Math.PI/180;
+
+                switch(args[0]){
+                    case "x":
+                        mat4.rotateX(this.transformations,this.transformations,angleRad);
+                    case "y":
+                        mat4.rotateY(this.transformations,this.transformations,angleRad);
+                    case "z":
+                        mat4.rotateZ(this.transformations,this.transformations,angleRad);
+                }
+        }
+    }
+
+    /**
+     * return mat4 representing the node's transformations
+     */
+    getTransformations(){
+        return this.transformations;
+    }
 
 }
