@@ -38,8 +38,7 @@ class MyCylinder extends CGFobject {
       var radius=this.bottomradius;
       var currentHeight=0;
   
-      
-      
+    
       for (let stack= 0; stack <= this.stacks; stack++) {
   
         //resets the angle after each stack is built
