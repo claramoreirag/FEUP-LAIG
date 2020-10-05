@@ -40,7 +40,7 @@
 
     <textures>
         <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
-        <texture id="demoTexture" path="./scenes/images/vidral.jpg" />
+        <texture id="demoTexture" path="./scenes/images/others/vidral.jpg" />
     </textures>
 
 
@@ -57,116 +57,26 @@
     </materials>
 
     <nodes>
-       
+        <node id="root">            <!-- defines one intermediate node; may be repeated as necessary -->
+            <!-- next two lines are mandatory -->
+            <material id="demoMaterial" /><!-- this superimposes the material received from parent node id="null" maintains material from parent node -->
 
-    <node id="root">
-        <material id="null" />
+            <texture id="demoTexture"><!-- declared texture superimposes the texture received from parent node id="null" maintains texture from parent node id="clear" clears texture declaration received from parent node -->
+                <amplification afs="2.0" aft="2.0" /><!-- for primitives = dx/afs, dy/aft -->
+            </texture>
 
-        <texture id="clear">
-            <amplification afs="1.0" aft="1.0" />
-        </texture>
+            <!-- geom. transf. are optional and may be repeated, in any order, as necessary: -->
+            <transformations>
+                <translation x="0" y="1.0" z="1.0" />
+                <rotation axis="yy" angle="45" />
+                <scale sx="2" sy="1" sz="1" />
+            </transformations>
 
-        <transformations>
-            <translation x="0.0" y="0.0" z="0.0" />
-        </transformations>
-
-        <descendants>
-            <noderef id="pernaMesa1" />
-            <noderef id="pernaMesa2" />
-            <noderef id="pernaMesa3" />
-            <noderef id="pernaMesa4" />
-            <!-- x y z coordinates of each vertex -->
-        </descendants>
-    </node>
-
-
-    <node id="pernaMesa1">            
-        <material id="null" />
-
-        <texture id="clear">
-            <amplification afs="1.0" aft="1.0" />
-        </texture>
-
-        <transformations>
-            <translation x="0.0" y="0.0" z="0.0" />
-        </transformations>
-
-
-        <descendants>
-            <noderef id="pernaMesa" />
-        
-        </descendants>
-    </node>
-
-        
-    <node id="pernaMesa2">         
-        
-        <material id="null" />
-        <texture id="clear">
-            <amplification afs="1.0" aft="1.0" />
-        </texture>
-
-        <transformations>
-            <translation x="10.0" y="0.0" z="0.0" />
-        </transformations>
-
-        <descendants>
-            <noderef id="pernaMesa" />
-        </descendants>
-    </node>
-
-        
-    <node id="pernaMesa3">         
-        
-        <material id="null" />
-        <texture id="clear">
-            <amplification afs="1.0" aft="1.0" />
-        </texture>
-
-        <transformations>
-            <translation x="0.0" y="0.0" z="5.0" />
-        </transformations>
-
-        <descendants>
-            <noderef id="pernaMesa" />
-            
-        </descendants>
-    </node>
-
-        
-    <node id="pernaMesa4">         
-        
-        <material id="null" />
-        <texture id="clear">
-            <amplification afs="1.0" aft="1.0" />
-        </texture>
-
-        <transformations>
-            <translation x="10.0" y="0.0" z="5.0" />
-        </transformations>
-
-        <descendants>
-            <noderef id="pernaMesa" />
-            
-        </descendants>
-    </node>
-
-        
-    <node id="pernaMesa">         
-        
-        <material id="null" />
-        <texture id="clear">
-            <amplification afs="1.0" aft="1.0" />
-        </texture>
-
-        <transformations>
-        </transformations>
-
-        <descendants>
-                <leaf type="cylinder" height="7" topRadius="0.4" bottomRadius="0.4" stacks="8" slices="16"/>
-        </descendants>
-    </node>
-
+            <descendants>
+               
+                <leaf type="triangle" x1="0" y1="0" x2="1" y2="1" x3="1" y3="0.5" />
+                
+            </descendants>
         
     </nodes>
 </lsf>
