@@ -48,69 +48,7 @@ class Graph{
     getRootNode(){
         return this.rootIsSet ? this.rootNode : null;
     }
-
-    /**
-     * @param {Node} startingNode - if null starts dfs on root node by default 
-     */
-    dfs(startingNode){
-        let start = startingNode == null ? this.rootNode : startingNode;
-        let desc = start.descendants;
-
-        for(var i=0; i<desc.length; i++){
-            if(desc[i] instanceof Node){
-                // console.log("AM NODE: " + desc[i].getID());
-                let matrix= desc[i].getTransformations();
-
-                //UNCOMMENT TO TEST TRANSFORMATIONS
-                //this.scene.pushMatrix();
-                //this.scene.multMatrix(matrix);
-                this.dfs(desc[i]);
-                //this.scene.popMatrix();
-            }
-            else if(desc[i] instanceof Leaf){
-                // console.log("AM LEAF: " + desc[i].type);
-                desc[i].render();
-            }
-        }
-    }
-
     
-}
-
-class Leaf{
-    constructor(scene,type,args){
-        this.leaf = this.createPrimitive(scene,type,args);
-        this.args = args;
-        this.type = type;
-    }
-
-    createPrimitive(scene,type,args){
-        switch(type){
-            case "rectangle":
-                return new MyRectangle(scene,args[0],args[1],args[2],args[3]);
-            case "triangle":
-                return new MyTriangle(scene,args[0],args[1],args[2],args[3],args[4],args[5]);
-              
-            case "sphere":
-                return new MySphere(scene,args[0],args[1],args[2]);
-            case "torus":
-                return new MyTorus(scene,args[0],args[1],args[2],args[3]);
-            case "cylinder":
-                return new MyCylinder(scene,args[0],args[1],args[2],args[3],args[4]);
-                
-        }
-
-    }
-
-    render(){
-        if(this.leaf!=null)
-            this.leaf.display();
-            //console.log("RENDER: "+ this.type);
-    }
-
-    isSet(){
-        return this.leaf!=null;
-    }
 }
 
 class Node{
@@ -141,13 +79,6 @@ class Node{
      */
     changeMaterial(material){
         this.material=material;
-    }
-
-    /**
-     * @param {Leaf} leaf 
-     */
-    addLeaf(leaf){
-        this.descendants.push(leaf);
     }
 
     //changeTexture(texture);
@@ -181,4 +112,57 @@ class Node{
         return this.transformations;
     }
 
+    /**
+     * @param {XMLscene} scene
+     */
+    display(scene){
+        let matrix= this.getTransformations();
+        scene.pushMatrix();
+        scene.multMatrix(matrix);
+
+        let desc = this.descendants;
+
+        for(var i=0; i<desc.length; i++){
+            desc[i].display(scene);
+        }
+
+        scene.popMatrix();
+    }
+
+}
+
+class Leaf extends Node{
+    constructor(scene,type,args){
+        super();
+        this.leaf = this.createPrimitive(scene,type,args);
+        this.args = args;
+        this.type = type;
+    }
+
+    createPrimitive(scene,type,args){
+        switch(type){
+            case "rectangle":
+                return new MyRectangle(scene,args[0],args[1],args[2],args[3]);
+            case "triangle":
+                return new MyTriangle(scene,args[0],args[1],args[2],args[3],args[4],args[5]);
+            case "sphere":
+                return new MySphere(scene,args[0],args[1],args[2]);
+            case "torus":
+                return new MyTorus(scene,args[0],args[1],args[2],args[3]);
+            case "cylinder":
+                return new MyCylinder(scene,args[0],args[1],args[2],args[3],args[4]);
+                
+        }
+
+    }
+
+    display(scene){
+        if(this.isSet())
+            this.leaf.display();
+            //console.log("RENDER: "+ this.type);
+    }
+
+    isSet(){
+        return this.leaf!=null;
+    }
 }

@@ -817,11 +817,7 @@ class MySceneGraph {
      * Displays the scene, processing each node, starting in the root node.
      */
     displayScene() {
-        let rootTransformations = this.graph.getRootNode().getTransformations();
-
-        //this.scene.pushMatrix();
-        //this.scene.multMatrix(rootTransformations);
-        this.graph.dfs();
-        //this.scene.popMatrix();
+        let rootNode = this.graph.getRootNode();
+        rootNode.display(this.scene);
     }
 }
