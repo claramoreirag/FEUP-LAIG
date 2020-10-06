@@ -1,0 +1,529 @@
+<lsf>
+    <initials>
+        <reference length="2" />
+        <!-- axis length; "0" means no axis displayed -->
+        <root id="root" />
+        <!-- identifier of root node of the scene graph; this node -->
+        <!-- must be defined in one of the following NODE declarations -->
+    </initials>
+    <views default="defaultCamera">
+        <!-- at least one of the following type of cameras must be declared -->
+        <!--new CGFcamera(angle, near, far, from, to)-->
+        <!--from / to -> vec3.fromValues(x, y, z)-->
+        <perspective id="defaultCamera" near="0.1" far="500" angle="22.5">
+            <from x="0" y="15" z="60" />
+            <to x="0" y="0" z="0" />
+        </perspective>
+        <ortho id="demoOrtho" near="0.2" far="100" left="-0.2" right="0.2" top="0.2" bottom="-0.2">
+            <from x="5" y="0" z="10" />
+            <to x="5" y="0" z="0" />
+            <up x="0" y="1" z="0" /><!-- optional, default 0,1,0 -->
+        </ortho>
+    </views>
+
+    <illumination>
+        <ambient r="0.2" g="0.4" b="0.8" a="1.0" />           <!-- global ambient -->
+        <background r="0.0" g="0.0" b="0.0" a="1.0" />        <!-- background color -->
+    </illumination>
+
+
+    <lights>
+        <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
+        <light id="esquerdaTras">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="-4" y="-2" z="5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
+            <specular r="0" g="0" b="0" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="esquerdaFrente">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="-4" y="2" z="5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="0" g="0" b="0" a="1.0" />             <!-- diffuse component -->
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="direitaTras">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="4" y="-2" z="5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="0.2" g="0.2" b="0.2" a="1.0" />             <!-- diffuse component -->
+            <specular r="0.8" g="0.8" b="0.2" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="direitaFrente">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="4" y="2" z="5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="0.8" g="0.8" b="0.2" a="1.0" />             <!-- diffuse component -->
+            <specular r="0.2" g="0.2" b="0.2" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="meio">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="0" y="0" z="0" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="1" g="1" b="1" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="0" g="0" b="0" a="1.0" />             <!-- diffuse component -->
+            <specular r="0" g="0" b="0" a="1.0" />            <!-- specular component -->
+        </light>
+    </lights>
+
+
+    <textures>
+        <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
+        <texture id="texturaPontos" path="./scenes/images/pontos.jpg" />
+        <texture id="texturaTabela" path="./scenes/images/tabela.png" />
+        <texture id="texturaBola" path="./scenes/images/bola.jpg" />
+        <texture id="texturaPiso" path="./scenes/images/piso.jpg" />
+    </textures>
+
+
+    <materials>
+        <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
+         requires a distinct "id". At least one material should be present. -->
+
+        <material id="materialMetal">
+            <shininess value="1" />
+            <ambient r="0.27" g="0.28" b="0.24" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="0.0" />
+            <specular r="0.27" g="0.28" b="0.24" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="0.0" />
+        </material>
+
+        <material id="materialMadeira">
+            <shininess value="1" />
+            <ambient r="0.41" g="0.34" b="0.25" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="0.0" />
+            <specular r="0.41" g="0.34" b="0.25" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="0.0" />
+        </material>
+
+        <material id="materialLaranja">
+            <shininess value="1" />
+            <ambient r="0.6" g="0.31" b="0.08" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="0.0" />
+            <specular r="0.6" g="0.31" b="0.08" a="1.0" />
+            <emissive r="0.6" g="0.31" b="0.08" a="1.0" />
+        </material>
+
+        <material id="materialVermelho">
+            <shininess value="1" />
+            <ambient r="1" g="0" b="0" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="0.0" />
+            <specular r="1" g="0" b="0" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="0.0" />
+        </material>
+
+        <material id="materialCinza">
+            <shininess value="1" />
+            <ambient r="0.33" g="0.33" b="0.33" a="1.0" />
+            <diffuse r="0.0" g="0.0" b="0.0" a="0.0" />
+            <specular r="0.33" g="0.33" b="0.33" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="0.0" />
+        </material>
+    </materials>
+
+    <nodes>
+        <node id = "root">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id = "cestos" /> <!--feito-->
+                <noderef id = "bola" /> <!--feito-->
+                <noderef id = "campo" /> <!--feito-->
+                <noderef id = "pontuação" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "cestos">
+            <material id = "materialVermelho" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id = "cesto1" /> <!--feito-->
+                <noderef id = "cesto2" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "cesto1">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "-3.8" y = "0" z = "0" />
+                <rotation axis="y" angle="90" />
+            </transformations>
+
+            <descendants>
+                <noderef id = "cesto" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "cesto2">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "3.8" y = "0" z = "0" />
+                <rotation axis="y" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id = "cesto" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "cesto">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id = "armação" /> <!--feito-->
+                <noderef id = "suporte" /> <!--feito-->
+                <noderef id = "tabela" /> <!--feito-->
+                <noderef id = "base" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "armação">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "1.504" z = "0.779" />
+                <rotation axis="x" angle="90" />
+            </transformations>
+
+            <descendants>
+                <leaf type="torus" inner="0.025" outer="0.15" slices="20" loops="15" />
+            </descendants>
+        </node>
+
+        <node id = "suporte">
+            <material id = "materialMetal" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <noderef id = "suporte1" /> <!--feito-->
+                <noderef id = "suporte2" /> <!--feito-->
+                <noderef id = "suporte3" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "suporte1">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <rotation axis="x" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <leaf type = "cylinder" height="1.5" topRadius="0.05" bottomRadius="0.05" stacks="10" slices="25" />
+            </descendants>
+        </node>
+
+        <node id = "suporte2">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "1.4" z = "0" />
+                <rotation axis="x" angle="-45" />
+            </transformations>
+
+            <descendants>
+                <leaf type = "cylinder" height="0.5" topRadius="0.05" bottomRadius="0.05" stacks="10" slices="25" />
+            </descendants>
+        </node>
+
+        <node id = "suporte3">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "1.704" z = "0.304" />
+            </transformations>
+
+            <descendants>
+                <leaf type = "cylinder" height="0.3" topRadius="0.05" bottomRadius="0.05" stacks="10" slices="25" />
+            </descendants>
+        </node>
+
+        <node id = "base">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "0.125" z = "0" />
+            </transformations>
+
+            <descendants>
+                <noderef id = "b1" /> <!--feito-->
+                <noderef id = "b2" /> <!--feito-->
+                <noderef id = "b3" /> <!--feito-->
+                <noderef id = "b4" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "b1">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "0" z = "0.0884" />
+                <rotation axis="x" angle="-45" />
+                <translation x = "0" y = "-0.125" z = "0" />
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="-0.185" y1="0" x2="0.185" y2="0" x3="0" y3="0.25" />
+            </descendants>
+        </node>
+
+        <node id = "b2">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "0.0884" y = "0" z = "0" />
+                <rotation axis="z" angle="45" />
+                <translation x = "0" y = "-0.125" z = "0" />
+                <rotation axis="y" angle="90" />
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="-0.185" y1="0" x2="0.185" y2="0" x3="0" y3="0.25" />
+            </descendants>
+        </node>
+
+        <node id = "b3">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "0" z = "-0.0884" />
+                <rotation axis="x" angle="45" />
+                <translation x = "0" y = "-0.125" z = "0" />
+                <rotation axis="y" angle="180" />
+            </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="-0.185" y1="0" x2="0.185" y2="0" x3="0" y3="0.25" />
+            </descendants>
+        </node>
+
+        <node id = "b4">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "-0.0884" y = "0" z = "0" />
+                <rotation axis="z" angle="-45" />
+                <translation x = "0" y = "-0.125" z = "0" />
+                <rotation axis="y" angle="-90" />
+             </transformations>
+
+            <descendants>
+                <leaf type="triangle" x1="-0.185" y1="0" x2="0.185" y2="0" x3="0" y3="0.25" />
+            </descendants>
+        </node>
+
+        <node id = "tabela">
+            <material id = "materialMetal" />
+
+            <texture id = "texturaTabela">
+                <amplification afs = "1" aft = "1"/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "1.704" z = "0.604" />
+            </transformations>
+
+            <descendants>
+                <leaf type = "rectangle" x1 = "-0.5" y1 = "-0.25" x2 = "0.5" y2 = "0.25" />
+            </descendants>
+        </node>
+
+        <node id = "bola">
+            <material id = "materialLaranja" />
+
+            <texture id = "texturaBola">
+                <amplification afs = "1" aft = "1"/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "0.1001" z = "0" />
+            </transformations>
+
+            <descendants>
+                <leaf type = "sphere" radius = "0.1" slices = "20" stacks = "10" />
+            </descendants>
+        </node>
+
+        <node id = "campo">
+            <material id = "materialMadeira" />
+
+            <texture id = "texturaPiso">
+                <amplification afs = "1" aft = "1"/>
+            </texture>
+
+            <transformations>
+                <rotation axis="x" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <leaf type = "rectangle" x1 = "-4" y1 = "-2" x2 = "4" y2 = "2" />
+            </descendants>
+        </node>
+
+
+        <node id = "pontuação">
+            <material id = "materialMetal" />
+
+            <texture id = "null">
+                <amplification afs = "1" aft = "1"/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "0" z = "-1.9" />
+            </transformations>
+
+            <descendants>
+                <noderef id = "posteEsquerdo" /> <!--feito-->
+                <noderef id = "posteDireito" /> <!--feito-->
+                <noderef id = "quadro" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "posteEsquerdo">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "-0.25" y = "0" z = "0" />
+                <rotation axis="x" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id = "poste" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "posteDireito">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+                <translation x = "0.25" y = "0" z = "0" />
+                <rotation axis="x" angle="-90" />
+            </transformations>
+
+            <descendants>
+                <noderef id = "poste" /> <!--feito-->
+            </descendants>
+        </node>
+
+        <node id = "poste">
+            <material id = "null" />
+
+            <texture id = "null">
+                <amplification afs = "" aft = ""/>
+            </texture>
+
+            <transformations>
+            </transformations>
+
+            <descendants>
+                <leaf type = "cylinder" height="1.5" topRadius="0.05" bottomRadius="0.05" stacks="10" slices="25" />
+            </descendants>
+        </node>
+
+        <node id = "quadro">
+            <material id = "materialCinza" />
+
+            <texture id = "texturaPontos">
+                <amplification afs = "1" aft = "1"/>
+            </texture>
+
+            <transformations>
+                <translation x = "0" y = "1.5" z = "0.051" />
+            </transformations>
+
+            <descendants>
+                <leaf type = "rectangle" x1 = "-0.5" y1 = "-0.25" x2 = "0.5" y2 = "0.25" />
+            </descendants>
+        </node>
+    </nodes>
+</lsf>
