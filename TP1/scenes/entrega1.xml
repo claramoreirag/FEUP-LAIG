@@ -67,6 +67,14 @@
             <specular r="0.06" g="0.06" b="0.06" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
+
+        <material id="materialAmarelo">
+            <shininess value="5" />
+            <ambient r="1.0" g="1.0" b="0.0" a="1.0" />
+            <diffuse r="1.0" g="1.0" b="0.0" a="1.0" />
+            <specular r="1.0" g="1.0" b="0.0" a="1.0" />
+            <emissive r="1.0" g="1.0" b="0.0" a="1.0" />
+        </material>
     </materials>
 
 
@@ -75,9 +83,8 @@
     <nodes>
         <node id="root">           
            
-            <material id="materialPreto" />
-
-            <texture id="demoTexture">
+            <material id="materialAmarelo" /> <!--Change later-->
+            <texture id="null">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 

@@ -56,7 +56,7 @@ class Node{
         this.id=id;
         this.material=null;
         this.texture=null;
-        this.amplification=1; 
+        this.amplification=[]; 
         this.transformations=[]; //final transformation matrix after all multiplications
         this.descendants=[];
         this.visited = false;
@@ -81,8 +81,14 @@ class Node{
         this.material=material;
     }
 
-    //changeTexture(texture);
-    //changeAmplification(amplification);
+    changeTexture(texture){
+        this.texture=texture;
+    }
+
+    setAmplification(afs,aft){
+        this.amplification[0]=afs;
+        this.amplification[1]=aft;
+    }
 
     addTransformation(name,args){
         switch(name){
@@ -117,8 +123,14 @@ class Node{
      */
     display(scene){
         let matrix= this.getTransformations();
-        scene.pushMatrix();
-        scene.multMatrix(matrix);
+        //scene.pushMatrix();
+        //scene.multMatrix(matrix);
+
+        //TODO
+        //apply textures
+
+        if(this.material!=null)
+            this.material.apply();
 
         let desc = this.descendants;
 
@@ -126,7 +138,7 @@ class Node{
             desc[i].display(scene);
         }
 
-        scene.popMatrix();
+        //scene.popMatrix();
     }
 
 }

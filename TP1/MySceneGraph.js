@@ -34,6 +34,9 @@ class MySceneGraph {
         this.textureList = new Textures();
         this.materialStack = new Stack();
         this.textureStack = new Stack();
+
+        let clearTextureObject = new Texture("clear"); //clear texture
+        this.textureList.addTexture(clearTextureObject);
         /** */
 
         this.idRoot = null; // The id of the root element.
@@ -412,7 +415,6 @@ class MySceneGraph {
 
             this.textureList.addTexture(newTextureObject);
         }
-
         this.log("Parsed textures");
     
         return null;
@@ -561,8 +563,38 @@ class MySceneGraph {
             }
 
             // Material
+            let materialNode = grandChildren[materialIndex];
+            let materialID = this.reader.getString(materialNode,"id");
 
+            // if materialID = null then father nodes material is kept
+            if(materialID!="null"){
+                let material;
+                if((material = this.materialList.getMaterial(materialID)) !=null)
+                    fatherNode.changeMaterial(material);
+                else
+                    this.onXMLMinorError("Material '" + materialID + "' not declared in <materials> node");
+            }
+            
             // Texture
+            let textureNode = grandChildren[textureIndex];
+            let ampfs = textureNode.children;
+
+            let textureID = this.reader.getString(textureNode,"id");
+            let afs = this.reader.getFloat(ampfs[0],"afs");
+            let aft = this.reader.getFloat(ampfs[0],"aft");
+
+            fatherNode.setAmplification(afs,aft);
+
+            if(textureID!="null"){
+                let texture;
+                if((texture = this.textureList.getTexture(textureID)) != null)
+                    fatherNode.changeTexture(texture);
+                else
+                    this.onXMLMinorError("Texture '" + textureID + "' not declared in <textures> node");
+            }
+
+
+
 
             // Descendants
             let descendants = grandChildren[descendantsIndex].children;

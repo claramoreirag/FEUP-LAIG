@@ -15,7 +15,6 @@ class Texture{
         return this.texture;
     }
 
-
 }
 
 class Textures{
@@ -24,7 +23,6 @@ class Textures{
     }
 
     /**
-     * 
      * @param {Texture} texture 
      */
     addTexture(texture){
@@ -37,10 +35,9 @@ class Textures{
 
     getTexture(id){
         for(let x of this.textures){
-            if(x.getID==id)
+            if(x.getID()==id)
                 return x;
         }
-
         return null;
     }
 }

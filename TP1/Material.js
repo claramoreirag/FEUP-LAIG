@@ -14,6 +14,10 @@ class Material{
     getID(){
         return this.id;
     }
+
+    apply(){
+        this.appearance.apply();
+    }
 }
 
 
