@@ -90,162 +90,300 @@
 
 
     <nodes>
-        	<!--teto-->
-		<node id="teto">
-			  
-            <material id="materialChao" />
-            <texture id="clear">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
+       
+    
+<node id="cubo">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
 
-            <transformations>
-                <translation x="1.0" y="2.0" z="1.0" />
-                <scale sx="2.0" sy="0.0" sz="2.0"/>
-                <rotation axis="x" angle="-90" />
-            </transformations>
+        <transformations>
+        </transformations>
 
+        <descendants>
+                <noderef id="faceCima" />
+                <noderef id="faceBaixo" />
+                <noderef id="faceFrente" />
+                <noderef id="faceTras" />
+                <noderef id="faceEsquerda" />
+                <noderef id="faceDireita" />
+            
+        </descendants>
+    </node>
 
-            <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" /> 
-            </descendants>
-		</node>
-
-		<!--chao-->
-		<node id="chao">
-			<material id="null" />
-            <texture id="wallTexture">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="1.0" y=".0" z="1.0" />
-                <scale sx="2.0" sy="0.0" sz="2.0"/>
-                <rotation axis="x" angle="90" />
-            </transformations>
+ 
 
 
-            <descendants>
+
+    <node id="faceBaixo">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="-0.5" z="0.0" />
+            <rotation axis="x" angle="-90" />
+        </transformations>
+
+
+        <descendants>
                 <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            </descendants>
-		</node>
-
-	<!--Parede -->
-		<node id="paredeTras">
-			<material id="null" />
-            <texture id="clear">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="1.0" y="1.0" z="2.0" />
-                <scale sx="2.0" sy="2.0" sz="0.0"/>
-                 
-            </transformations>
-
-
-            <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            </descendants>
-		</node>
-
-
-        <!--Parede -->
-		<node id="paredeFrente">
-			 <material id="null" />
-            <texture id="clear">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="1.0" y="1.0" z="5.0" />
-                <scale sx="2.0" sy="20.0" sz="0.0"/>
-                <rotation axis="y" angle="-90" />
-            </transformations>
-
-
-            <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            </descendants>
-		</node>
-
-
-        <!--Parede -->
-		<node id="paredeDireita">
-			 <material id="null" />
-            <texture id="clear">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="2.0" y="1.0" z="1.0" />
-                <scale sx="0.0" sy="2.0" sz="2.0"/>
-                <rotation axis="y" angle="90" />
-            </transformations>
-
-
-            <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            </descendants>
-		</node>
-
-        <!--Parede -->
-		<node id="paredeEsquerda">
-			 <material id="null" />
-            <texture id="clear">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="0.0" y="1.0" z="1.0" />
-                <scale sx="0.0" sy="2.0" sz="2.0"/>
-                <rotation axis="y" angle="-90" />
-            </transformations>
-
-
-            <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-            </descendants>
-		</node>
-
-          <!--chao teto e paredes -->
-		<node id="root">
-			 <material id="null" />
-            <texture id="clear">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-            </transformations>
-
-
-            <descendants>
-                <noderef id="paredes" />
-                <noderef id="chao" />
-                <noderef id="teto" />
-            </descendants>
-		</node>
-
-    <!--chao teto e paredes -->
-		<node id="paredes">
-			<material id="null" />
-            <texture id="wallTexture">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-            </transformations>
-
-            <descendants>
-                <noderef id="paredeFrente" />
-                <noderef id="paredeTras" />
-                <noderef id="paredeDireita" />
-                <noderef id="paredeEsquerda" />
-            </descendants>
-		</node>
+        </descendants>
+    </node>
 
 
 
+    <node id="faceCima">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
 
+        <transformations>
+            <translation x="0.0" y="0.5" z="0.0" />
+            <rotation axis="x" angle="90" />
+        </transformations>
+
+
+        <descendants>
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+        </descendants>
+    </node>
+
+
+    <node id="faceTras">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="0.0" z="-0.5" />
+        </transformations>
+
+
+        <descendants>
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+        </descendants>
+    </node>
+
+
+
+        
+    <node id="faceFrente">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="0.0" z="0.5" />
+            <rotation axis="y" angle="180" />
+        </transformations>
+
+
+        <descendants>
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+        </descendants>
+    </node>
+
+
+
+        
+    <node id="faceDireita">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.5" y="0.0" z="0.0" />
+            <rotation axis="y" angle="-90" />
+        </transformations>
+
+
+        <descendants>
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />  
+        </descendants>
+    </node>
+
+        
+    <node id="faceEsquerda">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="-0.5" y="0.0" z="0.0" />
+            <rotation axis="y" angle="90" /> 
+        </transformations>
+
+
+        <descendants>
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+        </descendants>
+    </node>
+
+  
+    <node id="root">           
+        <material id="null" />
+        <texture id="woodTexture1">
+          <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            
+        </transformations>
+
+        <descendants>
+            <noderef id="pernasMesa" />
+            <noderef id="tampoMesa" />
+            <noderef id="donut" />
+			<noderef id="ecra" />
+            <noderef id="esquadro"/>
+        </descendants>
+    </node>
+
+
+
+    <node id="pernasMesa">
+        <material id="null" />
+
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="0.0" z="0.0" />
+             <scale sx="0.6" sy="0.6" sz="0.6" />
+        </transformations>
+
+        <descendants>
+            <noderef id="pernaMesa1" />
+            <noderef id="pernaMesa2" />
+            <noderef id="pernaMesa3" />
+            <noderef id="pernaMesa4" />
+            <!-- x y z coordinates of each vertex -->
+        </descendants>
+    </node>
+
+
+    <node id="pernaMesa1">            
+        <material id="null" />
+
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="0.0" z="0.0" />
+        </transformations>
+
+
+        <descendants>
+            <noderef id="pernaMesa" />
+        
+        </descendants>
+    </node>
+
+        
+    <node id="pernaMesa2">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="10.0" y="0.0" z="0.0" />
+        </transformations>
+
+        <descendants>
+            <noderef id="pernaMesa" />
+        </descendants>
+    </node>
+
+        
+    <node id="pernaMesa3">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="0.0" z="5.0" />
+        </transformations>
+
+        <descendants>
+            <noderef id="pernaMesa" />
+            
+        </descendants>
+    </node>
+
+        
+    <node id="pernaMesa4">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="10.0" y="0.0" z="5.0" />
+        </transformations>
+
+        <descendants>
+            <noderef id="pernaMesa" />
+            
+        </descendants>
+    </node>
+
+        
+    <node id="pernaMesa">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+         <rotation axis="x" angle="-90" />
+        </transformations>
+
+        <descendants>
+                <leaf type="cylinder" height="7" topRadius="0.35" bottomRadius="0.35" stacks="8" slices="16"/>
+        </descendants>
+    </node>
+
+
+        
+    <node id="tampoMesa">         
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="3" y="4.2" z="1.5" />
+            <scale sx="7" sy="0.3" sz="3.8" />
+        </transformations>
+
+        <descendants>
+                <noderef id="cubo" />
+            
+        </descendants>
+    </node>
 
 
 
