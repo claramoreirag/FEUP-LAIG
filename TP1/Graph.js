@@ -57,7 +57,7 @@ class Node{
         this.material=null;
         this.texture=null;
         this.amplification=[]; 
-        this.transformations=[]; //final transformation matrix after all multiplications
+        this.transformations=mat4.create(); //final transformation matrix after all multiplications
         this.descendants=[];
         this.visited = false;
         mat4.identity(this.transformations);
@@ -93,21 +93,26 @@ class Node{
     addTransformation(name,args){
         switch(name){
             case "translation":
-                mat4.translate(this.transformations,this.transformations,vec3.fromValues(args[0],args[1],args[2]));
+                this.transformations=mat4.translate(this.transformations,this.transformations,vec3.fromValues(args[0],args[1],args[2]));
+                break;
             case "scale":
-                mat4.scale(this.transformations,this.transformations,vec3.fromValues(args[0],args[1],args[2]));
-
+                this.transformations= mat4.scale(this.transformations,this.transformations,vec3.fromValues(args[0],args[1],args[2]));
+                break;
             case "rotation":
                 let angleRad = args[1]*Math.PI/180;
 
                 switch(args[0]){
                     case "x":
-                        mat4.rotateX(this.transformations,this.transformations,angleRad);
+                        this.transformations= mat4.rotateX(this.transformations,this.transformations,angleRad);
+                        break;
                     case "y":
-                        mat4.rotateY(this.transformations,this.transformations,angleRad);
+                        this.transformations=mat4.rotateY(this.transformations,this.transformations,angleRad);
+                        break;
                     case "z":
-                        mat4.rotateZ(this.transformations,this.transformations,angleRad);
-                }
+                        this.transformations=mat4.rotateZ(this.transformations,this.transformations,angleRad);
+                        break;
+                    }
+                break;
         }
     }
 
@@ -123,8 +128,8 @@ class Node{
      */
     display(scene){
         let matrix= this.getTransformations();
-        //scene.pushMatrix();
-        //scene.multMatrix(matrix);
+        scene.pushMatrix();
+        scene.multMatrix(this.transformations);
 
         //TODO
         //apply textures
@@ -138,7 +143,7 @@ class Node{
             desc[i].display(scene);
         }
 
-        //scene.popMatrix();
+        scene.popMatrix();
     }
 
 }

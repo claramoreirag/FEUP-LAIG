@@ -33,6 +33,15 @@
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
         </light>
+
+        <light id="Light1">            <!-- light identifier -->
+            <enable value="1" />
+            <!-- enable/disable -->
+            <position x="4" y="2" z="1" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
+            <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+        </light>
     </lights>
 
 
@@ -101,7 +110,7 @@
             </descendants>
         </node> 
 
-    <node id="mesa">           
+    <node id="root">           
         <material id="null" />
         <texture id="woodTexture1">
           <amplification afs="1.0" aft="1.0" />
@@ -251,7 +260,8 @@
 
 
 
-    <node id="cubo">         
+    
+<node id="cubo">         
         
         <material id="null" />
         <texture id="clear">
@@ -272,41 +282,7 @@
         </descendants>
     </node>
 
-    <node id="faceFrenteEcra" >
-		 <material id="null" />
-		 <texture id="screenTexture">
-			 <amplification afs="1.0" aft="1.0" />
-		 </texture>
  
-		 <transformations>
-		 </transformations>
- 
-		 <descendants>
-			 <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-		 </descendants>
- 
-     </node>
- 
-
-
-
-    <node id="faceCima">         
-        
-        <material id="null" />
-        <texture id="clear">
-            <amplification afs="1.0" aft="1.0" />
-        </texture>
-
-        <transformations>
-            <translation x="0.0" y="0.5" z="0.0" />
-            <rotation axis="x" angle="-90" />
-        </transformations>
-
-
-        <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
-        </descendants>
-    </node>
 
 
 
@@ -319,6 +295,26 @@
 
         <transformations>
             <translation x="0.0" y="-0.5" z="0.0" />
+            <rotation axis="x" angle="-90" />
+        </transformations>
+
+
+        <descendants>
+                <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+        </descendants>
+    </node>
+
+
+
+    <node id="faceCima">         
+        
+        <material id="null" />
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="0.5" z="0.0" />
             <rotation axis="x" angle="90" />
         </transformations>
 
@@ -329,7 +325,7 @@
     </node>
 
 
-    <node id="faceFrente">         
+    <node id="faceTras">         
         
         <material id="null" />
         <texture id="clear">
@@ -337,7 +333,7 @@
         </texture>
 
         <transformations>
-            <translation x="0.0" y="0.0" z="0.5" />
+            <translation x="0.0" y="0.0" z="-0.5" />
         </transformations>
 
 
@@ -349,7 +345,7 @@
 
 
         
-    <node id="faceTras">         
+    <node id="faceFrente">         
         
         <material id="null" />
         <texture id="clear">
@@ -357,7 +353,7 @@
         </texture>
 
         <transformations>
-            <translation x="0.0" y="0.0" z="-0.5" />
+            <translation x="0.0" y="0.0" z="0.5" />
             <rotation axis="y" angle="180" />
         </transformations>
 
@@ -370,7 +366,7 @@
 
 
         
-    <node id="faceEsquerda">         
+    <node id="faceDireita">         
         
         <material id="null" />
         <texture id="clear">
@@ -378,7 +374,7 @@
         </texture>
 
         <transformations>
-            <translation x="-0.5" y="0.0" z="0.0" />
+            <translation x="0.5" y="0.0" z="0.0" />
             <rotation axis="y" angle="-90" />
         </transformations>
 
@@ -389,7 +385,7 @@
     </node>
 
         
-    <node id="faceDireita">         
+    <node id="faceEsquerda">         
         
         <material id="null" />
         <texture id="clear">
@@ -397,7 +393,7 @@
         </texture>
 
         <transformations>
-            <translation x="0.5" y="0.0" z="0.0" />
+            <translation x="-0.5" y="0.0" z="0.0" />
             <rotation axis="y" angle="90" /> 
         </transformations>
 
@@ -407,6 +403,8 @@
         </descendants>
     </node>
 
+
+    
     
     <!--Donut-->
     <node id="donut">

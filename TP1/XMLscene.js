@@ -37,7 +37,7 @@ class XMLscene extends CGFscene {
         this.loadingProgress=0;
 
         this.defaultAppearance=new CGFappearance(this);
-
+       
     }
 
     /**
@@ -121,12 +121,10 @@ class XMLscene extends CGFscene {
         if (this.sceneInited) {
             // Draw axis
             this.axis.display();
- 
+           
             this.defaultAppearance.apply();
 
             // Displays the scene (MySceneGraph function).
-            //let app = new CGFappearance(this);
-           
             this.graph.displayScene();
         }
         else
