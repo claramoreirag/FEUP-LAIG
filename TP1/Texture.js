@@ -4,7 +4,7 @@
 class Texture{
     constructor(id,texture){
         this.id=id;
-        this.texture=texture;
+        this.texture = texture;
     }
 
     getID(){
@@ -13,6 +13,10 @@ class Texture{
 
     getTexture(){
         return this.texture;
+    }
+
+    apply(){
+        this.texture.apply();
     }
 
 }

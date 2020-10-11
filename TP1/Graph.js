@@ -126,23 +126,32 @@ class Node{
     /**
      * @param {XMLscene} scene
      */
-    display(scene){
-        let matrix= this.getTransformations();
+    display(scene,materialStack,textureStack){
         scene.pushMatrix();
         scene.multMatrix(this.transformations);
 
-        //TODO
-        //apply textures
+        let material = this.material; 
+        if(material == null){
+            material = materialStack.pop();
+            materialStack.push(material);
+        }
+        materialStack.push(material);
 
-        if(this.material!=null)
-            this.material.apply();
+        let texture = this.texture;
+        if(texture == null){
+            texture = textureStack.pop();
+            textureStack.push(texture);
+        }
+        textureStack.push(texture);
 
         let desc = this.descendants;
 
         for(var i=0; i<desc.length; i++){
-            desc[i].display(scene);
+            desc[i].display(scene,materialStack,textureStack);
         }
 
+        materialStack.pop();
+        textureStack.pop();
         scene.popMatrix();
     }
 
@@ -173,10 +182,21 @@ class Leaf extends Node{
 
     }
 
-    display(scene){
-        if(this.isSet())
+    display(scene,materialStack,textureStack){
+        if(this.isSet()){
+            let material = materialStack.pop();
+            let texture = textureStack.pop();
+
+            if(texture.getID()!="clear")
+                texture.apply();
+            else
+                material.apply();
+
             this.leaf.display();
-            //console.log("RENDER: "+ this.type);
+
+            materialStack.push(material);
+            textureStack.push(texture);
+        }
     }
 
     isSet(){

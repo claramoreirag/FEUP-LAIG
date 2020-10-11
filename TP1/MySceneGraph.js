@@ -410,7 +410,9 @@ class MySceneGraph {
             if (texturePath == null)
                 return "no path defined for texture";
 
-            let newTexture = new CGFtexture(this.scene,texturePath);
+            let newTexture = new CGFappearance(this.scene);
+            newTexture.loadTexture(texturePath);
+            newTexture.setTextureWrap("REPEAT","REPEAT");
             let newTextureObject = new Texture(textureID,newTexture);
 
             this.textureList.addTexture(newTextureObject);
@@ -850,6 +852,6 @@ class MySceneGraph {
      */
     displayScene() {
         let rootNode = this.graph.getRootNode();
-        rootNode.display(this.scene);
+        rootNode.display(this.scene,this.materialStack,this.textureStack);
     }
 }
