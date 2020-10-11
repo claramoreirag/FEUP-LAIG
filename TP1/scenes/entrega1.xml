@@ -19,7 +19,7 @@
 
     <illumination>
         <ambient r="0.2" g="0.2" b="0.2" a="1.0" />           <!-- global ambient -->
-        <background r="0.1" g="0.7" b="1.0" a="1.0" />        <!-- background color -->
+        <background r="0.1" g="0.7" b="1.0" a="1.0" />          <!-- background color -->
     </illumination>
 
 
@@ -28,17 +28,36 @@
         <light id="demoLight">            <!-- light identifier -->
             <enable value="1" />
             <!-- enable/disable -->
-            <position x="10" y="12" z="9.5" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
-            <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
+            <position x="0" y="10" z="1" w="0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="1" g="1" b="1" a="1.0" />                   <!-- ambient component -->
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
-            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />            <!-- specular component -->
         </light>
 
         <light id="Light1">            <!-- light identifier -->
-            <enable value="1" />
+            <enable value="0" />
             <!-- enable/disable -->
             <position x="4" y="2" z="1" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="0.5" g="0.5" b="0.5" a="1.0" />                   <!-- ambient component -->
+            <diffuse r=".5" g=".5" b=".5" a="1.0" />             <!-- diffuse component -->
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+        </light>
+
+        <light id="Light2">            <!-- light identifier -->
+            <enable value="0" />
+            <!-- enable/disable -->
+            <position x="10" y="2" z="10" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
             <ambient r="0" g="0" b="0" a="1.0" />                   <!-- ambient component -->
+            <diffuse r=".0" g=".0" b="1.0" a="1.0" />             <!-- diffuse component -->
+            <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
+        </light>
+
+        
+        <light id="Light3">            <!-- light identifier -->
+            <enable value="0" />
+            <!-- enable/disable -->
+            <position x="7" y="9" z="9" w="0" /><!-- light position; w=1: point light; w=0: directional light -->
+            <ambient r="1" g="1" b="1" a="1.0" />                   <!-- ambient component -->
             <diffuse r="1.0" g="1.0" b="1.0" a="1.0" />             <!-- diffuse component -->
             <specular r="1.0" g="1.0" b="1.0" a="1.0" />            <!-- specular component -->
         </light>
@@ -49,7 +68,7 @@
         <!-- NOTE: this block "TEXTURE" must be repeated as necessary with different "id" -->
 		<texture id="wallTexture" path="./scenes/images/wall.jpg" />
 		<texture id="donutTexture" path="./scenes/images/donut.jpg" />
-		<texture id="doorTexture" path="./scenes/images/door.png" />
+		<texture id="doorTexture" path="./scenes/images/door.jpg" />
 		<texture id="keyboardTexture" path="./scenes/images/keyboard.png" />
 		<texture id="windowTexture" path="./scenes/images/window.jpg" />
 		<texture id="woodTexture1" path="./scenes/images/wood/wood1.jpg" />
@@ -62,11 +81,11 @@
         <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
          requires a distinct "id". At least one material should be present. -->
         <material id="materialPreto">
-            <shininess value="0.5" />
+            <shininess value="2" />
             <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
             <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
-            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r=".1" g=".1" b=".1" a="1.0" />
         </material>
 
          <material id="materialChao">
@@ -604,6 +623,26 @@
 
 
 
+   
+    <node id="faceFrenteEcra">         
+        
+        <material id="null" />
+        <texture id="screenTexture">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="0.0" y="0.0" z="0.5" />
+            <rotation axis="y" angle="180" />
+        </transformations>
+
+
+        <descendants>
+            <leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+        </descendants>
+    </node>
+
+
      <!--Ecrã-->
  
      <node id="ecra">
@@ -616,7 +655,9 @@
          <transformations>
             <translation x="3.2" y="5.6" z="0.6" />
             <scale sx="3" sy="2.5" sz="0.4"/>
-            <rotation axis="y" angle="-90" />
+          
+            <rotation axis="z" angle="-180" />
+            
          </transformations>
  
          <descendants>
@@ -650,7 +691,7 @@
 		<!--Porta-->
 		<node id="porta">
 
-            <material id="materialAmarelo" />
+            <material id="null" />
             <texture id="doorTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
@@ -658,18 +699,18 @@
         <transformations>
             <translation x="0.05" y="7." z="10.0" />
             <scale sx="0.0" sy="14.0" sz="5.0"/>
-            <rotation axis="y" angle="-90" />
+            <rotation axis="y" angle="90" />
         </transformations>
 
 
 		<descendants>
-			<leaf type="rectangle" x1="-0.5" y1="0.5" x2="0.5" y2="-0.5" />
+			<leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
 		</descendants>
 
 		</node>
 
 
-<!--Porta-->
+<!--Janela-->
 		<node id="janela">
 
             <material id="null" />
@@ -679,9 +720,10 @@
 
         <transformations>
             <translation x="0" y="0." z="0.05" />
+    
         </transformations>
 		<descendants>
-			<leaf type="rectangle" x1="7" y1="11" x2="13" y2="16" />
+			<leaf type="rectangle" x1="5" y1="10" x2="14" y2="16" />
 		</descendants>
 
 		</node>
@@ -689,8 +731,8 @@
 	 	<!--teto-->
 		<node id="teto">
 			  
-            <material id="materialChao" />
-            <texture id="clear">
+            <material id="null" />
+            <texture id="wallTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -709,7 +751,7 @@
 		<!--chao-->
 		<node id="chao">
 			<material id="null" />
-            <texture id="wallTexture">
+            <texture id="woodTexture2">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 

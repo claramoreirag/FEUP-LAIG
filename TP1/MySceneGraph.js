@@ -309,7 +309,7 @@ class MySceneGraph {
         var children = lightsNode.children;
 
         this.lights = [];
-        var numLights = 0;
+         this.numLights = 0;
 
         var grandChildren = [];
         var nodeNames = [];
@@ -369,15 +369,16 @@ class MySceneGraph {
                     return "light " + attributeNames[i] + " undefined for ID = " + lightId;
             }
             this.lights[lightId] = global;
-            numLights++;
+           this.numLights++;
         }
 
-        if (numLights == 0)
+        if (this.numLights == 0)
             return "at least one light must be defined";
-        else if (numLights > 8)
+        else if (this.numLights > 8)
             this.onXMLMinorError("too many lights defined; WebGL imposes a limit of 8 lights");
 
         this.log("Parsed lights");
+        
         return null;
     }
 
@@ -387,7 +388,7 @@ class MySceneGraph {
      */
     parseTextures(texturesNode) {
         let children = texturesNode.children;
-
+  
         //For each texture in textures block, check ID and file URL
         //this.onXMLMinorError("To do: Parse textures.");
 

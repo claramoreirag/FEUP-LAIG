@@ -23,6 +23,20 @@ class XMLscene extends CGFscene {
 
         this.initCameras();
 
+
+        this.displayLight0 = false;
+        this.displayLight1 = false;
+        this.displayLight2 = false;
+        this.displayLight3 = false;
+        this.displayLight4 = false;
+        this.displayLight5 = false;
+        this.displayLight6 = false;
+        this.displayLight7 = false;        
+        this.displayLights = [this.displayLight0,this.displayLight1,this.displayLight2,this.displayLight3,
+            this.displayLight4,this.displayLight5,this.displayLight6,this.displayLight7];      
+
+
+
         this.enableTextures(true);
 
         this.gl.clearDepth(100.0);
@@ -65,7 +79,8 @@ class XMLscene extends CGFscene {
                 this.lights[i].setAmbient(...graphLight[2]);
                 this.lights[i].setDiffuse(...graphLight[3]);
                 this.lights[i].setSpecular(...graphLight[4]);
-
+             
+              // this.lights[i].setSpotCutOff(0);
                 this.lights[i].setVisible(true);
                 if (graphLight[0])
                     this.lights[i].enable();
@@ -89,8 +104,8 @@ class XMLscene extends CGFscene {
 
         this.setGlobalAmbientLight(...this.graph.ambient);
 
+        this.interface.addLightsFolder();
         this.initLights();
-
         this.sceneInited = true;
     }
 
@@ -114,14 +129,14 @@ class XMLscene extends CGFscene {
         this.pushMatrix();
 
         for (var i = 0; i < this.lights.length; i++) {
-            this.lights[i].setVisible(true);
+            if(this.displayLights[i])this.lights[i].setVisible(true);
             this.lights[i].enable();
         }
 
         if (this.sceneInited) {
             // Draw axis
             this.axis.display();
-           
+           //this.initLights();
             this.defaultAppearance.apply();
 
             // Displays the scene (MySceneGraph function).
@@ -140,5 +155,20 @@ class XMLscene extends CGFscene {
 
         this.popMatrix();
         // ---- END Background, camera and axis setup
+    }
+
+    
+
+
+    update(t) {
+       
+        this.displayLights[0]=this.displayLight0;
+        this.displayLights[1]=this.displayLight1;
+        this.displayLights[2]=this.displayLight2;
+        this.displayLights[3]=this.displayLight3;
+        this.displayLights[4]=this.displayLight4;
+        this.displayLights[5]=this.displayLight5;
+        this.displayLights[6]=this.displayLight6;
+        this.displayLights[7]=this.displayLight7;
     }
 }

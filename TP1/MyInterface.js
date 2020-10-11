@@ -23,7 +23,8 @@ class MyInterface extends CGFinterface {
         // add a group of controls (and open/expand by defult)
 
         this.initKeys();
-        //this.addLightsFolder();
+       
+        this.addCameras();
         return true;
     }
 
@@ -53,14 +54,13 @@ class MyInterface extends CGFinterface {
     addLightsFolder() {
     
         var lightsFolder = this.gui.addFolder('Lights');
-        var i = 0;
+        
 
-        for(var key in this.scene.lights) {
-            if(i >= 8)
-                break;
-            
-            lightsFolder.add(this.scene.lights[key], '0').name(key);
-            i++;
-        }
+        for(let i=0; i<this.scene.graph.numLights;i++)
+          lightsFolder.add(this.scene, 'displayLight'+i).name("Display "+i);      
+    }
+
+    addCameras(cameras){
+       // this.gui.add(this.scene, 'selectedCamera', cameras).name('Selected Camera').onChange(this.scene.updateCamera.bind(this.scene));
     }
 }
