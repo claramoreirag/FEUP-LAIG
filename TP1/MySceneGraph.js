@@ -113,7 +113,7 @@ class MySceneGraph {
 
         var nodes = rootElement.children;
 
-        // Reads the names of the nodes to an auxiliary buffer.
+        // Reads the names of the nodes to an upiliary buffer.
         var nodeNames = [];
 
         for (var i = 0; i < nodes.length; i++) {
@@ -234,11 +234,11 @@ class MySceneGraph {
             return "No root id defined for scene.";
 
         this.idRoot = id;
-        /**new*/
+      
         var rootNode = new Node(this.idRoot);
         this.graph.addNode(rootNode);
         this.graph.setRootNode(rootNode);
-        /*****/
+      
 
         // Get axis length        
         if(referenceIndex == -1)
@@ -261,8 +261,103 @@ class MySceneGraph {
      * @param {view block element} viewsNode
      */
     parseViews(viewsNode) {
-        this.onXMLMinorError("To do: Parse views and create cameras.");
+
+        var children= viewsNode.children;
+        var grandChildren = [];
+
+        this.views=[];
+        this.numViews=0;
+
+        var nodeNames = [];
+
+        this.defaultView = this.reader.getString(viewsNode, 'default');
+
+        
+        for (let i = 0; i < children.length; i++) {
+
+            //views information
+            var global = [];
+            var attributeNames = [];
+            var attributeTypes = [];
+
+            //Check type of view
+            if (children[i].nodeName != "perspective" && children[i].nodeName != "ortho") {
+                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                continue;
+            }
+            else {
+                attributeNames.push(...["from", "to"]);
+                attributeTypes.push(...["position", "position"]);
+            }
+
+            // id of the current view
+            var viewID = this.reader.getString(children[i], 'id');
+            if (viewID == null) return "no ID defined for view";
+
+            if (this.views[viewID] != null)
+                return "ID must be unique for each view (conflict: ID = " + viewID + ")";
+
+    
+            grandChildren = children[i].children;
+          
+
+            nodeNames = [];
+            for (var j = 0; j < grandChildren.length; j++) {
+                nodeNames.push(grandChildren[j].nodeName);
+            }
+
+            for (var j = 0; j < attributeNames.length; j++) {
+                var attributeIndex = nodeNames.indexOf(attributeNames[j]);
+
+                if (attributeIndex != -1) {
+                    if (attributeTypes[j] == "position")
+                        var up = this.parseCoordinates3D(grandChildren[attributeIndex], "view position for ID" + viewID);
+                    if (!Array.isArray(up))
+                        return up;
+
+                    global.push(up);
+                }
+                else
+                    return "view " + attributeNames[i] + " undefined for ID = " + viewID;
+            }
+
+            // Gets the additional attributes of the ortho view
+            if (children[i].nodeName == "ortho") {
+                var upIndex = nodeNames.indexOf("up");
+
+                //  get param up for ortho.
+                var viewUp = [];
+                if (upIndex != -1) {
+                    var up = this.parseCoordinates3D(grandChildren[upIndex], "up for ortho for ID " + viewID);
+                    
+                    //check if up is specified, if not use default [0,1,0]
+                    if (!Array.isArray(up)) viewUp = [0,1,0];
+                    else viewUp = up;
+                }
+             
+                //global.push(...[viewUp]);
+              
+                if(viewUp.length==0) var camera = new CGFcameraOrtho(this.reader.getFloat(children[i],'left'), this.reader.getFloat(children[i],'right'), this.reader.getFloat(children[i],'bottom'), this.reader.getFloat(children[i],'top'), this.reader.getFloat(children[i],'near'), this.reader.getFloat(children[i],'far'),global[0], global[1], viewUp);
+                else var camera = new CGFcameraOrtho(this.reader.getFloat(children[i],'left'), this.reader.getFloat(children[i],'right'), this.reader.getFloat(children[i],'bottom'), this.reader.getFloat(children[i],'top'), this.reader.getFloat(children[i],'near'), this.reader.getFloat(children[i],'far'),global[0], global[1], viewUp);
+            }
+            
+            else if(children[i].nodeName == "perspective") {
+                var camera = new CGFcamera(this.reader.getFloat(children[i],'angle'), this.reader.getFloat(children[i],'near'), this.reader.getFloat(children[i],'far'), global[0], global[1]);
+            }
+            
+            this.views[viewID] = camera;
+            this.numViews++;
+
+        }
+
+        if (this.numViews == 0)
+            return "at least one view must be defined";
+
+        this.log("Parsed views");
+      
+
         return null;
+
     }
 
     /**
@@ -354,16 +449,16 @@ class MySceneGraph {
 
                 if (attributeIndex != -1) {
                     if (attributeTypes[j] == "boolean")
-                        var aux = this.parseBoolean(grandChildren[attributeIndex], "value", "enabled attribute for light of ID" + lightId);
+                        var up = this.parseBoolean(grandChildren[attributeIndex], "value", "enabled attribute for light of ID" + lightId);
                     else if (attributeTypes[j] == "position")
-                        var aux = this.parseCoordinates4D(grandChildren[attributeIndex], "light position for ID" + lightId);
+                        var up = this.parseCoordinates4D(grandChildren[attributeIndex], "light position for ID" + lightId);
                     else
-                        var aux = this.parseColor(grandChildren[attributeIndex], attributeNames[j] + " illumination for ID" + lightId);
+                        var up = this.parseColor(grandChildren[attributeIndex], attributeNames[j] + " illumination for ID" + lightId);
 
-                    if (typeof aux === 'string')
-                        return aux;
+                    if (typeof up === 'string')
+                        return up;
 
-                    global.push(aux);
+                    global.push(up);
                 }
                 else
                     return "light " + attributeNames[i] + " undefined for ID = " + lightId;
@@ -542,7 +637,7 @@ class MySceneGraph {
             var textureIndex = nodeNames.indexOf("texture");
             var descendantsIndex = nodeNames.indexOf("descendants");
 
-            //this.onXMLMinorError("To do: Parse nodes.");
+            
             // Transformations
             let transformations = grandChildren[transformationsIndex].children;
 

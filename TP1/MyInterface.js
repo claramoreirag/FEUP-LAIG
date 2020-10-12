@@ -62,5 +62,6 @@ class MyInterface extends CGFinterface {
 
     addCameras(cameras){
        // this.gui.add(this.scene, 'selectedCamera', cameras).name('Selected Camera').onChange(this.scene.updateCamera.bind(this.scene));
+      // this.gui.add(this.scene,'selectedCamera',this.scene.textureList).onChange(this.scene.updateTexture.bind(this.scene)).name('Texture');
     }
 }
