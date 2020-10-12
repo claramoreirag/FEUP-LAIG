@@ -21,20 +21,11 @@ class XMLscene extends CGFscene {
 
         this.sceneInited = false;
 
+        this.IDlights = new Object();
+        this.cameras=[];
+        this.camerasID={};
         this.initCameras();
-
-
-        this.displayLight0 = false;
-        this.displayLight1 = false;
-        this.displayLight2 = false;
-        this.displayLight3 = false;
-        this.displayLight4 = false;
-        this.displayLight5 = false;
-        this.displayLight6 = false;
-        this.displayLight7 = false;        
-        this.displayLights = [this.displayLight0,this.displayLight1,this.displayLight2,this.displayLight3,
-            this.displayLight4,this.displayLight5,this.displayLight6,this.displayLight7];      
-
+        this.selectedCamera=0;
 
 
         this.enableTextures(true);
@@ -51,15 +42,10 @@ class XMLscene extends CGFscene {
         this.loadingProgress=0;
 
         this.defaultAppearance=new CGFappearance(this);
-       
+     //   this.initCameras();
     }
 
-    /**
-     * Initializes the scene cameras.
-     */
-    initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
-    }
+    
     /**
      * Initializes the scene lights with the values read from the XML file.
      */
@@ -79,9 +65,9 @@ class XMLscene extends CGFscene {
                 this.lights[i].setAmbient(...graphLight[2]);
                 this.lights[i].setDiffuse(...graphLight[3]);
                 this.lights[i].setSpecular(...graphLight[4]);
-             
-              // this.lights[i].setSpotCutOff(0);
-                this.lights[i].setVisible(true);
+        
+               // this.lights[i].setSpotCutOff(0);
+                this.lights[i].setVisible(true); //comment this line to disable light geometry
                 if (graphLight[0])
                     this.lights[i].enable();
                 else
@@ -94,6 +80,24 @@ class XMLscene extends CGFscene {
         }
     }
 
+    initCameras() {
+        var i=0;
+        // cameras index.
+        if(this.sceneInited){
+            // Reads the cameras from the scene graph.
+            for (var key in this.graph.views) {
+                var view = this.graph.views[key];
+                this.cameras[i] = view;
+                this.camerasID[key] = i;
+                i++;
+            }
+            this.camera = this.cameras[this.camerasID[this.graph.defaultView]];
+            this.interface.setActiveCamera(this.camera);
+        }            
+        else
+            this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15,15, 15), vec3.fromValues(0, 0, 0));
+}
+
     /** Handler called when the graph is finally loaded. 
      * As loading is asynchronous, this may be called already after the application has started the run loop
      */
@@ -104,8 +108,11 @@ class XMLscene extends CGFscene {
 
         this.setGlobalAmbientLight(...this.graph.ambient);
 
-        this.interface.addLightsFolder();
         this.initLights();
+      
+      //  this.initCameras();
+        this.interface.addLightsFolder();
+     //   this.interface.addCameras(this.cameras);
         this.sceneInited = true;
     }
 
@@ -128,17 +135,13 @@ class XMLscene extends CGFscene {
 
         this.pushMatrix();
 
-        for (var i = 0; i < this.lights.length; i++) {
-            if(this.displayLights[i])this.lights[i].setVisible(true);
-            this.lights[i].enable();
-        }
-
         if (this.sceneInited) {
             // Draw axis
             this.axis.display();
-           //this.initLights();
+         
             this.defaultAppearance.apply();
-
+            //this.updateCameras();
+            this.updateLights();
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
         }
@@ -158,17 +161,33 @@ class XMLscene extends CGFscene {
     }
 
     
+    updateLights() {
+        var i = 0;
+    
+        
+        for (var key in this.graph.lights) {
+            if (i >= 8)
+                break;              // Only eight lights allowed .
+            this.IDlights[key] = i;
+            if (this.graph.lights.hasOwnProperty(key)) {
+                var light = this.graph.lights[key];
 
+                if (light[0])
+                    this.lights[i].enable();
+                else
+                    this.lights[i].disable();
 
-    update(t) {
-       
-        this.displayLights[0]=this.displayLight0;
-        this.displayLights[1]=this.displayLight1;
-        this.displayLights[2]=this.displayLight2;
-        this.displayLights[3]=this.displayLight3;
-        this.displayLights[4]=this.displayLight4;
-        this.displayLights[5]=this.displayLight5;
-        this.displayLights[6]=this.displayLight6;
-        this.displayLights[7]=this.displayLight7;
+                this.lights[i].update();
+
+                i++;
+            }
+        }
     }
+
+    updateCameras(){
+        this.camera = this.cameras[this.selectedCamera];
+        this.interface.setActiveCamera(this.camera);
+    }
+
+   
 }

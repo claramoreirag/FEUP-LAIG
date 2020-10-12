@@ -347,15 +347,14 @@ class MySceneGraph {
             
             this.views[viewID] = camera;
             this.numViews++;
-
+            
         }
 
         if (this.numViews == 0)
             return "at least one view must be defined";
 
         this.log("Parsed views");
-      
-
+        
         return null;
 
     }
