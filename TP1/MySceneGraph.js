@@ -695,8 +695,6 @@ class MySceneGraph {
             }
 
 
-
-
             // Descendants
             let descendants = grandChildren[descendantsIndex].children;
 
@@ -751,7 +749,7 @@ class MySceneGraph {
                         break;
                 }
 
-                let leaf = new Leaf(this.scene,type,args);
+                let leaf = new Leaf(this.scene,type,args,afs,aft);
 
                 fatherNode.addEdge(leaf);
             }
