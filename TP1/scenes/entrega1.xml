@@ -710,7 +710,7 @@
 
         <transformations>
             <translation x="0.05" y="7." z="10.0" />
-            <scale sx="0.0" sy="14.0" sz="5.0"/>
+            <scale sx="1.0" sy="14.0" sz="5.0"/>
             <rotation axis="y" angle="90" />
         </transformations>
 
@@ -750,7 +750,7 @@
 
             <transformations>
                 <translation x="1.0" y="2.0" z="1.0" />
-                <scale sx="2.0" sy="0.0" sz="2.0"/>
+                <scale sx="2.0" sy="1.0" sz="2.0"/>
                 <rotation axis="x" angle="-90" />
             </transformations>
 
@@ -769,7 +769,7 @@
 
             <transformations>
                 <translation x="1.0" y=".0" z="1.0" />
-                <scale sx="2.0" sy="0.0" sz="2.0"/>
+                <scale sx="2.0" sy="1.0" sz="2.0"/>
                 <rotation axis="x" angle="90" />
             </transformations>
 
@@ -788,7 +788,7 @@
 
             <transformations>
                 <translation x="1.0" y="1.0" z="2.0" />
-                <scale sx="2.0" sy="2.0" sz="0.0"/>
+                <scale sx="2.0" sy="2.0" sz="1.0"/>
                  
             </transformations>
 
@@ -808,7 +808,7 @@
 
             <transformations>
                 <translation x="1.0" y="1.0" z="0.0" />
-                <scale sx="2.0" sy="2.0" sz="0.0"/>
+                <scale sx="2.0" sy="2.0" sz="1.0"/>
                 <rotation axis="x" angle="-180" />
             </transformations>
 
@@ -828,7 +828,7 @@
 
             <transformations>
                 <translation x="2.0" y="1.0" z="1.0" />
-                <scale sx="0.0" sy="2.0" sz="2.0"/>
+                <scale sx="1.0" sy="2.0" sz="2.0"/>
                 <rotation axis="y" angle="90" />
             </transformations>
 
@@ -847,7 +847,7 @@
 
             <transformations>
                 <translation x="0.0" y="1.0" z="1.0" />
-                <scale sx="0.0" sy="2.0" sz="2.0"/>
+                <scale sx="1.0" sy="2.0" sz="2.0"/>
                 <rotation axis="y" angle="-90" />
             </transformations>
 
@@ -901,7 +901,7 @@
  <!--Esquadro -->
 		<node id="esquadro">
 			 <material id="null" />
-            <texture id="clear">
+            <texture id="screenTexture">
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 

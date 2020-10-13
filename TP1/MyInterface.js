@@ -60,7 +60,7 @@ class MyInterface extends CGFinterface {
         }
     }
 
-    addCamerasFolder(cameras){
+    addCamerasFolder(){
 
         for(var key in this.scene.graph.views) {
             this.scene.interfaceViews[key] = key;
