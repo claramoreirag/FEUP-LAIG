@@ -173,7 +173,7 @@ class Leaf extends Node{
             case "rectangle":
                 return new MyRectangle(scene,args[0],args[1],args[2],args[3],this.afs,this.aft);
             case "triangle":
-                return new MyTriangle(scene,args[0],args[1],args[2],args[3],args[4],args[5]);
+                return new MyTriangle(scene,args[0],args[1],args[2],args[3],args[4],args[5],this.afs,this.aft);
             case "sphere":
                 return new MySphere(scene,args[0],args[1],args[2]);
             case "torus":
