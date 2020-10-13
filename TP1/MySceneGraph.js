@@ -311,11 +311,11 @@ class MySceneGraph {
 
                 if (attributeIndex != -1) {
                     if (attributeTypes[j] == "position")
-                        var up = this.parseCoordinates3D(grandChildren[attributeIndex], "view position for ID" + viewID);
-                    if (!Array.isArray(up))
-                        return up;
+                        var pos = this.parseCoordinates3D(grandChildren[attributeIndex], "view position for ID" + viewID);
+                    if (!Array.isArray(pos))
+                        return pos;
 
-                    global.push(up);
+                    global.push(pos);
                 }
                 else
                     return "view " + attributeNames[i] + " undefined for ID = " + viewID;
@@ -335,7 +335,7 @@ class MySceneGraph {
                     else viewUp = up;
                 }
              
-                //global.push(...[viewUp]);
+                global.push(...[viewUp]);
               
                 if(viewUp.length==0) var camera = new CGFcameraOrtho(this.reader.getFloat(children[i],'left'), this.reader.getFloat(children[i],'right'), this.reader.getFloat(children[i],'bottom'), this.reader.getFloat(children[i],'top'), this.reader.getFloat(children[i],'near'), this.reader.getFloat(children[i],'far'),global[0], global[1], viewUp);
                 else var camera = new CGFcameraOrtho(this.reader.getFloat(children[i],'left'), this.reader.getFloat(children[i],'right'), this.reader.getFloat(children[i],'bottom'), this.reader.getFloat(children[i],'top'), this.reader.getFloat(children[i],'near'), this.reader.getFloat(children[i],'far'),global[0], global[1], viewUp);
@@ -357,6 +357,10 @@ class MySceneGraph {
         
         return null;
 
+
+ 
+
+ 
     }
 
     /**

@@ -53,17 +53,22 @@ class MyInterface extends CGFinterface {
 
     addLightsFolder() {
     
-        var folder = this.gui.addFolder("Lights");
+        let lightsFolder = this.gui.addFolder("Lights");
 
         for(let key in this.scene.graph.lights){
-            folder.add(this.scene.graph.lights[key], "0").name(key);
+            lightsFolder.add(this.scene.graph.lights[key], "0").name(key);
         }
     }
 
     addCamerasFolder(cameras){
-        var camerasFolder = this.gui.addFolder("Cameras");
 
-        this.gui.add(this.scene, 'selectedCamera', cameras).name('Selected Camera').onChange(this.scene.updateCameras.bind(this.scene));
+        for(var key in this.scene.graph.views) {
+            this.scene.interfaceViews[key] = key;
+        }
+
+        let camerasFolder = this.gui.addFolder("Cameras");
+
+        camerasFolder.add(this.scene, 'selectedCamera', this.scene.interfaceViews).name('Selected Camera').onChange(this.scene.updateCameras.bind(this.scene));
     
     }
 }

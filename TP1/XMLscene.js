@@ -22,8 +22,7 @@ class XMLscene extends CGFscene {
         this.sceneInited = false;
 
         this.IDlights = new Object();
-        this.cameras=[];
-        this.camerasID={};
+        this.interfaceViews= new Object();
         this.initCameras();
         this.selectedCamera=0;
 
@@ -42,7 +41,7 @@ class XMLscene extends CGFscene {
         this.loadingProgress=0;
 
         this.defaultAppearance=new CGFappearance(this);
-     //   this.initCameras();
+     
     }
 
     
@@ -84,18 +83,11 @@ class XMLscene extends CGFscene {
         var i=0;
         // cameras index.
         if(this.sceneInited){
-            // Reads the cameras from the scene graph.
-            for (var key in this.graph.views) {
-                var view = this.graph.views[key];
-                this.cameras[i] = view;
-                this.camerasID[key] = i;
-                i++;
-            }
             this.camera = this.cameras[this.camerasID[this.graph.defaultView]];
             this.interface.setActiveCamera(this.camera);
         }            
         else
-            this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15,15, 15), vec3.fromValues(0, 0, 0));
+            this.camera = new CGFcamera(0.8, 0.1, 500, vec3.fromValues(15,15, 15), vec3.fromValues(0, 0, 0));
 }
 
     /** Handler called when the graph is finally loaded. 
@@ -110,9 +102,10 @@ class XMLscene extends CGFscene {
 
         this.initLights();
       
-      //  this.initCameras();
+        //this.initCameras();
         this.interface.addLightsFolder();
-     //   this.interface.addCameras(this.cameras);
+        this.interface.addCamerasFolder();
+     
         this.sceneInited = true;
     }
 
@@ -140,7 +133,7 @@ class XMLscene extends CGFscene {
             this.axis.display();
          
             this.defaultAppearance.apply();
-            //this.updateCameras();
+           //this.updateCameras();
             this.updateLights();
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
@@ -185,8 +178,8 @@ class XMLscene extends CGFscene {
     }
 
     updateCameras(){
-        this.camera = this.cameras[this.selectedCamera];
-        this.interface.setActiveCamera(this.camera);
+        this.camera = this.graph.views[this.selectedCamera];
+        
     }
 
    

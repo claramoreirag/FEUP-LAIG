@@ -90,6 +90,7 @@ class Node{
         this.amplification[1]=aft;
     }
 
+    
     addTransformation(name,args){
         switch(name){
             case "translation":
