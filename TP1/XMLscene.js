@@ -21,8 +21,9 @@ class XMLscene extends CGFscene {
 
         this.sceneInited = false;
 
-        this.IDlights = new Object();
+      
         this.interfaceViews= new Object();
+        this.lightsInterface = {};
         this.initCameras();
         this.selectedCamera=0;
         
@@ -65,14 +66,17 @@ class XMLscene extends CGFscene {
                 this.lights[i].setSpecular(...graphLight[4]);
         
                // this.lights[i].setSpotCutOff(0);
-                this.lights[i].setVisible(true); //comment this line to disable light geometry
-                if (graphLight[i])
+                this.lights[i].setVisible(false); // disable light geometry
+                if (graphLight[i]){
                     this.lights[i].enable();
-                else
+                    this.lightsInterface[key]=true;
+                }
+                else{
                     this.lights[i].disable();
-
+                    this.lightsInterface[key]=false;
+                }
                 this.lights[i].update();
-
+                
                 i++;
             }
         }
@@ -157,24 +161,16 @@ initsceneCameras(){
 
     
     updateLights() {
-        var i = 0;
-    
-        
-        for (var key in this.graph.lights) {
-            if (i >= 8)
-                break;              // Only eight lights allowed .
-            this.IDlights[key] = i;
-            if (this.graph.lights.hasOwnProperty(key)) {
-                var light = this.graph.lights[key];
-
-                if (light[0])
+        let i = 0;
+        for (let key in this.lightsInterface) {
+            if (this.lightsInterface.hasOwnProperty(key)) {
+                if (this.lightsInterface[key]) {
                     this.lights[i].enable();
-                else
+                }
+                else {
                     this.lights[i].disable();
-
-                this.lights[i].update();
-
-                i++;
+                }
+                this.lights[i++].update();
             }
         }
     }
