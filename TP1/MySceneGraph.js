@@ -36,6 +36,20 @@ class MySceneGraph {
         this.textureStack = new Stack();
 
         let clearTextureObject = new Texture("clear"); //clear texture
+
+        let cgfErrorTexture = new CGFappearance(this.scene);
+        cgfErrorTexture.loadTexture("./scenes/images/error.png");
+        let errorTexture = new Texture("error",cgfErrorTexture); //error texture
+
+        let cgfErrorMaterial = new CGFappearance(this.scene)
+        cgfErrorMaterial.setShininess(1);
+        cgfErrorMaterial.setAmbient(1,1,1,1);
+        cgfErrorMaterial.setDiffuse(1,1,1,1);
+        cgfErrorMaterial.setSpecular(1,1,1,1);
+        let errorMaterial = new Material("error",cgfErrorMaterial); //error material
+
+        this.materialStack.push(errorMaterial);
+        this.textureStack.push(errorTexture);
         this.textureList.addTexture(clearTextureObject);
         /** */
 
