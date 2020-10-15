@@ -25,8 +25,7 @@ class XMLscene extends CGFscene {
         this.interfaceViews= new Object();
         this.initCameras();
         this.selectedCamera=0;
-
-
+        
         this.enableTextures(true);
 
         this.gl.clearDepth(100.0);
@@ -67,7 +66,7 @@ class XMLscene extends CGFscene {
         
                // this.lights[i].setSpotCutOff(0);
                 this.lights[i].setVisible(true); //comment this line to disable light geometry
-                if (graphLight[0])
+                if (graphLight[i])
                     this.lights[i].enable();
                 else
                     this.lights[i].disable();
@@ -80,14 +79,15 @@ class XMLscene extends CGFscene {
     }
 
     initCameras() {
-        var i=0;
-        // cameras index.
-        if(this.sceneInited){
-            this.camera = this.cameras[this.camerasID[this.graph.defaultView]];
-            this.interface.setActiveCamera(this.camera);
-        }            
-        else
+       
+        
             this.camera = new CGFcamera(0.8, 0.1, 500, vec3.fromValues(15,15, 15), vec3.fromValues(0, 0, 0));
+}
+
+initsceneCameras(){
+    this.selectedCamera=this.graph.defaultView;
+    this.camera = this.graph.views[this.graph.defaultView];
+    this.interface.setActiveCamera(this.camera);
 }
 
     /** Handler called when the graph is finally loaded. 
@@ -99,14 +99,14 @@ class XMLscene extends CGFscene {
         this.gl.clearColor(...this.graph.background);
 
         this.setGlobalAmbientLight(...this.graph.ambient);
-
-        this.initLights();
-      
-        //this.initCameras();
-        this.interface.addLightsFolder();
-        this.interface.addCamerasFolder();
-     
         this.sceneInited = true;
+        
+        
+        this.interface.addCamerasFolder();
+        this.interface.addLightsFolder();
+        
+        this.initLights();
+        this.initsceneCameras();
     }
 
     /**
@@ -133,10 +133,10 @@ class XMLscene extends CGFscene {
             this.axis.display();
          
             this.defaultAppearance.apply();
-           //this.updateCameras();
+            this.updateCameras();
             this.updateLights();
 
-            
+
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
         }
@@ -181,7 +181,7 @@ class XMLscene extends CGFscene {
 
     updateCameras(){
         this.camera = this.graph.views[this.selectedCamera];
-        
+        this.interface.setActiveCamera(this.camera);
     }
 
    

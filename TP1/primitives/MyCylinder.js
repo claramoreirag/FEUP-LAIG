@@ -75,7 +75,7 @@ class MyCylinder extends CGFobject {
           }
       }
        
-  
+   
       //for drawing the bases
       this.vertices.push(0, 0,0); //bootom center
       this.vertices.push(0, 0,this.height);//top center
@@ -95,7 +95,7 @@ class MyCylinder extends CGFobject {
      //for the top
      for(let slice = 0; slice <= this.slices; slice++){
       this.indices.push(slice+laststackindex+1,topcenterindex, slice+laststackindex);
-      this.normals.push(  0, 0, 1);
+      this.normals.push(  0, 0, 1); 
     
    }
       this.primitiveType = this.scene.gl.TRIANGLES;
