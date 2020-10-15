@@ -334,11 +334,12 @@ class MySceneGraph {
                     if (!Array.isArray(up)) viewUp = [0,1,0];
                     else viewUp = up;
                 }
+                else viewUp=[0,1,0];
              
                 global.push(...[viewUp]);
               
-                if(viewUp.length==0) var camera = new CGFcameraOrtho(this.reader.getFloat(children[i],'left'), this.reader.getFloat(children[i],'right'), this.reader.getFloat(children[i],'bottom'), this.reader.getFloat(children[i],'top'), this.reader.getFloat(children[i],'near'), this.reader.getFloat(children[i],'far'),global[0], global[1], viewUp);
-                else var camera = new CGFcameraOrtho(this.reader.getFloat(children[i],'left'), this.reader.getFloat(children[i],'right'), this.reader.getFloat(children[i],'bottom'), this.reader.getFloat(children[i],'top'), this.reader.getFloat(children[i],'near'), this.reader.getFloat(children[i],'far'),global[0], global[1], viewUp);
+                var camera = new CGFcameraOrtho(this.reader.getFloat(children[i],'left'), this.reader.getFloat(children[i],'right'), this.reader.getFloat(children[i],'bottom'), this.reader.getFloat(children[i],'top'), this.reader.getFloat(children[i],'near'), this.reader.getFloat(children[i],'far'),global[0], global[1], viewUp);
+            
             }
             
             else if(children[i].nodeName == "perspective") {
