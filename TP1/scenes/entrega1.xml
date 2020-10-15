@@ -737,7 +737,7 @@
 
             <material id="null" />
             <texture id="windowTexture">
-                <amplification afs="1.0" aft="1.0" />
+                <amplification afs="4.5" aft="3.0" />
             </texture>
 
         <transformations>

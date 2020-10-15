@@ -8,12 +8,14 @@
  * @param y2 - y coordinate corner 2
  */
 class MyRectangle extends CGFobject {
-	constructor(scene, x1, y1, x2, y2) {
+	constructor(scene, x1, y1, x2, y2, afs, aft) {
 		super(scene);
 		this.x1 = x1;
 		this.x2 = x2;
 		this.y1 = y1;
 		this.y2 = y2;
+		this.afs = afs == null ? 1 : afs;
+		this.aft = aft == null ? 1 : aft;
 
 		this.initBuffers();
 	}
@@ -39,15 +41,20 @@ class MyRectangle extends CGFobject {
 			0, 0, 1,
 			0, 0, 1
 		];
-		
-	
+
+		let dist_s = Math.abs(this.x1-this.x2);
+		let dist_t = Math.abs(this.y1-this.y2);
+
+		let s = dist_s/this.afs;
+		let t = dist_t/this.aft;
 
 		this.texCoords = [
-			0, 1,
-			1, 1,
+			0, t,
+			s, t,
 			0, 0,
-			1, 0
+			s, 0
 		]
+
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}

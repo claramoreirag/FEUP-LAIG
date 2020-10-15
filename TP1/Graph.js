@@ -42,7 +42,7 @@ class Graph{
     }
 
     isEmpty(){
-        return this.nodes.length>0;
+        return this.nodes.length==0;
     }
 
     getRootNode(){
@@ -159,19 +159,21 @@ class Node{
 }
 
 class Leaf extends Node{
-    constructor(scene,type,args){
+    constructor(scene,type,args,afs,aft){
         super();
-        this.leaf = this.createPrimitive(scene,type,args);
+        this.afs = afs;
+        this.aft = aft;
         this.args = args;
         this.type = type;
+        this.leaf = this.createPrimitive(scene,type,args);
     }
 
     createPrimitive(scene,type,args){
         switch(type){
             case "rectangle":
-                return new MyRectangle(scene,args[0],args[1],args[2],args[3]);
+                return new MyRectangle(scene,args[0],args[1],args[2],args[3],this.afs,this.aft);
             case "triangle":
-                return new MyTriangle(scene,args[0],args[1],args[2],args[3],args[4],args[5]);
+                return new MyTriangle(scene,args[0],args[1],args[2],args[3],args[4],args[5],this.afs,this.aft);
             case "sphere":
                 return new MySphere(scene,args[0],args[1],args[2]);
             case "torus":
