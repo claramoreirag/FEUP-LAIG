@@ -40,7 +40,7 @@
     <lights>
         <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
         <light id="demoLight">            <!-- light identifier -->
-            <enable value="1" />
+            <enable value="0" />
             <!-- enable/disable -->
             <position x="1" y="9" z="1" w="1" /><!-- light position; w=1: point light; w=0: directional light -->
             <ambient r="1" g="1" b="1" a="1.0" />                   <!-- ambient component -->
@@ -116,7 +116,7 @@
 
          <material id="materialBranco">
             <shininess value="1" />
-            <ambient r="0.4" g="0.4" b="0.4" a="1.0" />
+            <ambient r="0.4" g="0.4" b="0.1" a="1.0" />
              <diffuse r="0.7" g="0.5" b="0.4" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
@@ -128,8 +128,8 @@
 
     <nodes>
         <node id="root">
-            <material id="null" /> <!--Default material-->
-            <texture id="null">  <!--Default texture-->
+            <material id="materialAmarelo" /> <!--Default material-->
+            <texture id="wallTexture">  <!--Default texture-->
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
