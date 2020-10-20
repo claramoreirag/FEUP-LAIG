@@ -630,8 +630,6 @@ class MySceneGraph {
                 return "no ID defined for nodeID";
 
             /*new*/
-            console.log("NAME: " + nodeID);
-
             let fatherNode = this.graph.findNode(nodeID);
             if(fatherNode==null){
                 fatherNode = new Node(nodeID);
@@ -771,6 +769,8 @@ class MySceneGraph {
 
         }
         
+        if(this.graph.checkMissingNodes())
+            this.onXMLMinorError("Missing node(s) in xml file");
     }
 
     parseBoolean(node, name, messageError) {

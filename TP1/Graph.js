@@ -48,6 +48,19 @@ class Graph{
     getRootNode(){
         return this.rootIsSet ? this.rootNode : null;
     }
+
+    checkMissingNodes(){
+        let missing=false;
+
+        for(let node of this.nodes){
+            if(!node.isSet()){
+                missing=true;
+                console.log("Node '" + node.getID() + "' not found in <nodes> tag.");
+            }
+        }
+        
+        return missing;
+    }
     
 }
 
@@ -154,6 +167,10 @@ class Node{
         materialStack.pop();
         textureStack.pop();
         scene.popMatrix();
+    }
+
+    isSet(){
+        return this.descendants.length!=0;
     }
 
 }
