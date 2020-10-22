@@ -26,7 +26,7 @@ class MySceneGraph {
         this.scene = scene;
         scene.graph = this;
 
-        this.nodes = [];
+        this.nodes = []; //used to check if there are conflicting nodes
         
         /** new */
         this.graph = new Graph(scene);
@@ -251,8 +251,10 @@ class MySceneGraph {
       
         var rootNode = new Node(this.idRoot);
         this.graph.addNode(rootNode);
-        this.graph.setRootNode(rootNode);
-      
+
+        let error;
+        if((error=this.graph.setRootNode(rootNode))!=null)
+            this.onXMLError(error);
 
         // Get axis length        
         if(referenceIndex == -1)
@@ -371,11 +373,6 @@ class MySceneGraph {
         this.log("Parsed views");
         
         return null;
-
-
- 
-
- 
     }
 
     /**
@@ -629,6 +626,12 @@ class MySceneGraph {
             if (nodeID == null)
                 return "no ID defined for nodeID";
 
+            // Checks for repeated IDs.
+            if (this.nodes[nodeID] != null)
+                return "ID must be unique for each node (conflict: ID = " + nodeID + ")";
+            else 
+                this.nodes[nodeID]=1;
+
             /*new*/
             let fatherNode = this.graph.findNode(nodeID);
             if(fatherNode==null){
@@ -637,9 +640,6 @@ class MySceneGraph {
             }
             /*****/
 
-            // Checks for repeated IDs.
-            if (this.nodes[nodeID] != null)
-                return "ID must be unique for each node (conflict: ID = " + nodeID + ")";
 
             grandChildren = children[i].children;
 
@@ -647,124 +647,144 @@ class MySceneGraph {
             for (var j = 0; j < grandChildren.length; j++) {
                 nodeNames.push(grandChildren[j].nodeName);
             }
-
-            var transformationsIndex = nodeNames.indexOf("transformations");
-            var materialIndex = nodeNames.indexOf("material");
-            var textureIndex = nodeNames.indexOf("texture");
-            var descendantsIndex = nodeNames.indexOf("descendants");
-
             
             // Transformations
-            let transformations = grandChildren[transformationsIndex].children;
+            let transformationsIndex = nodeNames.indexOf("transformations");
 
-            for(let transformation of transformations){
-                let name = transformation.nodeName;
-                let args;
+            if(transformationsIndex==-1)
+                this.onXMLMinorError("<transformations> node not found on node '" + nodeID + "'");
+            else{
+                let transformations = grandChildren[transformationsIndex].children;
 
-                switch(name){
-                    case "translation":
-                        args = this.parseCoordinates3D(transformation);
-                        break;
-                    case "scale":
-                        args = this.parseCoordinatesScale3D(transformation);
-                        break;
-                    case "rotation":
-                        args = this.parseRotation(transformation);
-                        break;
+                for(let transformation of transformations){
+                    let name = transformation.nodeName;
+                    let args;
+
+                    switch(name){
+                        case "translation":
+                            args = this.parseCoordinates3D(transformation);
+                            break;
+                        case "scale":
+                            args = this.parseCoordinatesScale3D(transformation);
+                            break;
+                        case "rotation":
+                            args = this.parseRotation(transformation);
+                            break;
+                    }
+                    
+                    fatherNode.addTransformation(name,args);
                 }
-                
-                fatherNode.addTransformation(name,args);
             }
 
             // Material
-            let materialNode = grandChildren[materialIndex];
-            let materialID = this.reader.getString(materialNode,"id");
+            let materialIndex = nodeNames.indexOf("material");
 
-            // if materialID = null then father nodes material is kept
-            if(materialID!="null"){
-                let material;
-                if((material = this.materialList.getMaterial(materialID)) !=null)
-                    fatherNode.changeMaterial(material);
-                else
-                    this.onXMLMinorError("Material '" + materialID + "' not declared in <materials> node");
+            if(materialIndex==-1)
+                this.onXMLMinorError("<material> node not found on node '" + nodeID + "'");
+            else{
+                let materialNode = grandChildren[materialIndex];
+                let materialID = this.reader.getString(materialNode,"id");
+
+                // if materialID = null then father nodes material is kept
+                if(materialID!="null"){
+                    let material;
+                    if((material = this.materialList.getMaterial(materialID)) !=null)
+                        fatherNode.changeMaterial(material);
+                    else
+                        this.onXMLMinorError("Material '" + materialID + "' not declared in <materials> node");
+                }
             }
             
             // Texture
-            let textureNode = grandChildren[textureIndex];
-            let ampfs = textureNode.children;
+            let textureIndex = nodeNames.indexOf("texture");
+            let afs,aft;
 
-            let textureID = this.reader.getString(textureNode,"id");
-            let afs = this.reader.getFloat(ampfs[0],"afs");
-            let aft = this.reader.getFloat(ampfs[0],"aft");
+            if(textureIndex==-1)
+                this.onXMLMinorError("<texture> node not found on node '" + nodeID + "'");
+            else{
+                let textureNode = grandChildren[textureIndex];
+                let ampfs = textureNode.children;
 
-            fatherNode.setAmplification(afs,aft);
+                let textureID = this.reader.getString(textureNode,"id");
 
-            if(textureID!="null"){
-                let texture;
-                if((texture = this.textureList.getTexture(textureID)) != null)
-                    fatherNode.changeTexture(texture);
-                else
-                    this.onXMLMinorError("Texture '" + textureID + "' not declared in <textures> node");
+                afs = this.reader.getFloat(ampfs[0],"afs");
+                aft = this.reader.getFloat(ampfs[0],"aft");
+
+                if(textureID!="null"){
+                    let texture;
+                    if((texture = this.textureList.getTexture(textureID)) != null)
+                        fatherNode.changeTexture(texture);
+                    else
+                        this.onXMLMinorError("Texture '" + textureID + "' not declared in <textures> node");
+                }
             }
 
 
             // Descendants
-            let descendants = grandChildren[descendantsIndex].children;
 
-            let leafDescendants = [];
-            let nodeDescendants = [];
+            let descendantsIndex = nodeNames.indexOf("descendants");
+            if(descendantsIndex==-1)
+                this.onXMLMinorError("<descendants> node not found on node '" + nodeID + "'");
+            else{
+                let descendants = grandChildren[descendantsIndex].children;
 
-            
-            for(let k=0; k<descendants.length; k++){
-                let name=descendants[k].nodeName;
-                if(name=="leaf"){
-                    leafDescendants.push(descendants[k]);
-                }
-                else if(name=="noderef") {
-                    nodeDescendants.push(descendants[k]);
-                }
-            }
+                let leafDescendants = [];
+                let nodeDescendants = [];
 
-            for(var k=0; k<nodeDescendants.length; k++){
-                let id = this.reader.getString(nodeDescendants[k],"id");
-
-                let wantedNode = this.graph.findNode(id);
                 
-                if(wantedNode == null){
-                    wantedNode = new Node(id);
-                    this.graph.addNode(wantedNode);
-                }
-                
-                fatherNode.addEdge(wantedNode);
-            }
-
-            for(var k=0; k<leafDescendants.length;k++){
-                let type= this.reader.getString(leafDescendants[k],"type");
-                let primitive = leafDescendants[k];
-
-                var args;
-
-                switch(type){
-                    case "rectangle":
-                        args = this.parseRectangle(primitive);
-                        break;
-                    case "triangle":
-                        args = this.parseTriangle(primitive);
-                        break;
-                    case "sphere":
-                        args = this.parseSphere(primitive);
-                        break;
-                    case "torus":
-                        args = this.parseTorus(primitive);
-                        break;
-                    case "cylinder":
-                        args = this.parseCylinder(primitive);
-                        break;
+                for(let k=0; k<descendants.length; k++){
+                    let name=descendants[k].nodeName;
+                    if(name=="leaf"){
+                        leafDescendants.push(descendants[k]);
+                    }
+                    else if(name=="noderef") {
+                        nodeDescendants.push(descendants[k]);
+                    }
+                    else
+                        this.onXMLMinorError("Unrecognized descendant type '" + name + "' on node '" + nodeID + "'");
                 }
 
-                let leaf = new Leaf(this.scene,type,args,afs,aft);
+                for(var k=0; k<nodeDescendants.length; k++){
+                    let id = this.reader.getString(nodeDescendants[k],"id");
 
-                fatherNode.addEdge(leaf);
+                    let wantedNode = this.graph.findNode(id);
+                    
+                    if(wantedNode == null){
+                        wantedNode = new Node(id);
+                        this.graph.addNode(wantedNode);
+                    }
+                    
+                    fatherNode.addEdge(wantedNode);
+                }
+
+                for(var k=0; k<leafDescendants.length;k++){
+                    let type= this.reader.getString(leafDescendants[k],"type");
+                    let primitive = leafDescendants[k];
+
+                    var args;
+
+                    switch(type){
+                        case "rectangle":
+                            args = this.parseRectangle(primitive);
+                            break;
+                        case "triangle":
+                            args = this.parseTriangle(primitive);
+                            break;
+                        case "sphere":
+                            args = this.parseSphere(primitive);
+                            break;
+                        case "torus":
+                            args = this.parseTorus(primitive);
+                            break;
+                        case "cylinder":
+                            args = this.parseCylinder(primitive);
+                            break;
+                    }
+
+                    let leaf = new Leaf(this.scene,type,args,afs,aft);
+
+                    fatherNode.addEdge(leaf);
+                }
             }
 
         }

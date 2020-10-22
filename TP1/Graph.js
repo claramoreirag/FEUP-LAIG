@@ -26,7 +26,7 @@ class Graph{
             this.rootIsSet=true;
         }
         else
-            console.log("ERROR - ROOT NODE ALREADY SET");
+            return "COULD NOT SET ROOT NODE";
     }
 
     /**
@@ -34,7 +34,7 @@ class Graph{
      */
     findNode(nodeID){
         for(let x of this.nodes){
-            if(x instanceof Node && x.id == nodeID)
+            if(x.id == nodeID)
                 return x;
         }
         
@@ -69,7 +69,6 @@ class Node{
         this.id=id;
         this.material=null;
         this.texture=null;
-        this.amplification=[]; 
         this.transformations=mat4.create(); //final transformation matrix after all multiplications
         this.descendants=[];
         this.visited = false;
@@ -97,12 +96,6 @@ class Node{
     changeTexture(texture){
         this.texture=texture;
     }
-
-    setAmplification(afs,aft){
-        this.amplification[0]=afs;
-        this.amplification[1]=aft;
-    }
-
     
     addTransformation(name,args){
         switch(name){

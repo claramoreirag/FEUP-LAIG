@@ -85,6 +85,7 @@
 		<texture id="woodTexture2" path="./scenes/images/wood/wood2.jpg" />
 		<texture id="screenTexture" path="./scenes/images/screen.jpg" />
         <texture id="pizzaTexture" path="./scenes/images/pizza.jpg" />
+        <texture id="stripesTexture" path="./scenes/images/stripes.png" />
     </textures>
 
 
@@ -129,8 +130,8 @@
 
     <nodes>
         <node id="root">
-            <material id="null" /> <!--Default material-->
-            <texture id="null">  <!--Default texture-->
+            <material id="null" />
+            <texture id="null">  
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -155,9 +156,8 @@
         </texture>
 
         <transformations>
-              <translation x="5" y="0" z="0.1" />
-        
-          <scale sx="1.2" sy="1.2" sz="1.2" />
+            <translation x="5" y="0" z="0.1" />
+            <scale sx="1.2" sy="1.2" sz="1.2" />
         </transformations>
 
         <descendants>
@@ -166,6 +166,7 @@
             <noderef id="donut" />
 			<noderef id="ecra" />
             <noderef id="pizza"/>
+            <noderef id="poster"/>
         </descendants>
     </node>
 
@@ -840,10 +841,10 @@
 
 
             <descendants>
+                <noderef id="poster"/>
                 <leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
             </descendants>
 		</node>
-
 
         <!--Parede -->
 		<node id="paredeTras">
@@ -954,6 +955,24 @@
             <transformations>
                 <translation x="5.0" y="4.4" z="2.0" />
                 <rotation axis="x" angle="-90" />
+            </transformations>
+
+
+            <descendants>
+                <leaf type="triangle" x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5"  x3="0" y3="0.3"/>
+            </descendants>
+		</node>
+
+        <node id="poster">
+			 <material id="null" />
+            <texture id="stripesTexture">
+                <amplification afs="1" aft="0.1" />
+            </texture>
+
+            <transformations>
+                <rotation axis="z" angle="180"/>
+                <translation x="-0.2" y="-0.075" z="0.01"/>
+                <scale sx="0.4" sy="0.85" sz="1" />
             </transformations>
 
 
