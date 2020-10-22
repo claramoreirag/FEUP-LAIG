@@ -25,8 +25,6 @@ class MySceneGraph {
         // Establish bidirectional references between scene and graph.
         this.scene = scene;
         scene.graph = this;
-
-        this.nodes = []; //used to check if there are conflicting nodes
         
         /** new */
         this.graph = new Graph(scene);
@@ -641,10 +639,9 @@ class MySceneGraph {
   parseNodes(nodesNode) {
         var children = nodesNode.children; //children = <node>
 
-        this.nodes = [];
+        let nodes = [];
 
         var grandChildren = [];
-        var grandgrandChildren = [];
         var nodeNames = [];
 
         // Any number of nodes.
@@ -661,10 +658,10 @@ class MySceneGraph {
                 return "no ID defined for nodeID";
 
             // Checks for repeated IDs.
-            if (this.nodes[nodeID] != null)
+            if (nodes[nodeID] != null)
                 return "ID must be unique for each node (conflict: ID = " + nodeID + ")";
             else 
-                this.nodes[nodeID]=1;
+                nodes[nodeID]=1;
 
             /*new*/
             let fatherNode = this.graph.findNode(nodeID);
