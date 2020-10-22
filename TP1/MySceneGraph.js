@@ -480,7 +480,7 @@ class MySceneGraph {
                     global.push(up);
                 }
                 else
-                    return "light " + attributeNames[i] + " undefined for ID = " + lightId;
+                    return "light " + attributeNames[j] + " undefined for ID = " + lightId;
             }
             this.lights[lightId] = global;
            this.numLights++;

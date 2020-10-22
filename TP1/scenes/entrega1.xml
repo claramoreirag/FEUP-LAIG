@@ -167,7 +167,6 @@
             <noderef id="donut" />
 			<noderef id="ecra" />
             <noderef id="pizza"/>
-            
         </descendants>
     </node>
 
