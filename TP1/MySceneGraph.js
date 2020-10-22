@@ -337,7 +337,8 @@ class MySceneGraph {
                     global.push(pos);
                 }
                 else
-                    return "view " + attributeNames[i] + " undefined for ID = " + viewID;
+                    //if a parameter of the view isn't defined an error 
+                    return "view parameter '" + attributeNames[j] + "' undefined for ID = " + viewID;
             }
 
             
@@ -573,29 +574,56 @@ class MySceneGraph {
                 nodeNames.push(grandChildren[j].nodeName);
             }
             
+            //variables to store parameters of  material
+            let shininessValue, ambientColor,diffuseColor,specularColor,emissiveColor;
+
+            //Gets shininess if exists or uses default
             var shininessIndex = nodeNames.indexOf("shininess");
+            if (shininessIndex==-1){
+                shininessValue=1;
+                this.onXMLMinorError("shininess value of material: "+ materialID + " is not defined, default value=1 will be used.")
+            }
+            else  shininessValue = this.reader.getFloat(grandChildren[shininessIndex],"value"); 
+            
+            //Gets ambient color if exists or uses default
             var ambientIndex = nodeNames.indexOf("ambient");
+            if (ambientIndex==-1){
+                ambientColor={0:1.0,1:0.0,2:0.0};
+                this.onXMLMinorError("ambient color of material: "+ materialID + " is not defined, default r=1.0, g=0.0, b=0.0 will be used.")
+            }
+            else ambientColor = this.parseColor(grandChildren[ambientIndex], "of ambient color of material"+ materialID);
+            
+            
+            //Gets diffuse color if exists or uses default
             var diffuseIndex = nodeNames.indexOf("diffuse");
+            if (diffuseIndex==-1){
+                diffuseColor={0:1.0,1:0.0,2:0.0};
+                this.onXMLMinorError("diffuse color of material: "+ materialID + " is not defined, default r=1.0, g=0.0, b=0.0 will be used.")
+            }
+            else  diffuseColor = this.parseColor(grandChildren[diffuseIndex], "of difuse color of material");
+            
+            //Gets specular color if exists or uses default
             var specularIndex = nodeNames.indexOf("specular");
+            if (specularIndex==-1){
+                specularColor={0:1.0,1:0.0,2:0.0};
+                this.onXMLMinorError("specular color of material: "+ materialID + " is not defined, default r=1.0, g=0.0, b=0.0 will be used.")
+            }
+            else  specularColor = this.parseColor(grandChildren[specularIndex]);
+
+            //Gets emissive color if exists or uses default
             var emissiveIndex = nodeNames.indexOf("emissive");
+            if (emissiveIndex==-1){
+                emissiveColor={0:1.0,1:0.0,2:0.0};
+                this.onXMLMinorError("emissive color of material: "+ materialID + " is not defined, default r=1.0, g=0.0, b=0.0 will be used.")
+            }
+            else emissiveColor = this.parseColor(grandChildren[emissiveIndex]);
             
-            
-            var shininessValue = this.reader.getFloat(grandChildren[shininessIndex],"value");
-
-            var ambientColor = this.parseColor(grandChildren[ambientIndex], "of difuse color of material"+ materialID);
-
-            var diffuseColor = this.parseColor(grandChildren[diffuseIndex], "of difuse color of material");
-
-            var specularColor = this.parseColor(grandChildren[specularIndex]);
-            var emissiveColor = this.parseColor(grandChildren[emissiveIndex]);
-            
-            this.appearance = new CGFappearance(this.scene)
+            this.appearance = new CGFappearance(this.scene);
             this.appearance.setShininess(shininessValue);
             this.appearance.setAmbient(ambientColor[0],ambientColor[1],ambientColor[2],ambientColor[3]);
             this.appearance.setDiffuse(diffuseColor[0],diffuseColor[1],diffuseColor[2],diffuseColor[3]);
             this.appearance.setSpecular(specularColor[0],specularColor[1],specularColor[2],specularColor[3]);
             this.appearance.setEmission(emissiveColor[0],emissiveColor[1],emissiveColor[2],emissiveColor[3]);
-            
             
             this.newMaterial = new Material(materialID,this.appearance);
             this.materialList.addMaterial(this.newMaterial);
