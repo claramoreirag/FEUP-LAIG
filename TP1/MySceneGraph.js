@@ -325,7 +325,7 @@ class MySceneGraph {
 
                 if (attributeIndex != -1) {
                     if (attributeTypes[j] == "position")
-                        var pos = this.parseCoordinates3D(grandChildren[attributeIndex], "view position for ID" + viewID);
+                        var pos = this.parseCoordinates3D(grandChildren[attributeIndex], "view position for ID: " + viewID);
                     if (!Array.isArray(pos))
                         return pos;
 
@@ -335,7 +335,7 @@ class MySceneGraph {
                     return "view " + attributeNames[i] + " undefined for ID = " + viewID;
             }
 
-            // Gets the additional attributes of the ortho view
+            
             if (children[i].nodeName == "ortho") {
                 var upIndex = nodeNames.indexOf("up");
 
@@ -563,7 +563,7 @@ class MySceneGraph {
 
             // Checks for repeated IDs.
             if (this.materials[materialID] != null)
-                return "ID must be unique for each light (conflict: ID = " + materialID + ")";
+                return "ID must be unique for each material (conflict: ID = " + materialID + ")";
 
             //Continue here
             grandChildren = children[i].children;
@@ -581,8 +581,11 @@ class MySceneGraph {
             
             
             var shininessValue = this.reader.getFloat(grandChildren[shininessIndex],"value");
-            var ambientColor = this.parseColor(grandChildren[ambientIndex]);
-            var diffuseColor = this.parseColor(grandChildren[diffuseIndex]);
+
+            var ambientColor = this.parseColor(grandChildren[ambientIndex], "of difuse color of material"+ materialID);
+
+            var diffuseColor = this.parseColor(grandChildren[diffuseIndex], "of difuse color of material");
+
             var specularColor = this.parseColor(grandChildren[specularIndex]);
             var emissiveColor = this.parseColor(grandChildren[emissiveIndex]);
             
@@ -592,14 +595,14 @@ class MySceneGraph {
             this.appearance.setDiffuse(diffuseColor[0],diffuseColor[1],diffuseColor[2],diffuseColor[3]);
             this.appearance.setSpecular(specularColor[0],specularColor[1],specularColor[2],specularColor[3]);
             this.appearance.setEmission(emissiveColor[0],emissiveColor[1],emissiveColor[2],emissiveColor[3]);
-            //this.onXMLMinorError("To do: Parse materials.");
+            
             
             this.newMaterial = new Material(materialID,this.appearance);
             this.materialList.addMaterial(this.newMaterial);
         }
 
         this.log("Parsed materials");
-        //this.log(this.materialList.getMaterial("demoMaterial").getMaterial().ambient[0]);
+      
         return null;
     }
 

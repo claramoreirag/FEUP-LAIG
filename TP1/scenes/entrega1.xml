@@ -17,13 +17,13 @@
         </perspective>
 
 
-        <ortho id="Ortho2" near="0.2" far="100" left="-0.2" right="0.2" top="0.2" bottom="-0.2">
+        <ortho id="Ortho1" near="0.2" far="100" left="-0.2" right="0.2" top="0.2" bottom="-0.2">
             <from x="10" y="10" z="10" />
             <to x="1" y="1" z="1" />
            
         </ortho>
 
-        <ortho id="Ortho1"  near="0.1" far="500" left="-5" right="10" top="10" bottom="-5" >
+        <ortho id="Ortho2"  near="0.1" far="500" left="-5" right="10" top="10" bottom="-5" >
             <from x="0" y="0" z="10" />
             <to x="0" y="0" z="0" />
             <up x="0" y="2" z="0"/>
@@ -102,7 +102,7 @@
          <material id="materialChao">
             <shininess value="5" />
             <ambient r="0.75" g="0.45" b="0.26" a="1.0" />
-            <diffuse r="0.7" g="0.5" b="0.4" a="1.0" />
+            <diffuse  g="0.5" b="0.4" a="1.0" />
             <specular r="0.06" g="0.06" b="0.06" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
@@ -110,14 +110,14 @@
         <material id="materialAmarelo">
             <shininess value="2" />
             <ambient r="1.0" g="1.0" b="0.0" a="1.0" />
-             <diffuse r="0.7" g="0.5" b="0.4" a="1.0" />
+             <diffuse  g="0.5" b="0.4" a="1.0" />
             <specular r="0.06" g="0.06" b="0.06" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
 
          <material id="materialBranco">
             <shininess value="1" />
-            <ambient r="0.4" g="0.4" b="0.1" a="1.0" />
+            <ambient r="0.9" g="0.9" b="0.1" a="1.0" />
              <diffuse r="0.7" g="0.5" b="0.4" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
