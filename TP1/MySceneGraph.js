@@ -706,7 +706,7 @@ class MySceneGraph {
 
 
             //default afs and aft
-            let afs=1.0, aft=1.0;
+            let afs,aft;
 
             if(textureIndex==-1)
                 this.onXMLMinorError("<texture> node not found on node '" + nodeID + "'");
@@ -720,7 +720,7 @@ class MySceneGraph {
                 if(ampfs.length!=0){
                     afs = this.reader.getFloat(ampfs[0],"afs");
                     aft = this.reader.getFloat(ampfs[0],"aft");
-                 }
+                }
                 else this.onXMLMinorError("Amplifications not set for texture of node "+ nodeID+ ", default amplifications will be used");
 
                 if(textureID!="null"){
