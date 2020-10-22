@@ -37,6 +37,10 @@ class MySceneGraph {
 
         let clearTextureObject = new Texture("clear"); //clear texture
 
+
+        /*Definition of error material and texture to use when 
+        an object doesn't have a valid material or texture apllied
+        */
         let cgfErrorTexture = new CGFappearance(this.scene);
         cgfErrorTexture.loadTexture("./scenes/images/error.png");
         let errorTexture = new Texture("error",cgfErrorTexture); //error texture
@@ -51,7 +55,7 @@ class MySceneGraph {
         this.materialStack.push(errorMaterial);
         this.textureStack.push(errorTexture);
         this.textureList.addTexture(clearTextureObject);
-        /** */
+       
 
         this.idRoot = null; // The id of the root element.
 
@@ -294,7 +298,7 @@ class MySceneGraph {
             var attributeNames = [];
             var attributeTypes = [];
 
-            //Check type of view
+            //Check for valid type of view
             if (children[i].nodeName != "perspective" && children[i].nodeName != "ortho") {
                 this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
                 continue;
@@ -314,7 +318,6 @@ class MySceneGraph {
     
             grandChildren = children[i].children;
           
-
             nodeNames = [];
             for (var j = 0; j < grandChildren.length; j++) {
                 nodeNames.push(grandChildren[j].nodeName);
@@ -371,10 +374,6 @@ class MySceneGraph {
         this.log("Parsed views");
         
         return null;
-
-
- 
-
  
     }
 
@@ -633,8 +632,6 @@ class MySceneGraph {
                 return "no ID defined for nodeID";
 
             /*new*/
-            console.log("NAME: " + nodeID);
-
             let fatherNode = this.graph.findNode(nodeID);
             if(fatherNode==null){
                 fatherNode = new Node(nodeID);
@@ -660,26 +657,30 @@ class MySceneGraph {
 
             
             // Transformations
-            let transformations = grandChildren[transformationsIndex].children;
+            if (transformationsIndex == -1) this.onXMLMinorError ("transformations tag  missing for " + nodeID);
+            
+            else{
+                let transformations = grandChildren[transformationsIndex].children;
 
-            for(let transformation of transformations){
-                let name = transformation.nodeName;
-                let args;
+                for(let transformation of transformations){
+                    let name = transformation.nodeName;
+                    let args;
 
-                switch(name){
-                    case "translation":
-                        args = this.parseCoordinates3D(transformation);
-                        break;
-                    case "scale":
-                        args = this.parseCoordinatesScale3D(transformation);
-                        break;
-                    case "rotation":
-                        args = this.parseRotation(transformation);
-                        break;
+                    switch(name){
+                        case "translation":
+                            args = this.parseCoordinates3D(transformation);
+                            break;
+                        case "scale":
+                            args = this.parseCoordinatesScale3D(transformation);
+                            break;
+                        case "rotation":
+                            args = this.parseRotation(transformation);
+                            break;
+                    }
+                    
+                    fatherNode.addTransformation(name,args);
                 }
-                
-                fatherNode.addTransformation(name,args);
-            }
+            }   
 
             // Material
             let materialNode = grandChildren[materialIndex];
@@ -696,14 +697,23 @@ class MySceneGraph {
             
             // Texture
             let textureNode = grandChildren[textureIndex];
+        
             let ampfs = textureNode.children;
 
+            //default afs and aft
+            let afs=1.0, aft=1.0;
+    
             let textureID = this.reader.getString(textureNode,"id");
-            let afs = this.reader.getFloat(ampfs[0],"afs");
-            let aft = this.reader.getFloat(ampfs[0],"aft");
-
+            
+            //checks if amplifications are defined on xml file
+            if(ampfs.length!=0){
+              afs = this.reader.getFloat(ampfs[0],"afs");
+              aft = this.reader.getFloat(ampfs[0],"aft");
+            }
+            else this.onXMLMinorError("Amplifications not set for texture of node "+ nodeID+ ", default amplifications will be used");
+          
             fatherNode.setAmplification(afs,aft);
-
+            
             if(textureID!="null"){
                 let texture;
                 if((texture = this.textureList.getTexture(textureID)) != null)
@@ -774,6 +784,8 @@ class MySceneGraph {
 
         }
         
+        if(this.graph.checkMissingNodes())
+            this.onXMLMinorError("Missing node(s) in xml file");
     }
 
     parseBoolean(node, name, messageError) {
