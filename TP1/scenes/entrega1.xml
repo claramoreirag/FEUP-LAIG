@@ -39,7 +39,7 @@
 
     <lights>
         <!-- NOTE: this block "light" must be repeated as necessary with different "id". At least one light should be present, and a maximum of eight lights is accepted. -->
-        <light id="demoLight">            <!-- light identifier -->
+        <light id="brightLight">            <!-- light identifier -->
             <enable value="0" />
             <!-- enable/disable -->
             <position x="1" y="9" z="1" w="1" /><!-- light position; w=1: point light; w=0: directional light -->
