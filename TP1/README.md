@@ -19,8 +19,8 @@
   - The created scene consists in a study room with 4 walls, ceiling and wooden floor. 
   - Inside there's a table, a chair, a door, a window, a poster on the wall and a ceiling light.
   - On top of the table there's a computer screen, a donnut and a slice of pizza.
-  - [Link to the scene](../scenes/entrega1.xml)
+  - [Link to the scene](./scenes/LAIG_TP1_T3_G03.xml)
 ----
 ## Issues/Problems
 
-- (items describing unimplemented features, bugs, problems, etc.)
+- There are no detected issues, everything works as expected.

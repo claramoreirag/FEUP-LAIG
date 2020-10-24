@@ -79,7 +79,6 @@
 		<texture id="wallTexture" path="./scenes/images/wall.jpg" />
 		<texture id="donutTexture" path="./scenes/images/donut.png" />
 		<texture id="doorTexture" path="./scenes/images/door.jpg" />
-		<texture id="keyboardTexture" path="./scenes/images/keyboard.png" />
 		<texture id="windowTexture" path="./scenes/images/window.jpg" />
 		<texture id="woodTexture1" path="./scenes/images/wood/wood1.jpg" />
 		<texture id="woodTexture2" path="./scenes/images/wood/wood2.jpg" />
