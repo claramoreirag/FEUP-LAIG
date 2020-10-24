@@ -48,7 +48,7 @@ class MyTriangle extends CGFobject {
     this.sin = Math.sqrt(1 - this.cos * this.cos);
 
     let dist_s = this.a;
-    let dist_t = this.c*this.sin;
+    let dist_t =- this.c*this.sin;
     let dist_ss = this.c*this.cos;
 
     let s = dist_s/this.afs;
