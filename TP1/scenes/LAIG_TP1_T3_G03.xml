@@ -83,7 +83,6 @@
 		<texture id="windowTexture" path="./scenes/images/window.jpg" />
 		<texture id="woodTexture1" path="./scenes/images/wood/wood1.jpg" />
 		<texture id="woodTexture2" path="./scenes/images/wood/wood2.jpg" />
-		<texture id="screenTexture" path="./scenes/images/screen.jpg" />
         <texture id="pizzaTexture" path="./scenes/images/pizza.jpg" />
         <texture id="stripesTexture" path="./scenes/images/stripes.png" />
         <texture id="background" path="./scenes/images/background.png" />
