@@ -176,7 +176,7 @@ initsceneCameras(){
     }
 
     update(t){
-        this.updateAnimations(t);
+      //  this.updateAnimations(t);
     }
 
     updateAnimations(t){

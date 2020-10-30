@@ -6,33 +6,39 @@ class Animation{
         this.scene=scene;
     }
 
-    update();
-    apply();
+    update(t){}
+    apply(){}
 
 }
 
+class Keyframe{
+    constructor(instant,translate,rotateX,rotateY,rotateZ,scale){
+        this.instant=instant; 
+        this.translate=translate; //vec3
+        this.rotateX=rotateX;//angle
+        this.rotateY=rotateY;//angle
+        this.rotateZ=rotateZ;//angle
+        this.scale=scale;//vec3
+    }
+}
+
 class KeyframeAnimation extends Animation{
-    constructor(scene){
+    constructor(scene,keyframeList){
         super(scene);
-        this.keyframeList=[];
+        this.keyframeList=keyframeList;
         this.currentKeyFrame=null;
     }
     
-    //translate e scale vec3
-    //rotationX,Y,Z só o angulo
-    addKeyframe(instant,translate,rotateX,rotateY,rotateZ,scale){
-        let frame = new Keyframe(instant,translate,rotateX,rotateY,rotateZ,scale);
-        this.keyframeList.push(frame);
-    }
+    
 
     update(t){
 
 
         for(let keyframe of this.keyframeList){
-            if(keyframe.instant<t)
+            if(keyframe.instant<t);
         }
 
-        let totalT = this.keyframeList[i]
+        let totalT = this.keyframeList[i];
 
     }
 
@@ -47,16 +53,5 @@ class KeyframeAnimation extends Animation{
         mat4.scale(matrix,matrix,scale);
 
         this.scene.multMatrix(matrix);
-    }
-}
-
-class Keyframe{
-    constructor(instant,translate,rotateX,rotateY,rotateZ,scale){
-        this.instant=instant;
-        this.translate=translate;
-        this.rotateX=rotateX;
-        this.rotateY=rotateY;
-        this.rotateZ=rotateZ;
-        this.scale=scale;
     }
 }

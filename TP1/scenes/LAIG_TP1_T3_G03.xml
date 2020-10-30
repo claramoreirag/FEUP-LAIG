@@ -8,7 +8,7 @@
        
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
             <from x="19" y="15" z="19" />
-            <to x="0" y="0" z="u" />
+            <to x="0" y="0" z="0" />
         </perspective>
 
          <perspective id="Camera1" near="0.1" far="500" angle="45">
@@ -93,10 +93,7 @@
          requires a distinct "id". At least one material should be present. -->
         <material id="materialPreto">
             <shininess value="2" />
-            <ambient r="0.0" g="0.0" b="0.0" a="1.0" />
-            <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
-            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
-            <emissive r=".1" g=".1" b=".1" a="1.0" />
+           
         </material>
 
          <material id="materialChao">
@@ -130,7 +127,7 @@
     <nodes>
         <node id="root">
             <material id="null" />
-            <texture id="null">  
+            <texture id="clear">  
                 <amplification afs="1.0" aft="1.0" />
             </texture>
 
@@ -150,7 +147,7 @@
 
    <node id="mesa">           
         <material id="null" />
-        <texture id="woodTexture1">
+        <texture id="clear">
           <amplification afs="1.0" aft="1.0" />
         </texture>
 
@@ -183,7 +180,7 @@
         </transformations>
 
         <descendants>
-            <noderef id="pernaMesa1" />
+            <noderef id="pernaesa1" />
             <noderef id="pernaMesa2" />
             <noderef id="pernaMesa3" />
             <noderef id="pernaMesa4" />

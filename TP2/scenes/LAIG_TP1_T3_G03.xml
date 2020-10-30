@@ -8,7 +8,7 @@
        
         <perspective id="defaultCamera" near="0.1" far="500" angle="45">
             <from x="19" y="15" z="19" />
-            <to x="0" y="0" z="u" />
+            <to x="0" y="0" z="0" />
         </perspective>
 
          <perspective id="Camera1" near="0.1" far="500" angle="45">
@@ -125,7 +125,21 @@
     </materials>
 
 
+<animations>
 
+    <animation id="defaultAnimation" >
+
+        <keyframe instant="0.0">
+            <translation x="1" y="1" z="1" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+    </animation>
+
+</animations>
 
     <nodes>
         <node id="root">

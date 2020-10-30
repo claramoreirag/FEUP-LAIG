@@ -136,9 +136,9 @@ class Node{
      */
     display(scene,materialStack,textureStack){
         scene.pushMatrix();
-        this.animation.update()
+       // this.animation.update();
         scene.multMatrix(this.transformations); //adicionar animação
-        this.animation.apply();  //scene.multMatrix(this.animation)
+      //  this.animation.apply();  //scene.multMatrix(this.animation)
 
 
         let material = this.material; 
