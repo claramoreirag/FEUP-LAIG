@@ -176,12 +176,17 @@ initsceneCameras(){
     }
 
     update(t){
-      //  this.updateAnimations(t);
+        if(this.tInit == null)
+            this.tInit = t;
+        
+        let instant = (t - this.tInit) / 1000;
+
+        this.updateAnimations(t/1000);
     }
 
     updateAnimations(t){
         for(let key in this.graph.animations){
-            this.animations[key].update(t);
+            this.graph.animations[key].update(t);
         }
     }
 

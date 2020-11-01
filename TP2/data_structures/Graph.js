@@ -94,6 +94,10 @@ class Node{
         this.material=material;
     }
 
+    setAnimation(animation){
+        this.animation=animation;
+    }
+
     changeTexture(texture){
         this.texture=texture;
     }
@@ -136,10 +140,14 @@ class Node{
      */
     display(scene,materialStack,textureStack){
         scene.pushMatrix();
-       // this.animation.update();
+        if(this.animation!=null){
+        
         scene.multMatrix(this.transformations); //adicionar animação
-      //  this.animation.apply();  //scene.multMatrix(this.animation)
-
+        this.animation.apply();  //scene.multMatrix(this.animation)
+        }
+        else{
+            scene.multMatrix(this.transformations);
+        }
 
         let material = this.material; 
         if(material == null){

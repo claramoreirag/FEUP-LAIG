@@ -816,6 +816,25 @@ class MySceneGraph {
                 }
             }
 
+
+            //Animation
+            let animationIndex = nodeNames.indexOf("animationref");
+            if(animationIndex!=-1){
+                let animationID=this.reader.getString(children[i].children[animationIndex], 'id');
+                if (this.animations[animationID]==undefined)
+                {
+                    this.onXMLMinorError("The animation with id " + animationID + "referenced in node " + nodeID + " is not defined. The animation will be ignored.");
+                    animationID=null;
+                }
+                else{
+                    let animation=this.animations[animationID];
+                    fatherNode.setAnimation(animation);
+                }
+                
+            }
+
+
+
             // Material
             let materialIndex = nodeNames.indexOf("material");
 

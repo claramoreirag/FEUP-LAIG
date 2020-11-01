@@ -129,13 +129,31 @@
 
     <animation id="defaultAnimation" >
 
-        <keyframe instant="0.0">
+        <keyframe instant="1.0">
             <translation x="1" y="1" z="1" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
             <rotation axis="z" angle="0" />
             <scale sx="1" sy="1" sz="1" />
         </keyframe>
+
+        <keyframe instant="2.0">
+            <translation x="1" y="1" z="1" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="-90" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+
+        <keyframe instant="4.0">
+            <translation x="1" y="1" z="1" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+       
 
     </animation>
 
@@ -173,6 +191,7 @@
             <scale sx="1.2" sy="1.2" sz="1.2" />
         </transformations>
 
+        <animationref id="defaultAnimation" />
         <descendants>
             <noderef id="pernasMesa" />
             <noderef id="tampoMesa" />
