@@ -30,6 +30,7 @@ class KeyframeAnimation extends Animation{
         this.previousT=0;
         this.matrix=mat4.create();
 
+
         //object invisible until first declared keyframe
         if(this.keyframes[0].instant != 0)
            this.keyframes.push(new Keyframe(0,[0,0,0],0,0,0,[0,0,0])); 
@@ -47,11 +48,11 @@ class KeyframeAnimation extends Animation{
             this.previousT=t;
         }
 
-        //delta is the time since t0
-        let delta=t-this.initialT;
+        //elapsedTime is the time since t0
+        let elapsedTime=t-this.initialT;
         let currentFrame=-1;
         for (let i=0; i<this.keyframes.length; i++){
-            if (this.keyframes[i].instant > delta){
+            if (this.keyframes[i].instant > elapsedTime){
                 currentFrame=i;
                 break;
             }
@@ -69,16 +70,16 @@ class KeyframeAnimation extends Animation{
         let n = (frame2.instant-frame1.instant)/(deltaT);
 
         // times the function was already called
-        let current_n = (delta-frame1.instant)/deltaT;
+        let current_n = (elapsedTime-frame1.instant)/deltaT;
         
         //linear interpolation of transformation components
-        let tx=frame1.translate[0] + (frame2.translate[0] - frame1.translate[0])*(delta-frame1.instant)/(frame2.instant-frame1.instant);
-        let ty=frame1.translate[1] + (frame2.translate[1] - frame1.translate[1])*(delta-frame1.instant)/(frame2.instant-frame1.instant);
-        let tz=frame1.translate[2] + (frame2.translate[2] - frame1.translate[2])*(delta-frame1.instant)/(frame2.instant-frame1.instant);
+        let tx=frame1.translate[0] + (frame2.translate[0] - frame1.translate[0])*(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
+        let ty=frame1.translate[1] + (frame2.translate[1] - frame1.translate[1])*(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
+        let tz=frame1.translate[2] + (frame2.translate[2] - frame1.translate[2])*(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
         
-        let rx=frame1.rotateX*Math.PI/180 + (frame2.rotateX - frame1.rotateX)*Math.PI/180*(delta-frame1.instant)/(frame2.instant-frame1.instant);
-        let ry=frame1.rotateY*Math.PI/180 + (frame2.rotateY - frame1.rotateY)*Math.PI/180*(delta-frame1.instant)/(frame2.instant-frame1.instant);
-        let rz=frame1.rotateZ*Math.PI/180 + (frame2.rotateZ - frame1.rotateZ)*Math.PI/180*(delta-frame1.instant)/(frame2.instant-frame1.instant);
+        let rx=frame1.rotateX*Math.PI/180 + (frame2.rotateX - frame1.rotateX)*Math.PI/180*(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
+        let ry=frame1.rotateY*Math.PI/180 + (frame2.rotateY - frame1.rotateY)*Math.PI/180*(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
+        let rz=frame1.rotateZ*Math.PI/180 + (frame2.rotateZ - frame1.rotateZ)*Math.PI/180*(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
         
         let sx, sy, sz;
 

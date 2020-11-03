@@ -713,9 +713,9 @@ class MySceneGraph {
                 if (this.reader.getString(transformations[rotateyID],"axis")!='y')
                     return "third element of keyframes in Animation with ID " + animationID + " must be rotation of axis y";
                 if (this.reader.getString(transformations[rotatezID],"axis")!='z')
-                    return "second element of keyframes in Animation with ID " + animationID + " must be rotation of axis z";    
+                    return "fourth element of keyframes in Animation with ID " + animationID + " must be rotation of axis z";    
                 if (scaleID!=4)
-                    return "third element of keyframes in Animation with ID " + animationID + " must be scale";
+                    return "fifth element of keyframes in Animation with ID " + animationID + " must be scale";
 
                 var translation=this.parseCoordinates3D(transformations[translationID]);
                 var rotateX=this.parseRotation(transformations[rotatexID]);
