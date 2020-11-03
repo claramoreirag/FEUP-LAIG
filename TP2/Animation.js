@@ -28,6 +28,7 @@ class KeyframeAnimation extends Animation{
         this.keyframes=keyframeList;
         this.initialT=0;
         this.previousT=0;
+        this.isActive=false;
         this.matrix=mat4.create();
 
 
@@ -46,6 +47,7 @@ class KeyframeAnimation extends Animation{
         if (this.initialT==0){
             this.initialT=t;
             this.previousT=t;
+            this.isActive=true;
         }
 
         //elapsedTime is the time since t0
@@ -58,8 +60,20 @@ class KeyframeAnimation extends Animation{
             }
         }
 
-        if (currentFrame==-1)
-            return;
+        if (currentFrame==-1){
+            if(this.isActive==false)return;
+            else{
+                this.matrix=mat4.create();
+                mat4.translate(this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].translate);
+                mat4.scale(this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].scale);   
+                mat4.rotateX( this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].rotateX);
+                mat4.rotateY( this.matrix, this.matrix,this.keyframes[this.keyframes.length-1].rotateY);
+                mat4.rotateZ( this.matrix, this.matrix,this.keyframes[this.keyframes.length-1].rotateZ);
+                this.isActive=false;
+                return;
+            }
+        }
+           
         let frame1 = this.keyframes[currentFrame-1];
         let frame2 = this.keyframes[currentFrame];
 
