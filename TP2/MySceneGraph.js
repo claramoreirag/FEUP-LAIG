@@ -945,6 +945,8 @@ class MySceneGraph {
                         case "cylinder":
                             args = this.parseCylinder(primitive);
                             break;
+                        case "plane":
+                            args = this.parsePlane(primitive);
                     }
 
                     let leaf = new Leaf(this.scene,type,args,afs,aft);
@@ -1136,6 +1138,15 @@ class MySceneGraph {
         let args=[height,topRadius,bottomRadius,stacks,slices];
 
         return args;
+    }
+
+    parsePlane(primitive){
+        let npartsU = this.reader.getFloat(primitive,"npartsU");
+        let npartsV = this.reader.getFloat(primitive,"npartsV");
+        
+        return [npartsU,npartsV];
+
+      
     }
 
     parseRotation(transformation){

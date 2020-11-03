@@ -198,6 +198,7 @@
             <noderef id="donut" />
 			<noderef id="ecra" />
             <noderef id="pizza"/>
+            <leaf type="plane" npartsU="4" npartsV="5" />
         </descendants>
     </node>
 
