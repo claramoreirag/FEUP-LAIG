@@ -145,13 +145,13 @@
             <scale sx="1" sy="1" sz="1" />
         </keyframe>
 
-
+    
         <keyframe instant="4.0">
             <translation x="1" y="1" z="1" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
             <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
+            <scale sx="2" sy="2" sz="2" />
         </keyframe>
        
 
@@ -171,14 +171,30 @@
             </transformations>
             
             <descendants>
-            <noderef id="mesa" />
-            <noderef id="cadeira"/>
-            <noderef id="estruturaSala" />
-            <noderef id="porta"/>
-            <noderef id="janela"/>
-             <noderef id="candeeiro"/>
+                <noderef id="mesa" />
+                <noderef id="cadeira"/>
+                <noderef id="estruturaSala" />
+                <noderef id="porta"/>
+                <noderef id="janela"/>
+                <noderef id="text"/>
+                <noderef id="candeeiro"/>
             </descendants>
         </node> 
+
+        <node id="text">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <scale sx="2" sy="2" sz="2"/>
+            </transformations>
+
+            <descendants>
+                <leaf type="spritetext" text="Hello I am working"/>
+            </descendants>
+        </node>
 
    <node id="mesa">           
         <material id="null" />

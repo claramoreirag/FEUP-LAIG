@@ -36,6 +36,9 @@ class MySceneGraph {
 
         let clearTextureObject = new Texture("clear"); //clear texture
 
+        /**default text spritesheet */
+        
+
 
         /*Definition of error material and texture to use when 
         an object doesn't have a valid material or texture apllied
@@ -945,6 +948,9 @@ class MySceneGraph {
                         case "cylinder":
                             args = this.parseCylinder(primitive);
                             break;
+                        case "spritetext":
+                            args = this.reader.getString(primitive,"text");
+                            break;
                     }
 
                     let leaf = new Leaf(this.scene,type,args,afs,aft);
@@ -1144,6 +1150,7 @@ class MySceneGraph {
 
         return [axis,angle];
     }
+
 
     /**
      * Displays the scene, processing each node, starting in the root node.

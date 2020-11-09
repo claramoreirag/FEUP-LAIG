@@ -141,9 +141,8 @@ class Node{
     display(scene,materialStack,textureStack){
         scene.pushMatrix();
         if(this.animation!=null){
-        
-        scene.multMatrix(this.transformations); //adicionar animação
-        this.animation.apply();  //scene.multMatrix(this.animation)
+            scene.multMatrix(this.transformations); //adicionar animação
+            this.animation.apply();  //scene.multMatrix(this.animation)
         }
         else{
             scene.multMatrix(this.transformations);
@@ -202,7 +201,8 @@ class Leaf extends Node{
                 return new MyTorus(scene,args[0],args[1],args[2],args[3]);
             case "cylinder":
                 return new MyCylinder(scene,args[0],args[1],args[2],args[3],args[4]);
-                
+            case "spritetext":
+                return new MySpriteText(scene,args);
         }
 
     }

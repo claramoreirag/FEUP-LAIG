@@ -129,8 +129,105 @@ class KeyframeAnimation extends Animation{
     }
 
     apply(){
-       
-
         this.scene.multMatrix(this.matrix);
     }
+}
+
+class MySpriteSheet{
+    constructor(scene,appearance,sizeM,sizeN){
+        this.appearance=appearance; //should have texture loaded
+        this.sizeM=sizeM;
+        this.sizeN=sizeN;
+        this.scene=scene;
+        this.shader = new CGFshader(this.scene.gl, 'shaders/spritesheet.vert', 'shaders/spritesheet.frag');
+        this.shader.setUniformsValues({ uSampler: 1 });
+        this.shader.setUniformsValues({ 'sizeSpriteSheet': [sizeM,sizeN] });
+    }
+
+    activateCellMN(m, n){ //m - coluna  n - linha
+        this.shader.setUniformsValues({'spriteCoords': [m,n]});
+    }
+
+    activateCellP(p){
+        let m = p%this.sizeM;
+        let n = Math.floor(p/this.sizeM);
+
+        if(n<=this.sizeN)
+            this.activateCellMN(m,n);
+        else
+            console.log('Cell '+ p + " doesn't exist");
+
+        //chamar activateCell(m,n) depois de calcular 'm' e 'n'
+    }
+}
+
+class MySpriteText extends MySpriteSheet{
+    constructor(scene, text){ 
+        let appearance = new CGFappearance(scene);
+        let texture = new CGFtexture(scene, 'spritesheets/textsheet.png');
+        appearance.setAmbient(1, 1, 1, 1.0);
+        appearance.setTexture(texture);
+        appearance.setTextureWrap('REPEAT', 'REPEAT');
+
+        super(scene,appearance,16,16);
+        this.text=text;
+        this.texture = texture;
+        this.geometry = new MyRectangle(scene,-0.5,-0.5,0.5,0.5);
+    }
+
+    getCharacterPosition(character){
+        // valor de '!' = valor ascii (ascii=33)
+        // ate '~' (ascii = 126) 
+
+        let asciiValue = character.charCodeAt(0);
+        if(asciiValue > 31 && asciiValue < 127)
+            return asciiValue;
+        else
+            console.log("todo more characters\n");
+        //devolve a posição do character na spritesheet
+    }
+
+    //chamar durante o desenho do grafo
+    display(){
+        //Cada caracter será mapeado na geometria utilizando a função MySpritesheet.activateCellP().
+        //<leaf type=”spritetext” text=”ss” />
+
+        this.texture.bind(1);
+        this.scene.setActiveShader(this.shader);
+
+        let start = -this.text.length/2 - 0.5;
+        this.scene.translate(start,0,0);
+        this.appearance.apply();
+
+        for(let i=0;i<this.text.length;i++){
+            this.scene.translate(1,0,0);
+            let pos=this.getCharacterPosition(this.text[i]);
+            this.activateCellP(pos);
+            this.geometry.display();
+        }
+    
+        this.scene.setActiveShader(this.scene.defaultShader);
+    }
+}
+
+class MySpriteAnimation extends Animation{
+    //Dada uma spritesheet, uma célula de início e de fim, e um período de tempo para a animação,
+    constructor(scene,spritesheet,startCell,endCell,timeAnim){
+        super(scene);
+        this.spritesheet=spritesheet;
+        this.startCell=startCell;
+        this.endCell=endCell;
+        this.timeAnim=timeAnim
+    }
+
+    update(t){
+        print('todo\n');
+    }
+
+    apply(){
+        print('todo\n');
+    }
+
+    //<leaf type=”spriteanim” ssid=”ss” duration=”ff” startCell=”ii” endCell=”ii” />
+
 }
