@@ -140,15 +140,11 @@ class Node{
      */
     display(scene,materialStack,textureStack){
         scene.pushMatrix();
-        if(this.animation!=null){
-        
-        scene.multMatrix(this.transformations); //adicionar animação
-        this.animation.apply();  //scene.multMatrix(this.animation)
-        }
-        else{
-            scene.multMatrix(this.transformations);
-        }
+        scene.multMatrix(this.transformations); //adiciona animação
 
+        if(this.animation!=null)this.animation.apply();  //scene.multMatrix(this.animation)
+        
+        
         let material = this.material; 
         if(material == null){
             material = materialStack.pop();

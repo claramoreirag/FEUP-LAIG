@@ -32,11 +32,8 @@ class KeyframeAnimation extends Animation{
         this.previousT=0;
         this.isActive=false;
         this.matrix=mat4.create();
-
-        //object invisible until first declared keyframe
-        if(this.keyframes[0].instant != 0)
-           this.keyframes.push(new Keyframe(0,[0,0,0],0,0,0,[0,0,0])); 
-    
+       
+        //sorting the keyframes by instant to make sure we calculate the right animation
         this.keyframes.sort((a, b) => (a.instant > b.instant) ? 1 : -1);
         
         
@@ -51,8 +48,20 @@ class KeyframeAnimation extends Animation{
             this.isActive=true;
         }
 
+        this.matrix=mat4.create();
+
         //elapsedTime is the time since t0
         let elapsedTime=t-this.initialT;
+
+
+        //if the first animation instant hasn't ocurred yet the object is not visible
+        if(this.keyframes[0].instant > elapsedTime){
+           mat4.scale(this.matrix, this.matrix, [0,0,0]);   
+           return;
+        }
+
+
+        //gets the frame next keyframe
         let currentFrame=-1;
         for (let i=0; i<this.keyframes.length; i++){
             if (this.keyframes[i].instant > elapsedTime){
@@ -60,12 +69,14 @@ class KeyframeAnimation extends Animation{
                 break;
             }
         }
-
+            
+    
         //to finish the last animation
         if (currentFrame==-1){
+            //when it is already finished it doesn't calculate the matrix
             if(this.isActive==false)return;
             else{
-                this.matrix=mat4.create();
+                //applies the tranformations 
                 mat4.translate(this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].translate);
                 mat4.scale(this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].scale);   
                 mat4.rotateX( this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].rotateX);
@@ -75,9 +86,9 @@ class KeyframeAnimation extends Animation{
                 return;
             }
         }
-           
+
         let frame1 = this.keyframes[currentFrame-1];
-        let frame2 = this.keyframes[currentFrame];
+        let frame2 = this.keyframes[currentFrame];  
 
         
         //linear interpolation of transformations
@@ -94,7 +105,7 @@ class KeyframeAnimation extends Animation{
         let sz=frame1.scale[2]+(frame2.scale[2]-frame1.scale[2])*(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
     
         
-        this.matrix=mat4.create();
+       
         mat4.translate(this.matrix, this.matrix, [tx, ty, tz]);
         mat4.scale(this.matrix, this.matrix, [sx, sy, sz]);   
         mat4.rotateX( this.matrix, this.matrix, rx);
