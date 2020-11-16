@@ -735,12 +735,6 @@ class MySceneGraph {
         return null;
     }
 
-
-
-
-
-
-
     /**
    * Parses the <nodes> block.
    * @param {nodes block element} nodesNode
@@ -947,6 +941,10 @@ class MySceneGraph {
                             break;
                         case "plane":
                             args = this.parsePlane(primitive);
+                            break;
+                        case "patch":
+                            args = this.parsePatch(primitive,nodeID);
+                            break;
                     }
 
                     let leaf = new Leaf(this.scene,type,args,afs,aft);
@@ -1147,6 +1145,28 @@ class MySceneGraph {
         return [npartsU,npartsV];
 
       
+    }
+
+    parsePatch(primitive,nodeId){
+        let npointsU = this.reader.getFloat(primitive,"npointsU");
+        let npointsV = this.reader.getFloat(primitive,"npointsV");
+        let npartsU = this.reader.getFloat(primitive,"npartsU");
+        let npartsV = this.reader.getFloat(primitive,"npartsV");
+        let children=primitive.children;
+
+        if(children.length!=npointsV*npointsU)return "Number of control points different from npointsU*npointsV in primitive of node " + nodeId;
+   
+        var points = new Array(npointsU);
+        for (var u = 0; u < points.length; u++) {
+            points[u] = new Array(npointsV);
+        }
+
+        for (var u=0; u<npointsU; u++){
+            for (var v=0; v<npointsV; v++){
+                points[u][v]=[this.reader.getFloat(children[u*npointsV+v], 'xx'), this.reader.getFloat(children[u*npointsV+v], 'yy'), this.reader.getFloat(children[u*npointsV+v], 'zz'), 1];
+            }
+        }
+        return [npointsU,npointsV,npartsU,npartsV,points];
     }
 
     parseRotation(transformation){

@@ -204,6 +204,8 @@ class Leaf extends Node{
                 return new MyCylinder(scene,args[0],args[1],args[2],args[3],args[4]);
             case "plane":
                 return new Plane(scene,args[0],args[1]);   
+            case "patch":
+                return new Patch(scene,args[0],args[1],args[2],args[3],args[4]);
         }
 
     }

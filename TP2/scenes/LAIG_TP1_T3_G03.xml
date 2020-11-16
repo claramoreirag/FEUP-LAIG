@@ -142,7 +142,7 @@
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="-90" />
             <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
+            <scale sx="2" sy="2" sz="2" />
         </keyframe>
 
 
@@ -176,7 +176,48 @@
             <noderef id="estruturaSala" />
             <noderef id="porta"/>
             <noderef id="janela"/>
-             <noderef id="candeeiro"/>
+            <noderef id="candeeiro"/>
+            <leaf type="patch" npointsU="4" npointsV="2" npartsU="20" npartsV="20">
+                <controlpoint xx="-1" yy="0" zz="1"/>
+                <controlpoint xx="-1" yy="0" zz="0"/>
+                <controlpoint xx="-1" yy="0" zz="1"/>
+                <controlpoint xx="-1" yy="0" zz="0"/>
+                <controlpoint xx="1" yy="1.33" zz="1"/>
+                <controlpoint xx="1" yy="1.33" zz="0"/>
+                <controlpoint xx="1" yy="0" zz="1"/>
+                <controlpoint xx="1" yy="0" zz="0"/>
+           </leaf> 
+
+            <leaf type="patch" npointsU="4" npointsV="3" npartsU="15" npartsV="15">
+                <controlpoint xx="-1.0" yy="4" zz="-1" />
+                <controlpoint xx="0.0"  yy="4" zz="-1" />
+                <controlpoint xx="1.0"  yy="4" zz="-1" />
+
+                <controlpoint xx="-0.5" yy="1" zz="-0.5" />
+                <controlpoint xx="0.0"  yy="1" zz="-0.5" />
+                <controlpoint xx="0.5"  yy="1" zz="-0.5" />
+
+                <controlpoint xx="-0.5" yy="1" zz="0.5" />
+                <controlpoint xx="0.0"  yy="1" zz="0.5" />
+                <controlpoint xx="0.5"  yy="1" zz="0.5" />
+
+                <controlpoint xx="-1.0" yy="4" zz="1" />
+                <controlpoint xx="0.0"  yy="4" zz="1" />
+                <controlpoint xx="1.0"  yy="4" zz="1" />
+            </leaf>
+
+            <leaf type="patch" npointsU="3" npointsV="2" npartsU="15" npartsV="15">
+               
+                <controlpoint xx="0" yy="0" zz="0." />
+                <controlpoint xx="0.0"  yy="1" zz="1" />
+                 <controlpoint xx="0.0"  yy="0" zz="2" />
+
+                <controlpoint xx="1.0" yy="0" zz="0" />
+                <controlpoint xx="1.0"  yy="1" zz="1" />
+                <controlpoint xx="1.0"  yy="0" zz="2" />
+              
+               
+            </leaf>
             </descendants>
         </node> 
 
@@ -199,6 +240,17 @@
 			<noderef id="ecra" />
             <noderef id="pizza"/>
             <leaf type="plane" npartsU="4" npartsV="5" />
+            <leaf type="patch" npointsU="4" npointsV="2" npartsU="20" npartsV="20">
+                <controlpoint xx="-1" yy="0" zz="1"/>
+                <controlpoint xx="-1" yy="0" zz=""/>
+                <controlpoint xx="-1" yy="0" zz="1"/>
+                <controlpoint xx="-1" yy="0" zz="0"/>
+                <controlpoint xx="1" yy="0" zz="1"/>
+                <controlpoint xx="1" yy="0" zz="0"/>
+                <controlpoint xx="1" yy="0" zz="1"/>
+                <controlpoint xx="1" yy="0" zz="0"/>
+           </leaf> 
+          
         </descendants>
     </node>
 
