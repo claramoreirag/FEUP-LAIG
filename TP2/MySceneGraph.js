@@ -6,9 +6,10 @@ var VIEWS_INDEX = 1;
 var ILLUMINATION_INDEX = 2;
 var LIGHTS_INDEX = 3;
 var TEXTURES_INDEX = 4;
-var MATERIALS_INDEX = 5;
-var ANIMATIONS_INDEX=6;
-var NODES_INDEX = 7;
+var SPRITESHEETS_INDEX = 5;
+var MATERIALS_INDEX = 6;
+var ANIMATIONS_INDEX=7;
+var NODES_INDEX = 8;
 
 /**
  * MySceneGraph class, representing the scene graph.
@@ -35,7 +36,7 @@ class MySceneGraph {
         this.textureStack = new Stack();
 
         let clearTextureObject = new Texture("clear"); //clear texture
-
+        this.spriteAnimations=[];
         /**default text spritesheet */
         
 
@@ -201,6 +202,17 @@ class MySceneGraph {
 
             //Parse textures block
             if ((error = this.parseTextures(nodes[index])) != null)
+                return error;
+        }
+        // <spritesheets>
+        if ((index = nodeNames.indexOf("spritesheets")) == -1)
+            return "tag <spritesheets> missing";
+        else {
+            if (index != SPRITESHEETS_INDEX)
+                this.onXMLMinorError("tag <spritesheets> out of order");
+
+            //Parse spritesheets block
+            if ((error = this.parseSpritesheets(nodes[index])) != null)
                 return error;
         }
 
@@ -553,6 +565,61 @@ class MySceneGraph {
     }
 
     /**
+     * Parses the <spritesheets> block. 
+     * @param {spritesheets block element} texturesNode
+     */
+    parseSpritesheets(spritesheetsNode) {
+        let children = spritesheetsNode.children;
+        this.spritesheets=[];
+
+        // Any number of spritesheets.
+        for(let i=0; i < children.length; i++){
+
+            if(children[i].nodeName != "spritesheet"){
+                this.onXMLMinorError("unknown tag <" + children[i].nodeName + ">");
+                continue;
+            }
+
+            // Get id of the current spritesheet.
+            let spritesheetID = this.reader.getString(children[i], "id");
+            if (spritesheetID == null)
+                return "no ID defined for spritesheet";
+
+            // Checks for repeated IDs.
+            if (this.spritesheets[spritesheetID] != null)
+                return "ID must be unique for each spritesheet (conflict: ID = " + spritesheetID + ")";
+
+            // Get path of the current spritesheet.
+            let spritesheetPath = this.reader.getString(children[i], 'path');
+            if (spritesheetPath == null)
+                return "no path defined for spritesheet";
+
+            //sizeM
+            let sizeM = this.reader.getInteger(children[i],'sizeM');
+            if(sizeM==null)
+                return "sizeM not defined for spritesheet";
+
+            //sizeN
+            let sizeN = this.reader.getInteger(children[i],"sizeN");
+            if(sizeN==null)
+                return "sizeN not defined for spritesheet";
+
+            console.log("id: ", spritesheetID);
+            console.log("path: ", spritesheetPath);
+            console.log("m: ", sizeM);
+            console.log("n: ", sizeN);
+
+            let newTexture = new CGFtexture(this.scene, spritesheetPath);
+            let newSpritesheet = new MySpriteSheet(this.scene,newTexture,sizeM,sizeN);
+
+            this.spritesheets[spritesheetID] = newSpritesheet;
+        }
+        this.log("Parsed spritesheets");
+    
+        return null;
+    }
+
+    /**
      * Parses the <materials> node.
      * @param {materials block element} materialsNode
      */
@@ -756,6 +823,8 @@ class MySceneGraph {
         var grandChildren = [];
         var nodeNames = [];
 
+        this.spriteAnimations=[];
+
         // Any number of nodes.
         for (var i = 0; i < children.length; i++) {
 
@@ -833,7 +902,6 @@ class MySceneGraph {
                     let animation=this.animations[animationID];
                     fatherNode.setAnimation(animation);
                 }
-                
             }
 
 
@@ -951,9 +1019,15 @@ class MySceneGraph {
                         case "spritetext":
                             args = this.reader.getString(primitive,"text");
                             break;
+                        case "spriteanim":
+                            args = this.parseSpriteanim(primitive);
+                            break;
                     }
 
                     let leaf = new Leaf(this.scene,type,args,afs,aft);
+
+                    if(type=="spriteanim")
+                        this.spriteAnimations.push(leaf.leaf); //maybe doable without this if statement
 
                     fatherNode.addEdge(leaf);
                 }
@@ -1149,6 +1223,20 @@ class MySceneGraph {
         let angle = this.reader.getFloat(transformation,"angle");
 
         return [axis,angle];
+    }
+
+    parseSpriteanim(primitive){
+        //<leaf type=”spriteanim” ssid=”ss” duration=”ff” startCell=”ii” endCell=”ii” />
+
+        let ssid = this.reader.getString(primitive,"ssid");
+        let startCell = this.reader.getInteger(primitive,"startCell");
+        let endCell = this.reader.getInteger(primitive,"endCell");
+        let duration = this.reader.getFloat(primitive,"duration");
+
+
+        let args=[this.spritesheets[ssid],startCell,endCell,duration];
+        return args;
+
     }
 
 

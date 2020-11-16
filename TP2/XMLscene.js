@@ -183,6 +183,10 @@ initsceneCameras(){
         for(let key in this.graph.animations){
             this.graph.animations[key].update(t);
         }
+
+        for(let spriteanim of this.graph.spriteAnimations){
+            spriteanim.update(t);
+        }
     }
 
     updateCameras(){

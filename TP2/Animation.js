@@ -148,14 +148,21 @@ class KeyframeAnimation extends Animation{
 }
 
 class MySpriteSheet{
-    constructor(scene,appearance,sizeM,sizeN){
-        this.appearance=appearance; //should have texture loaded
+    constructor(scene,texture,sizeM,sizeN){
+        this.texture=texture;
         this.sizeM=sizeM;
         this.sizeN=sizeN;
         this.scene=scene;
+        
         this.shader = new CGFshader(this.scene.gl, 'shaders/spritesheet.vert', 'shaders/spritesheet.frag');
         this.shader.setUniformsValues({ uSampler: 1 });
         this.shader.setUniformsValues({ 'sizeSpriteSheet': [sizeM,sizeN] });
+
+        let appearance = new CGFappearance(scene);
+        appearance.setAmbient(1, 1, 1, 1.0);
+        appearance.setTexture(texture);
+        appearance.setTextureWrap('REPEAT', 'REPEAT');
+        this.appearance=appearance;
     }
 
     activateCellMN(m, n){ //m - coluna  n - linha
@@ -177,13 +184,9 @@ class MySpriteSheet{
 
 class MySpriteText extends MySpriteSheet{
     constructor(scene, text){ 
-        let appearance = new CGFappearance(scene);
         let texture = new CGFtexture(scene, 'spritesheets/textsheet.png');
-        appearance.setAmbient(1, 1, 1, 1.0);
-        appearance.setTexture(texture);
-        appearance.setTextureWrap('REPEAT', 'REPEAT');
 
-        super(scene,appearance,16,16);
+        super(scene,texture,16,16);
         this.text=text;
         this.texture = texture;
         this.geometry = new MyRectangle(scene,-0.5,-0.5,0.5,0.5);
@@ -207,7 +210,7 @@ class MySpriteText extends MySpriteSheet{
         //<leaf type=”spritetext” text=”ss” />
 
         this.texture.bind(1);
-        this.scene.setActiveShader(this.shader);
+        this.scene.setActiveShaderSimple(this.shader);
 
         let start = -this.text.length/2 - 0.5;
         this.scene.translate(start,0,0);
@@ -220,7 +223,7 @@ class MySpriteText extends MySpriteSheet{
             this.geometry.display();
         }
     
-        this.scene.setActiveShader(this.scene.defaultShader);
+        this.scene.setActiveShaderSimple(this.scene.defaultShader);
     }
 }
 
@@ -231,15 +234,55 @@ class MySpriteAnimation extends Animation{
         this.spritesheet=spritesheet;
         this.startCell=startCell;
         this.endCell=endCell;
-        this.timeAnim=timeAnim
+        this.timeAnim=timeAnim;
+
+
+        this.geometry = new MyRectangle(scene,-0.5,-0.5,0.5,0.5);
+        this.currentCell=null;
+        this.initialTime=0;
+        this.previousTime=0;
+        this.initCellIntervals();
+    }
+
+    initCellIntervals(){
+        this.cellIntervals=[];
+        let size = this.endCell - this.startCell;
+        let interval = this.timeAnim/size;
+        
+        for(let i=0;i<size;i++){
+            this.cellIntervals[this.startCell+i] = i*interval;
+        }
+        
     }
 
     update(t){
-        print('todo\n');
+        if(this.initialTime==0)
+            this.initialTime=t;
+
+        let elapsedTime = t - this.initialTime;
+
+        for(let i=0;i<this.cellIntervals.length;i++){
+            let indice = this.startCell+i;
+            if(this.cellIntervals[indice]>elapsedTime || indice==this.endCell){
+                this.currentCell=indice;
+                break;
+            }
+        }
+
+        if(elapsedTime>this.timeAnim)
+            this.initialTime=0;
     }
 
-    apply(){
-        print('todo\n');
+    //should be apply?
+    display(){
+        this.spritesheet.texture.bind(1);
+        this.scene.setActiveShaderSimple(this.spritesheet.shader);
+
+        this.spritesheet.appearance.apply();
+        this.spritesheet.activateCellP(this.currentCell);
+        this.geometry.display();
+
+        this.scene.setActiveShaderSimple(this.scene.defaultShader);
     }
 
     //<leaf type=”spriteanim” ssid=”ss” duration=”ff” startCell=”ii” endCell=”ii” />

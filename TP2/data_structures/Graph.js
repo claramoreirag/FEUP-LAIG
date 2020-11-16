@@ -203,6 +203,8 @@ class Leaf extends Node{
                 return new MyCylinder(scene,args[0],args[1],args[2],args[3],args[4]);
             case "spritetext":
                 return new MySpriteText(scene,args);
+            case "spriteanim":
+                return new MySpriteAnimation(scene,args[0],args[1],args[2],args[3]);
         }
 
     }

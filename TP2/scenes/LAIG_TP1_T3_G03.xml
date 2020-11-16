@@ -87,6 +87,11 @@
         <texture id="background" path="./scenes/images/background.png" />
     </textures>
 
+    <spritesheets>
+        <spritesheet id="spriteSheet_player" path="spritesheets/player.png" sizeM="8" sizeN="8" />
+        <spritesheet id="explosion" path="spritesheets/explosion.png" sizeM="4" sizeN="4" />
+    </spritesheets>
+
 
     <materials>
         <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
@@ -177,6 +182,7 @@
                 <noderef id="porta"/>
                 <noderef id="janela"/>
                 <noderef id="text"/>
+                <noderef id="spriteAnimation"/>
                 <noderef id="candeeiro"/>
             </descendants>
         </node> 
@@ -192,7 +198,23 @@
             </transformations>
 
             <descendants>
-                <leaf type="spritetext" text="Hello I am working"/>
+                <leaf type="spritetext" text="Hello I am working!"/>
+            </descendants>
+        </node>
+
+        <node id="spriteAnimation">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-8" z="0"/>
+                <scale sx="8" sy="8" sz="8"/>
+            </transformations>
+
+            <descendants>
+                <leaf type="spriteanim" ssid="spriteSheet_player" startCell="1" endCell="64" duration="10"/>
             </descendants>
         </node>
 
