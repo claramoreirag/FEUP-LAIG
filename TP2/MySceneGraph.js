@@ -1143,8 +1143,6 @@ class MySceneGraph {
         let npartsV = this.reader.getFloat(primitive,"npartsV");
         
         return [npartsU,npartsV];
-
-      
     }
 
     parsePatch(primitive,nodeId){
@@ -1156,13 +1154,13 @@ class MySceneGraph {
 
         if(children.length!=npointsV*npointsU)return "Number of control points different from npointsU*npointsV in primitive of node " + nodeId;
    
-        var points = new Array(npointsU);
-        for (var u = 0; u < points.length; u++) {
+        let points = new Array(npointsU);
+        for ( let u = 0; u < points.length; u++) {
             points[u] = new Array(npointsV);
         }
 
-        for (var u=0; u<npointsU; u++){
-            for (var v=0; v<npointsV; v++){
+        for (let u=0; u<npointsU; u++){
+            for (let v=0; v<npointsV; v++){
                 points[u][v]=[this.reader.getFloat(children[u*npointsV+v], 'xx'), this.reader.getFloat(children[u*npointsV+v], 'yy'), this.reader.getFloat(children[u*npointsV+v], 'zz'), 1];
             }
         }
