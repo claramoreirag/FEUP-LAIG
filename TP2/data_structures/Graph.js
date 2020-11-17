@@ -202,6 +202,10 @@ class Leaf extends Node{
                 return new Plane(scene,args[0],args[1]);   
             case "patch":
                 return new Patch(scene,args[0],args[1],args[2],args[3],args[4]);
+            case "spritetext":
+                return new MySpriteText(scene,args);
+            case "spriteanim":
+                return new MySpriteAnimation(scene,args[0],args[1],args[2],args[3]);
         }
 
     }

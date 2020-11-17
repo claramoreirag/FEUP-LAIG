@@ -87,6 +87,11 @@
         <texture id="background" path="./scenes/images/background.png" />
     </textures>
 
+    <spritesheets>
+        <spritesheet id="spriteSheet_player" path="spritesheets/player.png" sizeM="8" sizeN="8" />
+        <spritesheet id="explosion" path="spritesheets/explosion.png" sizeM="4" sizeN="4" />
+    </spritesheets>
+
 
     <materials>
         <!-- NOTE: the "MATERIAL" block may be repeated as required. Each defined material
@@ -151,7 +156,7 @@
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
             <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
+            <scale sx="2" sy="2" sz="2" />
         </keyframe>
        
 
@@ -177,6 +182,8 @@
             <noderef id="porta"/>
             <noderef id="janela"/>
             <noderef id="candeeiro"/>
+            <noderef id="text"/>
+            <noderef id="spriteAnimation"/>
             <leaf type="patch" npointsU="4" npointsV="2" npartsU="20" npartsV="20">
                 <controlpoint xx="-1" yy="0" zz="1"/>
                 <controlpoint xx="-1" yy="0" zz="0"/>
@@ -219,8 +226,42 @@
               
                
             </leaf>
+               
+               
+                
             </descendants>
         </node> 
+
+        <node id="text">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <scale sx="2" sy="2" sz="2"/>
+            </transformations>
+
+            <descendants>
+                <leaf type="spritetext" text="Hello I am working!"/>
+            </descendants>
+        </node>
+
+        <node id="spriteAnimation">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="0" y="-8" z="0"/>
+                <scale sx="8" sy="8" sz="8"/>
+            </transformations>
+
+            <descendants>
+                <leaf type="spriteanim" ssid="spriteSheet_player" startCell="1" endCell="64" duration="10"/>
+            </descendants>
+        </node>
 
    <node id="mesa">           
         <material id="null" />
