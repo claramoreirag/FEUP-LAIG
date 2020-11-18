@@ -9,7 +9,7 @@ class Patch extends CGFobject {
         this.object.initBuffers();
 	}
 
-    changeTexCoords(length_s, length_t){};
+
     
     display(){
         this.object.display();

@@ -134,7 +134,7 @@
 
     <animation id="defaultAnimation" >
 
-        <keyframe instant="5.0">
+        <keyframe instant="2.0">
             <translation x="0" y="0" z="0" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
@@ -142,7 +142,7 @@
             <scale sx="1" sy="1" sz="1" />
         </keyframe>
 
-        <keyframe instant="10.0">
+        <keyframe instant="4.0">
             <translation x="0" y="0" z="0" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="-90" />
@@ -151,17 +151,48 @@
         </keyframe>
 
 
-        <keyframe instant="14.0">
+        <keyframe instant="6.0">
             <translation x="0" y="0" z="0" />
             <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
+            <rotation axis="y" angle="-90" />
             <rotation axis="z" angle="0" />
-            <scale sx="2" sy="2" sz="2" />
+            <scale sx="1" sy="1" sz="1" />
         </keyframe>
        
 
     </animation>
 
+    <animation id="doorAnimation" >
+
+        <keyframe instant="0.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+        <keyframe instant="8.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="90" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+        
+        <keyframe instant="9.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+
+       
+
+    </animation>
 </animations>
 
     <nodes>
@@ -184,50 +215,8 @@
             <noderef id="candeeiro"/>
             <noderef id="text"/>
             <noderef id="spriteAnimation"/>
-            <leaf type="patch" npointsU="4" npointsV="2" npartsU="20" npartsV="20">
-                <controlpoint xx="-1" yy="0" zz="1"/>
-                <controlpoint xx="-1" yy="0" zz="0"/>
-                <controlpoint xx="-1" yy="0" zz="1"/>
-                <controlpoint xx="-1" yy="0" zz="0"/>
-                <controlpoint xx="1" yy="1.33" zz="1"/>
-                <controlpoint xx="1" yy="1.33" zz="0"/>
-                <controlpoint xx="1" yy="0" zz="1"/>
-                <controlpoint xx="1" yy="0" zz="0"/>
-           </leaf> 
-
-            <leaf type="patch" npointsU="4" npointsV="3" npartsU="15" npartsV="15">
-                <controlpoint xx="-1.0" yy="4" zz="-1" />
-                <controlpoint xx="0.0"  yy="4" zz="-1" />
-                <controlpoint xx="1.0"  yy="4" zz="-1" />
-
-                <controlpoint xx="-0.5" yy="1" zz="-0.5" />
-                <controlpoint xx="0.0"  yy="1" zz="-0.5" />
-                <controlpoint xx="0.5"  yy="1" zz="-0.5" />
-
-                <controlpoint xx="-0.5" yy="1" zz="0.5" />
-                <controlpoint xx="0.0"  yy="1" zz="0.5" />
-                <controlpoint xx="0.5"  yy="1" zz="0.5" />
-
-                <controlpoint xx="-1.0" yy="4" zz="1" />
-                <controlpoint xx="0.0"  yy="4" zz="1" />
-                <controlpoint xx="1.0"  yy="4" zz="1" />
-            </leaf>
-
-            <leaf type="patch" npointsU="3" npointsV="2" npartsU="15" npartsV="15">
-               
-                <controlpoint xx="0" yy="0" zz="0." />
-                <controlpoint xx="0.0"  yy="1" zz="1" />
-
-                 <controlpoint xx="0.0"  yy="0" zz="2" />
-                <controlpoint xx="1.0" yy="0" zz="0" />
-                
-                <controlpoint xx="1.0"  yy="1" zz="1" />
-                <controlpoint xx="1.0"  yy="0" zz="2" />
-              
-               
-            </leaf>
-               
-               
+            <leaf type="defbarrel" base="2" middle="4" height="6" slices="20" stacks="5" />
+            
                 
             </descendants>
         </node> 
@@ -284,7 +273,7 @@
             <leaf type="plane" npartsU="4" npartsV="5" />
             <leaf type="patch" npointsU="4" npointsV="2" npartsU="20" npartsV="20">
                 <controlpoint xx="-1" yy="0" zz="1"/>
-                <controlpoint xx="-1" yy="0" zz=""/>
+                <controlpoint xx="-1" yy="0" zz="0"/>
                 <controlpoint xx="-1" yy="0" zz="1"/>
                 <controlpoint xx="-1" yy="0" zz="0"/>
                 <controlpoint xx="1" yy="0" zz="1"/>
@@ -882,11 +871,12 @@
             </texture>
 
         <transformations>
-            <translation x="0.05" y="7." z="10.0" />
+           
             <scale sx="1.0" sy="14.0" sz="5.0"/>
-            <rotation axis="y" angle="90" />
+           
         </transformations>
 
+         <animationref id="doorAnimation" />
 
 		<descendants>
 			<leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
@@ -1095,13 +1085,14 @@
                 <amplification afs="1" aft="0.1" />
             </texture>
 
+
             <transformations>
                 <rotation axis="z" angle="180"/>
                 <translation x="-0.2" y="-0.075" z="0.01"/>
                 <scale sx="0.4" sy="0.85" sz="1" />
             </transformations>
 
-
+             <animationref id="doorAnimation" />
             <descendants>
                 <leaf type="triangle" x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5"  x3="0" y3="0.3"/>
             </descendants>

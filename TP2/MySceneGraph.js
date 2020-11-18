@@ -1022,6 +1022,9 @@ class MySceneGraph {
                         case "spriteanim":
                             args = this.parseSpriteanim(primitive);
                             break;
+                        case "defbarrel":
+                            args = this.parseBarrel(primitive);
+                            break;
                     }
 
                     let leaf = new Leaf(this.scene,type,args,afs,aft);
@@ -1266,6 +1269,18 @@ class MySceneGraph {
         let args=[this.spritesheets[ssid],startCell,endCell,duration];
         return args;
 
+    }
+
+    parseBarrel(primitive){
+        let base = this.reader.getFloat(primitive,"base");
+        let middle = this.reader.getFloat(primitive,"middle");
+        let height = this.reader.getFloat(primitive,"height");
+        let slices = this.reader.getInteger(primitive,"slices");
+        let stacks = this.reader.getInteger(primitive,"stacks");
+
+        let args=[base, middle, height,slices,stacks];
+
+        return args;
     }
 
 

@@ -45,23 +45,38 @@ class KeyframeAnimation extends Animation{
         if (this.initialT==0){
             this.initialT=t;
             this.previousT=t;
-            this.isActive=true;
         }
 
-        this.matrix=mat4.create();
-
+        
         //elapsedTime is the time since t0
         let elapsedTime=t-this.initialT;
-
-
+        
+        
         //if the first animation instant hasn't ocurred yet the object is not visible
         if(this.keyframes[0].instant > elapsedTime){
-           mat4.scale(this.matrix, this.matrix, [0,0,0]);   
-           return;
+            this.matrix=mat4.create();
+            mat4.scale(this.matrix, this.matrix, [0,0,0]);   
+            return;
+        }
+        //if elapsed time is samaller than last keyframe instant, the animation is active
+        else if (this.keyframes[this.keyframes.length-1].instant > elapsedTime)this.isActive=true;
+        //when animation is finished it just returns
+        else if (this.keyframes[this.keyframes.length-1].instant < elapsedTime && this.isActive==false)return;
+        else{
+            //applies the final keyframe tranformation
+            
+            this.matrix=mat4.create();
+            mat4.translate(this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].translate);
+            mat4.rotateX( this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].rotateX*Math.PI/180);
+            mat4.rotateY( this.matrix, this.matrix,this.keyframes[this.keyframes.length-1].rotateY*Math.PI/180);
+            mat4.rotateZ( this.matrix, this.matrix,this.keyframes[this.keyframes.length-1].rotateZ*Math.PI/180);
+            mat4.scale(this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].scale);   
+            this.isActive=false;
+            return;
         }
 
 
-        //gets the frame next keyframe
+        //gets the next keyframe
         let currentFrame=-1;
         for (let i=0; i<this.keyframes.length; i++){
             if (this.keyframes[i].instant > elapsedTime){
@@ -70,22 +85,6 @@ class KeyframeAnimation extends Animation{
             }
         }
             
-    
-        //to finish the last animation
-        if (currentFrame==-1){
-            //when it is already finished it doesn't calculate the matrix
-            if(this.isActive==false)return;
-            else{
-                //applies the tranformations 
-                mat4.translate(this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].translate);
-                mat4.scale(this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].scale);   
-                mat4.rotateX( this.matrix, this.matrix, this.keyframes[this.keyframes.length-1].rotateX);
-                mat4.rotateY( this.matrix, this.matrix,this.keyframes[this.keyframes.length-1].rotateY);
-                mat4.rotateZ( this.matrix, this.matrix,this.keyframes[this.keyframes.length-1].rotateZ);
-                this.isActive=false;
-                return;
-            }
-        }
 
         let frame1 = this.keyframes[currentFrame-1];
         let frame2 = this.keyframes[currentFrame];  
@@ -105,12 +104,12 @@ class KeyframeAnimation extends Animation{
         let sz=frame1.scale[2]+(frame2.scale[2]-frame1.scale[2])*(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
     
         
-       
+        this.matrix=mat4.create();
         mat4.translate(this.matrix, this.matrix, [tx, ty, tz]);
-        mat4.scale(this.matrix, this.matrix, [sx, sy, sz]);   
         mat4.rotateX( this.matrix, this.matrix, rx);
         mat4.rotateY( this.matrix, this.matrix, ry);
         mat4.rotateZ( this.matrix, this.matrix, rz);
+        mat4.scale(this.matrix, this.matrix, [sx, sy, sz]);   
         this.previousT=t;
 
     }
