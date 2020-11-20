@@ -1244,7 +1244,8 @@ class MySceneGraph {
 
         for (let u=0; u<npointsU; u++){
             for (let v=0; v<npointsV; v++){
-                points[u][v]=[this.reader.getFloat(children[u*npointsV+v], 'xx'), this.reader.getFloat(children[u*npointsV+v], 'yy'), this.reader.getFloat(children[u*npointsV+v], 'zz'), 1];
+                points[u][v]=this.parseCoordinates3D(children[u*npointsV+v], "error in coordinates of control points in patch of node "+ nodeId );
+                points[u][v].push(...[1]);
             }
         }
         return [npointsU,npointsV,npartsU,npartsV,points];
