@@ -98,6 +98,7 @@
     <spritesheets>
         <spritesheet id="spriteSheet_player" path="spritesheets/player.png" sizeM="8" sizeN="8" />
         <spritesheet id="explosion" path="spritesheets/explosion.png" sizeM="4" sizeN="4" />
+        <spritesheet id="bat" path="spritesheets/32x32-bat-sprite.png" sizeM="4" sizeN="4" />
     </spritesheets>
 
 
@@ -167,6 +168,84 @@
             <scale sx="1" sy="1" sz="1" />
         </keyframe>
        
+
+    </animation>
+
+    <animation id="batAnimation2">
+        <keyframe instant="10.001">
+            <translation x="0" y="0" z="3" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+        <keyframe instant="15">
+            <translation x="-4" y="0" z="3" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+        <keyframe instant="15.001">
+            <translation x="-4" y="0" z="3" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="0" sy="0" sz="0" />
+        </keyframe>
+
+    </animation>
+
+    <animation id="batAnimation">
+        <keyframe instant="0.0">
+            <translation x="0" y="-2" z="-15" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="0" sy="0" sz="0" />
+        </keyframe>
+
+        <keyframe instant="7.0">
+            <translation x="0" y="0" z="3"/>
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+        <keyframe instant="10.0">
+            <translation x="0" y="0" z="3"/>
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+        <keyframe instant="10.001">
+            <translation x="0" y="0" z="3"/>
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="0" sy="0" sz="0" />
+        </keyframe>
+
+        <keyframe instant ="15.0">
+            <translation x="-10" y="0" z="3"/>
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="0" sy="0" sz="0" />
+
+        </keyframe>
+             <keyframe instant ="15.001">
+            <translation x="-4" y="0" z="3"/>
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
 
     </animation>
 
@@ -338,7 +417,7 @@
             </texture>
 
             <transformations>
-             <scale sx="0.5" sy="0.5" sz="0.5" />
+                <scale sx="0.5" sy="0.5" sz="0.5" />
             </transformations>
             
             <descendants>
@@ -354,6 +433,7 @@
             <noderef id="candeeiro"/>
             <noderef id="text"/>
             <noderef id="spriteAnimation"/>
+            <noderef id="spriteAnimation2"/>
             
                 
             </descendants>
@@ -386,12 +466,33 @@
             </texture>
 
             <transformations>
-                <translation x="0" y="-8" z="0"/>
-                <scale sx="8" sy="8" sz="8"/>
+                <translation x="20.5" y="8" z="0.1"/>
+                <scale sx="4" sy="4" sz="4"/>
             </transformations>
 
+            <animationref id="batAnimation"/>
+
             <descendants>
-                <leaf type="spriteanim" ssid="spriteSheet_player" startCell="1" endCell="64" duration="10"/>
+                <leaf type="spriteanim" ssid="bat" startCell="1" endCell="3" duration="0.7"/>
+            </descendants>
+        </node>
+
+       
+        <node id="spriteAnimation2">
+            <material id="null" />
+            <texture id="null">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="20.5" y="8" z="0.1"/>
+                <scale sx="4" sy="4" sz="4"/>
+            </transformations>
+
+            <animationref id="batAnimation2"/>
+
+            <descendants>
+                <leaf type="spriteanim" ssid="bat" startCell="13" endCell="15" duration="0.7"/>
             </descendants>
         </node>
 
@@ -405,8 +506,6 @@
             <translation x="5" y="0" z="0.1" />
             <scale sx="1.2" sy="1.2" sz="1.2" />
         </transformations>
- 
-   
         <descendants>
             <noderef id="pernasMesa" />
             <noderef id="tampoMesa" />
@@ -414,8 +513,6 @@
 			<noderef id="ecra" />
             <noderef id="pizza"/>
             <leaf type="plane" npartsU="4" npartsV="5" />
-           
-          
         </descendants>
     </node>
 
