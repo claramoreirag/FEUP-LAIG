@@ -40,7 +40,7 @@
     - Animation of the curtains opening
     - Animation of the text 
     - Animation of the bat getting inside the room
-  - [Link to the scene](./scenes/LAIG_TP1_T3_G03.xml)
+  - [Link to the scene](./TP2/scenes/LAIG_TP1_T3_G03.xml)
 
 ----
 
