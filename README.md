@@ -25,8 +25,22 @@
 
 -----
 
-### [TP2 - ...](TP2)
-- (items briefly describing main strong points)
+### [TP2 - Animations, Spritesheets and Surfaces](TP2)
+- Main strong points
+  - All necessary features were achieved
+  - Transparencies were implemented in spritesheets
+- Scene
+  - The scene remains similar to TP1's scene with some new additions:
+    - A rug and curtains (defined with patch primitive)
+    - A vase and a lamp (defined with defbarrel primitive) 
+    - A pictute on the wall (defined with plane primitive)
+    - A message on the wall (defined with spritetext primitive)
+    - A bat flying (defined with spriteanim primitive)
+    - Animation of the door opening and closing
+    - Animation of the curtains opening
+    - Animation of the text 
+    - Animation of the bat getting inside the room
+  - [Link to the scene](./scenes/LAIG_TP1_T3_G03.xml)
 
 ----
 
