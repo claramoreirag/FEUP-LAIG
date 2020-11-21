@@ -11,8 +11,6 @@ class Plane extends CGFobject {
         
 	}
 
-    changeTexCoords(length_s, length_t){};
-    
     display(){
         this.object.display();
     }

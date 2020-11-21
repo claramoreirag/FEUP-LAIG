@@ -1022,6 +1022,9 @@ class MySceneGraph {
                         case "spriteanim":
                             args = this.parseSpriteanim(primitive);
                             break;
+                        case "defbarrel":
+                            args = this.parseBarrel(primitive);
+                            break;
                     }
 
                     let leaf = new Leaf(this.scene,type,args,afs,aft);
@@ -1241,7 +1244,8 @@ class MySceneGraph {
 
         for (let u=0; u<npointsU; u++){
             for (let v=0; v<npointsV; v++){
-                points[u][v]=[this.reader.getFloat(children[u*npointsV+v], 'xx'), this.reader.getFloat(children[u*npointsV+v], 'yy'), this.reader.getFloat(children[u*npointsV+v], 'zz'), 1];
+                points[u][v]=this.parseCoordinates3D(children[u*npointsV+v], "error in coordinates of control points in patch of node "+ nodeId );
+                points[u][v].push(...[1]);
             }
         }
         return [npointsU,npointsV,npartsU,npartsV,points];
@@ -1266,6 +1270,18 @@ class MySceneGraph {
         let args=[this.spritesheets[ssid],startCell,endCell,duration];
         return args;
 
+    }
+
+    parseBarrel(primitive){
+        let base = this.reader.getFloat(primitive,"base");
+        let middle = this.reader.getFloat(primitive,"middle");
+        let height = this.reader.getFloat(primitive,"height");
+        let slices = this.reader.getInteger(primitive,"slices");
+        let stacks = this.reader.getInteger(primitive,"stacks");
+
+        let args=[base, middle, height,slices,stacks];
+
+        return args;
     }
 
 
