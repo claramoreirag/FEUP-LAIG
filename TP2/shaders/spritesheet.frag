@@ -12,4 +12,7 @@ uniform vec2 sizeSpriteSheet;
 void main() {
 	vec2 offset = spriteCoords / sizeSpriteSheet;
 	gl_FragColor = texture2D(uSampler, vTextureCoord+offset);
+
+	if (gl_FragColor.r <= 0.01)
+  		discard;
 }

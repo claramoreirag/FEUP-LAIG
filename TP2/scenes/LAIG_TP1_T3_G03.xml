@@ -90,6 +90,7 @@
     <spritesheets>
         <spritesheet id="spriteSheet_player" path="spritesheets/player.png" sizeM="8" sizeN="8" />
         <spritesheet id="explosion" path="spritesheets/explosion.png" sizeM="4" sizeN="4" />
+        <spritesheet id="bat" path="spritesheets/32x32-bat-sprite.png" sizeM="4" sizeN="4" />
     </spritesheets>
 
 
@@ -243,7 +244,7 @@
             </transformations>
 
             <descendants>
-                <leaf type="spritetext" text="Hello I am working!"/>
+                <leaf type="spritetext" text="LAIG T3G3"/>
             </descendants>
         </node>
 
@@ -259,7 +260,8 @@
             </transformations>
 
             <descendants>
-                <leaf type="spriteanim" ssid="spriteSheet_player" startCell="1" endCell="64" duration="10"/>
+                <leaf type="spriteanim" ssid="bat" startCell="1" endCell="3" duration="1"/>
+                <!--<leaf type="spriteanim" ssid="spriteSheet_player" startCell="1" endCell="64" duration="10"/>-->
             </descendants>
         </node>
 
@@ -274,7 +276,7 @@
             <scale sx="1.2" sy="1.2" sz="1.2" />
         </transformations>
 
-        <animationref id="defaultAnimation" />
+        <!--<animationref id="defaultAnimation" />-->
         <descendants>
             <noderef id="pernasMesa" />
             <noderef id="tampoMesa" />

@@ -143,15 +143,14 @@ class MySpriteSheet{
     }
 
     activateCellP(p){
-        let m = p%this.sizeM;
+        let m = (p%this.sizeM);
         let n = Math.floor(p/this.sizeM);
 
-        if(n<=this.sizeN)
+        if(n<this.sizeN)
             this.activateCellMN(m,n);
         else
             console.log('Cell '+ p + " doesn't exist");
 
-        //chamar activateCell(m,n) depois de calcular 'm' e 'n'
     }
 }
 
@@ -173,7 +172,7 @@ class MySpriteText extends MySpriteSheet{
         if(asciiValue > 31 && asciiValue < 127)
             return asciiValue;
         else
-            console.log("todo more characters\n");
+            return 32;
         //devolve a posição do character na spritesheet
     }
 
@@ -213,17 +212,16 @@ class MySpriteAnimation extends Animation{
         this.geometry = new MyRectangle(scene,-0.5,-0.5,0.5,0.5);
         this.currentCell=null;
         this.initialTime=0;
-        this.previousTime=0;
         this.initCellIntervals();
     }
 
     initCellIntervals(){
         this.cellIntervals=[];
-        let size = this.endCell - this.startCell;
-        let interval = this.timeAnim/size;
+        this.size = this.endCell - this.startCell + 1;
+        this.interval = this.timeAnim/this.size;
         
-        for(let i=0;i<size;i++){
-            this.cellIntervals[this.startCell+i] = i*interval;
+        for(let i=0;i<this.size;i++){
+            this.cellIntervals[this.startCell+i] = (i+1)*this.interval;
         }
         
     }
@@ -233,16 +231,16 @@ class MySpriteAnimation extends Animation{
             this.initialTime=t;
 
         let elapsedTime = t - this.initialTime;
-
+        
         for(let i=0;i<this.cellIntervals.length;i++){
             let indice = this.startCell+i;
-            if(this.cellIntervals[indice]>elapsedTime || indice==this.endCell){
+            if(elapsedTime<this.cellIntervals[indice] || indice==this.endCell){
                 this.currentCell=indice;
                 break;
             }
         }
 
-        if(elapsedTime>this.timeAnim)
+        if(elapsedTime>this.cellIntervals[this.startCell+this.size-1])
             this.initialTime=0;
     }
 

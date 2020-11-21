@@ -15,7 +15,6 @@ varying vec3 vVertexPosition;
 
 void main() {
 	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);
-
 	vTextureCoord = aTextureCoord/sizeSpriteSheet;
 }
 
