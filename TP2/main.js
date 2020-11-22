@@ -11,7 +11,7 @@ function getUrlVars() {
     return vars;
 }	 
 //Include additional files here
-serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'primitives/MyRectangle.js','data_structures/Material.js','data_structures/Stack.js','data_structures/Graph.js','primitives/MySphere.js','primitives/MyCylinder.js','primitives/MyTorus.js','data_structures/Texture.js','primitives/MyTriangle.js', 'Animation.js','Plane.js','Patch.js','Defbarrel.js',
+serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.js', 'primitives/MyRectangle.js','data_structures/Material.js','data_structures/Stack.js','data_structures/Graph.js','primitives/MySphere.js','primitives/MyCylinder.js','primitives/MyTorus.js','data_structures/Texture.js','primitives/MyTriangle.js', 'animations/Animation.js','primitives/Plane.js','primitives/Patch.js','primitives/Defbarrel.js','animations/KeyframeAnimation.js','animations/MySpriteAnimation.js','primitives/MySpriteSheet.js','primitives/MySpriteText.js',
 
 main=function()
 {
@@ -30,7 +30,7 @@ main=function()
 	// get file name provided in URL, e.g. http://localhost/myproj/?file=myfile.xml
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor)
 	
-    var filename=getUrlVars()['file'] ||"LAIG_TP2_XML_T5_G10_v01.xml";
+    var filename=getUrlVars()['file'] ||"LAIG_TP1_T3_G03.xml";
 
 	// create and load graph, and associate it to scene.
 	// Check console for loading errors
