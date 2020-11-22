@@ -5,13 +5,8 @@
        
     </initials>
     <views default="CameraFront">
-       
-        <perspective id="defaultCamera" near="0.1" far="500" angle="45">
-            <from x="19" y="15" z="19" />
-            <to x="0" y="0" z="0" />
-        </perspective>
-
-         <perspective id="Camera1" near="0.1" far="500" angle="45">
+      
+         <perspective id="CameraSide" near="0.1" far="500" angle="45">
             <from x="-2" y="10" z="20" />
             <to x="10" y="2" z="5" />
         </perspective>
@@ -20,16 +15,16 @@
             <to x="11" y="2" z="-5" />
         </perspective>
 
-        <ortho id="Ortho1" near="0.2" far="100" left="-0.2" right="0.2" top="0.2" bottom="-0.2">
-            <from x="10" y="10" z="10" />
+        <ortho id="ZoomOrtho" near="0.1" far="200" left="-1" right="10" top="10" bottom="-0.2">
+            <from x="0" y="0" z="10" />
             <to x="1" y="1" z="1" />
-           
+             <up x="0" y="3" z="0"/>
         </ortho>
 
-        <ortho id="Ortho2"  near="0.1" far="500" left="-5" right="10" top="10" bottom="-5" >
-            <from x="0" y="0" z="10" />
-            <to x="0" y="0" z="0" />
-            <up x="0" y="2" z="0"/>
+        <ortho id="FrontOrtho"  near="0.1" far="200" left="-2" right="13" top="10" bottom="-2" >
+            <from x="-10" y="0" z="0" />
+            <to x="10" y="0" z="0" />
+            <up x="0" y="3" z="0"/>
         </ortho>
     
     </views>
@@ -63,7 +58,7 @@
       
 
         
-        <light id="candeeiro">            <!-- light identifier -->
+        <light id="Candeeiro">            <!-- light identifier -->
             <enable value="1" />
             <!-- enable/disable -->
             <position x="14" y="19" z="10" w="0" /><!-- light position; w=1: point light; w=0: directional light -->
@@ -88,11 +83,11 @@
         <texture id="pizzaTexture" path="./scenes/images/pizza.jpg" />
         <texture id="stripesTexture" path="./scenes/images/stripes.png" />
         <texture id="background" path="./scenes/images/background.png" />
-         <texture id="lampshade" path="./scenes/images/lampshade.jpg" />
+        <texture id="lampshade" path="./scenes/images/lampshade.jpg" />
         <texture id="rug" path="./scenes/images/rug.jpg" />
-         <texture id="curtains" path="./scenes/images/curtains.jpg" />
-         <texture id="poster" path="./scenes/images/poster.jpg" />
-         <texture id="grass" path="./scenes/images/grass.jpg" />
+        <texture id="curtains" path="./scenes/images/curtains.jpg" />
+        <texture id="poster" path="./scenes/images/poster.jpg" />
+        <texture id="grass" path="./scenes/images/grass.jpg" />
     </textures>
 
     <spritesheets>
@@ -281,7 +276,7 @@
 
      <animation id="textAnimation" >
 
-        <keyframe instant="2.0">
+        <keyframe instant="3.0">
             <translation x="0" y="0" z="0" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
@@ -289,13 +284,7 @@
             <scale sx="0.9" sy="0.9" sz="0.9" />
         </keyframe>
 
-        <keyframe instant="3.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1.1" sy="1.1" sz="1.1" />
-        </keyframe>
+        
 
         
         <keyframe instant="4.0">
@@ -341,32 +330,16 @@
             <scale sx="1" sy="1" sz="1" />
         </keyframe>
 
-    </animation>
-    
-   
-     <animation id="cortinaAnimation" >
-
-        <keyframe instant="0.0">
+          <keyframe instant="9.0">
             <translation x="0" y="0" z="0" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
             <rotation axis="z" angle="0" />
-            <scale sx="0.9" sy="0.9" sz="1" />
+            <scale sx="1.1" sy="1.1" sz="1.1" />
         </keyframe>
 
-        <keyframe instant="3.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1.5" sy="1" sz="0.4" />
-        </keyframe>
-
-    </animation>
-
-    <animation id="cortinaEAnimation" >
-
-       <keyframe instant="0.0">
+        
+        <keyframe instant="10.0">
             <translation x="0" y="0" z="0" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
@@ -374,8 +347,55 @@
             <scale sx="1" sy="1" sz="1" />
         </keyframe>
 
-        <keyframe instant="4.0">
-            <translation x="-2" y="0" z="0" />
+           <keyframe instant="11.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1.1" sy="1.1" sz="1.1" />
+        </keyframe>
+
+        
+        <keyframe instant="12.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+         <keyframe instant="14.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="0" sy="0" sz="0" />
+        </keyframe>
+
+    </animation>
+    
+   
+
+    <animation id="cortinaEAnimation" >
+
+        <keyframe instant="0.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+       <keyframe instant="2.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+        <keyframe instant="6.0">
+            <translation x="-2.5" y="0" z="0" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
             <rotation axis="z" angle="0" />
@@ -394,8 +414,16 @@
             <scale sx="1" sy="1" sz="1" />
         </keyframe>
 
-        <keyframe instant="4.0">
-            <translation x="2" y="0" z="0" />
+        <keyframe instant="2.0">
+            <translation x="0" y="0" z="0" />
+            <rotation axis="x" angle="0" />
+            <rotation axis="y" angle="0" />
+            <rotation axis="z" angle="0" />
+            <scale sx="1" sy="1" sz="1" />
+        </keyframe>
+
+        <keyframe instant="6.0">
+            <translation x="2.5" y="0" z="0" />
             <rotation axis="x" angle="0" />
             <rotation axis="y" angle="0" />
             <rotation axis="z" angle="0" />
