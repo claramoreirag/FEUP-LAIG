@@ -88,6 +88,7 @@
         <texture id="curtains" path="./scenes/images/curtains.jpg" />
         <texture id="poster" path="./scenes/images/poster.jpg" />
         <texture id="grass" path="./scenes/images/grass.jpg" />
+        <texture id="board" path="./scenes/images/board.png" />
     </textures>
 
     <spritesheets>
@@ -106,6 +107,30 @@
             <diffuse r="0.0" g="0.0" b="0.0" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r=".1" g=".1" b=".1" a="1.0" />
+        </material>
+
+        <material id="orange">
+            <shininess value="1" />
+            <ambient r="1.0" g="0.47" b="0.0" a="1.0" />
+            <diffuse r="1.0" g="0.47" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0" g="0" b="0" a="0" />
+        </material>
+
+         <material id="green">
+            <shininess value="1" />
+            <ambient r="1.0" g="0.47" b="0.0" a="1.0" />
+            <diffuse r="1.0" g="0.47" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0" g="0" b="0" a="0" />
+        </material>
+
+        <material id="purple">
+            <shininess value="1" />
+            <ambient r="1.0" g="0.47" b="0.0" a="1.0" />
+            <diffuse r="1.0" g="0.47" b="0.0" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0" g="0" b="0" a="0" />
         </material>
 
          <material id="materialChao">
@@ -134,309 +159,6 @@
     </materials>
 
 
-<animations>
-
-    <animation id="defaultAnimation" >
-
-        <keyframe instant="2.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="4.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="-90" />
-            <rotation axis="z" angle="0" />
-            <scale sx="2" sy="0" sz="2" />
-        </keyframe>
-
-
-        <keyframe instant="6.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="-90" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-       
-
-    </animation>
-
-    <animation id="batAnimation2">
-        <keyframe instant="10.001">
-            <translation x="0" y="0" z="3" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="15">
-            <translation x="-4" y="0" z="3" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="15.001">
-            <translation x="-4" y="0" z="3" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="0" sy="0" sz="0" />
-        </keyframe>
-
-    </animation>
-
-    <animation id="batAnimation">
-        <keyframe instant="0.0">
-            <translation x="0" y="-2" z="-15" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="0" sy="0" sz="0" />
-        </keyframe>
-
-        <keyframe instant="7.0">
-            <translation x="0" y="0" z="3"/>
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="10.0">
-            <translation x="0" y="0" z="3"/>
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="10.001">
-            <translation x="0" y="0" z="3"/>
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="0" sy="0" sz="0" />
-        </keyframe>
-
-        <keyframe instant ="15.0">
-            <translation x="-10" y="0" z="3"/>
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="0" sy="0" sz="0" />
-
-        </keyframe>
-             <keyframe instant ="15.001">
-            <translation x="-4" y="0" z="3"/>
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-    </animation>
-
-    <animation id="doorAnimation" >
-
-        <keyframe instant="0.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="8.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="-120" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        
-        <keyframe instant="9.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-    </animation>
-    
-
-     <animation id="textAnimation" >
-
-        <keyframe instant="3.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="0.9" sy="0.9" sz="0.9" />
-        </keyframe>
-
-        
-
-        
-        <keyframe instant="4.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        
-        <keyframe instant="5.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1.1" sy="1.1" sz="1.1" />
-        </keyframe>
-
-        
-        <keyframe instant="6.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-          <keyframe instant="7.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1.1" sy="1.1" sz="1.1" />
-        </keyframe>
-
-        
-        <keyframe instant="8.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-          <keyframe instant="9.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1.1" sy="1.1" sz="1.1" />
-        </keyframe>
-
-        
-        <keyframe instant="10.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-           <keyframe instant="11.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1.1" sy="1.1" sz="1.1" />
-        </keyframe>
-
-        
-        <keyframe instant="12.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-         <keyframe instant="14.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="0" sy="0" sz="0" />
-        </keyframe>
-
-    </animation>
-    
-   
-
-    <animation id="cortinaEAnimation" >
-
-        <keyframe instant="0.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-       <keyframe instant="2.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="6.0">
-            <translation x="-2.5" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="0.4" sy="1.5" sz="1" />
-        </keyframe>
-    </animation>
-
-    
-    <animation id="cortinaDAnimation" >
-
-        <keyframe instant="0.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="2.0">
-            <translation x="0" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="1" sy="1" sz="1" />
-        </keyframe>
-
-        <keyframe instant="6.0">
-            <translation x="2.5" y="0" z="0" />
-            <rotation axis="x" angle="0" />
-            <rotation axis="y" angle="0" />
-            <rotation axis="z" angle="0" />
-            <scale sx="0.4" sy="1.5" sz="1" />
-        </keyframe>
-
-    </animation>
-    
-    
-    
-
-</animations>
-
     <nodes>
         <node id="root">
             <material id="null" />
@@ -449,19 +171,18 @@
             </transformations>
             
             <descendants>
-            <noderef id="mesa" />
-            <noderef id="cadeira"/>
+            <noderef id="Cadeiras_Mesa" />
             <noderef id="estruturaSala" />
             <noderef id="porta"/>
             <noderef id="tapete"/>
-             <noderef id="portaAberta"/>
+            <noderef id="portaAberta"/>
             <noderef id="cortina"/>
              <noderef id="vaso"/>
             <noderef id="janela"/>
             <noderef id="candeeiro"/>
             <noderef id="text"/>
-            <noderef id="spriteAnimation"/>
-            <noderef id="spriteAnimation2"/>
+            <noderef id="board"/>
+          
             
                 
             </descendants>
@@ -480,49 +201,32 @@
                  
             </transformations>
 
-             <animationref id="textAnimation" />
+         
 
             <descendants>
                 <leaf type="spritetext" text="Study Room"/>
             </descendants>
         </node>
 
-        <node id="spriteAnimation">
-            <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
 
-            <transformations>
-                <translation x="20.5" y="8" z="0.1"/>
-                <scale sx="4" sy="4" sz="4"/>
-            </transformations>
+<node id="conjunto mesa">           
+        <material id="null" />
+        <texture id="woodTexture1">
+          <amplification afs="1.0" aft="1.0" />
+        </texture>
 
-            <animationref id="batAnimation"/>
+        <transformations>
+           
+        </transformations>
+        <descendants>
+            <noderef id="mesa" />
+           
+            <noderef id= "piece"/>
+        
+        
+        </descendants>
+    </node>
 
-            <descendants>
-                <leaf type="spriteanim" ssid="bat" startCell="1" endCell="3" duration="0.7"/>
-            </descendants>
-        </node>
-
-       
-        <node id="spriteAnimation2">
-            <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="20.5" y="8" z="0.1"/>
-                <scale sx="4" sy="4" sz="4"/>
-            </transformations>
-
-            <animationref id="batAnimation2"/>
-
-            <descendants>
-                <leaf type="spriteanim" ssid="bat" startCell="13" endCell="15" duration="0.7"/>
-            </descendants>
-        </node>
 
    <node id="mesa">           
         <material id="null" />
@@ -532,15 +236,13 @@
 
         <transformations>
             <translation x="5" y="0" z="0.1" />
-            <scale sx="1.2" sy="1.2" sz="1.2" />
+            <scale sx="1.2" sy="1" sz="2" />
         </transformations>
         <descendants>
             <noderef id="pernasMesa" />
             <noderef id="tampoMesa" />
-            <noderef id="donut" />
-			<noderef id="ecra" />
-            <noderef id="pizza"/>
-            <leaf type="plane" npartsU="4" npartsV="5" />
+           
+         
         </descendants>
     </node>
 
@@ -564,6 +266,29 @@
             <noderef id="pernaMesa3" />
             <noderef id="pernaMesa4" />
             <!-- x y z coordinates of each vertex -->
+        </descendants>
+    </node>
+
+
+
+    <node id="board">            
+        <material id="null" />
+
+        <texture id="board">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="10" y="5" z="10" />
+            <scale sx="10" sy="10" sz="10" />
+            <rotation axis="y" angle="-90" /> 
+            <rotation axis="y" angle="-90" /> 
+        </transformations>
+
+
+        <descendants>
+           
+            <leaf type="plane" npartsU="5" npartsV="5"/>
         </descendants>
     </node>
 
@@ -862,6 +587,26 @@
     </node>
 
 
+
+      <node id="Cadeiras_Mesa">    
+        <material id="materialChao" />
+        <texture id="woodTexture2">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+              <translation x="1.5" y="0" z="7" />   
+        </transformations>
+
+        <descendants>
+            <noderef id="cadeira"/>
+            <noderef id="cadeira2"/>
+            <noderef id="conjunto mesa"/>
+        </descendants>
+    
+    </node>
+
+
  <!--Candeeiro-->
     <node id="candeeiro">
 
@@ -890,7 +635,7 @@
         </texture>
 
         <transformations>
-            <translation x="6.5" y="0.0" z="2.5" />     
+            <translation x="6.5" y="0.0" z="6" />     
         </transformations>
 
         <descendants>
@@ -901,7 +646,25 @@
     
     </node>
 
+ <!--Cadeira-->
+    <node id="cadeira2">    
+        <material id="materialChao" />
+        <texture id="woodTexture2">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
 
+        <transformations>
+            <translation x="10.3" y="0.0" z="0" />     
+             <rotation axis="y" angle="180" /> 
+        </transformations>
+
+        <descendants>
+            <noderef id="tampoCadeira"/>
+            <noderef id="pernasCadeira"/>
+            <noderef id="costasCadeira"/>
+        </descendants>
+    
+    </node>
 
 
     <node id="pernasCadeira">            
@@ -1157,7 +920,7 @@
            
         </transformations>
 
-        <animationref id="doorAnimation" />
+   
       
 
 		<descendants>
@@ -1177,31 +940,16 @@
             </texture>
         <transformations>
            
-           <translation x="8" y="-0.7" z="4.5" />
-          <rotation axis="x" angle="-90" />
-          <scale sx="3." sy="3" sz="3" />
+           <translation x="10" y="0.01" z="10" />
+        
+          <scale sx="14" sy="14" sz="14" />
           
            
         </transformations>
 
 		<descendants>
-            <leaf type="patch" npointsU="3" npointsV="4" npartsU="15" npartsV="15">
-                <controlpoint x="-2.0" y="-1" z="0.5" />
-                <controlpoint x="-2.5"  y="1" z="0" />
-                <controlpoint x="-2"  y="1" z="0.5" />
-                <controlpoint x="-2" y="1.3" z="0.5" />
-
-                <controlpoint x="0.0"  y="-2" z="0" />
-                <controlpoint x="-0.5"  y="0" z="0.5" />
-                <controlpoint x="-0.5" y="1" z="1" />
-                <controlpoint x="0.0"  y="1" z="0" />
-
-
-                <controlpoint x="2"  y="-1" z="0.5" />
-                <controlpoint x="2.0" y="0" z="0.5" />
-                <controlpoint x="2.0"  y="1" z="0" />
-                <controlpoint x="2.0"  y="1" z="0.5" />
-            </leaf> 
+            <leaf type="plane" npartsU="5" npartsV="5"/>
+        
 		
 		</descendants>
 
@@ -1385,6 +1133,25 @@
 		</node>
 
 
+        <node id="piece">
+			 <material id="orange" />
+            <texture id="clear">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+        <!-- <translation x="0.0" y="1.0" z="1.0" />-->
+                <!-- <scale sx="1.0" sy="2.0" sz="2.0"/> -->
+                <rotation axis="x" angle="-90" /> 
+            </transformations>
+
+
+            <descendants>
+                <leaf type="cylinder" height="0.2
+                " topRadius="0.3" bottomRadius="0.3" stacks="8" slices="16"/>
+            </descendants>
+		</node>
+
 
 
  <!--Pizza -->
@@ -1462,7 +1229,6 @@
             </transformations>
 
 
-            <animationref id="cortinaEAnimation" />
             <descendants>
                 
             <leaf type="patch" npointsU="2" npointsV="4" npartsU="15" npartsV="15">
@@ -1496,7 +1262,6 @@
              <scale sx="0.5" sy="0.2" sz="1.7" /> 
             </transformations>
 
-            <animationref id="cortinaDAnimation" />
 
             <descendants>
                 

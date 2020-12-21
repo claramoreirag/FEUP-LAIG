@@ -1030,8 +1030,7 @@ class MySceneGraph {
                     let leaf = new Leaf(this.scene,type,args,afs,aft);
 
                     if(type=="spriteanim")
-                        this.spriteAnimations.push(leaf.leaf); //maybe doable without this if statement
-
+                        this.spriteAnimations.push(leaf.leaf);
                     fatherNode.addEdge(leaf);
                 }
             }
