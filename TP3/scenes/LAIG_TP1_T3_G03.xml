@@ -111,24 +111,24 @@
 
         <material id="orange">
             <shininess value="1" />
-            <ambient r="1.0" g="0.47" b="0.0" a="1.0" />
-            <diffuse r="1.0" g="0.47" b="0.0" a="1.0" />
+            <ambient r=".40" g="0.15" b="0.0" a=".5" />
+            <diffuse r=".80" g="0.30" b="0.0" a=".5" />
+            <specular r="0.0" g="0.0" b="0.0" a=".5" />
+            <emissive r="0" g="0" b="0" a="0" />
+        </material>
+
+         <material id="purple">
+            <shininess value="1" />
+            <ambient r=".30" g="0" b="0.40" a="1.0" />
+            <diffuse r=".30" g="0" b="0.40" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r="0" g="0" b="0" a="0" />
         </material>
 
-         <material id="green">
+        <material id="green">
             <shininess value="1" />
-            <ambient r="1.0" g="0.47" b="0.0" a="1.0" />
-            <diffuse r="1.0" g="0.47" b="0.0" a="1.0" />
-            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
-            <emissive r="0" g="0" b="0" a="0" />
-        </material>
-
-        <material id="purple">
-            <shininess value="1" />
-            <ambient r="1.0" g="0.47" b="0.0" a="1.0" />
-            <diffuse r="1.0" g="0.47" b="0.0" a="1.0" />
+            <ambient r=".0" g="0.20" b="0.0" a="1.0" />
+            <diffuse r=".0" g="0.47" b="0.0" a="1.0" />
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r="0" g="0" b="0" a="0" />
         </material>
@@ -167,7 +167,27 @@
             </texture>
 
             <transformations>
-                <scale sx="0.5" sy="0.5" sz="0.5" />
+                 <scale sx="0.5" sy="0.5" sz="0.5" /> 
+            </transformations>
+            
+            <descendants>
+            <noderef id="sala" />
+            <noderef id="board"/>
+          
+            
+                
+            </descendants>
+        </node> 
+
+<node id="sala">
+            <material id="null" />
+            <texture id="null">  
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+
+            <transformations>
+                <translation x="-4" y="-1.2" z="-4"/>
+                <scale sx="1.4" sy="1.4" sz="1.4" />
             </transformations>
             
             <descendants>
@@ -177,14 +197,11 @@
             <noderef id="tapete"/>
             <noderef id="portaAberta"/>
             <noderef id="cortina"/>
-             <noderef id="vaso"/>
+            <noderef id="vaso"/>
             <noderef id="janela"/>
             <noderef id="candeeiro"/>
             <noderef id="text"/>
-            <noderef id="board"/>
           
-            
-                
             </descendants>
         </node> 
 
@@ -204,7 +221,7 @@
          
 
             <descendants>
-                <leaf type="spritetext" text="Study Room"/>
+                <leaf type="spritetext" text="Game Room"/>
             </descendants>
         </node>
 
@@ -221,7 +238,7 @@
         <descendants>
             <noderef id="mesa" />
            
-            <noderef id= "piece"/>
+            <!-- <noderef id= "piece"/> -->
         
         
         </descendants>
@@ -236,7 +253,7 @@
 
         <transformations>
             <translation x="5" y="0" z="0.1" />
-            <scale sx="1.2" sy="1" sz="2" />
+            <scale sx="1.6" sy="1" sz="2" />
         </transformations>
         <descendants>
             <noderef id="pernasMesa" />
@@ -274,6 +291,24 @@
     <node id="board">            
         <material id="null" />
 
+        <texture id="clear">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+           
+        </transformations>
+
+
+        <descendants>
+            <noderef id="boardSurface"/>
+       
+        </descendants>
+    </node>
+
+    <node id="boardSurface">            
+        <material id="null" />
+
         <texture id="board">
             <amplification afs="1.0" aft="1.0" />
         </texture>
@@ -287,7 +322,7 @@
 
 
         <descendants>
-           
+             
             <leaf type="plane" npartsU="5" npartsV="5"/>
         </descendants>
     </node>
@@ -1140,15 +1175,14 @@
             </texture>
 
             <transformations>
-        <!-- <translation x="0.0" y="1.0" z="1.0" />-->
+                <!-- <translation x="10.0" y="5.0" z="10.0" /> -->
                 <!-- <scale sx="1.0" sy="2.0" sz="2.0"/> -->
-                <rotation axis="x" angle="-90" /> 
+                 <rotation axis="x" angle="-90" />  
             </transformations>
 
 
             <descendants>
-                <leaf type="cylinder" height="0.2
-                " topRadius="0.3" bottomRadius="0.3" stacks="8" slices="16"/>
+                <leaf type="piece" />
             </descendants>
 		</node>
 

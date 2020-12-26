@@ -18,7 +18,7 @@ class XMLscene extends CGFscene {
      */
     init(application) {
         super.init(application);
-
+        this.gameOrchestrator= new MyGameOrchestrator(this);
         this.sceneInited = false;
 
       
@@ -104,13 +104,14 @@ initsceneCameras(){
 
         this.setGlobalAmbientLight(...this.graph.ambient);
         this.sceneInited = true;
-        
-        
         this.interface.addCamerasFolder();
         this.interface.addLightsFolder();
         
         this.initLights();
         this.initsceneCameras();
+        console.log(this.gameOrchestrator);
+        this.gameOrchestrator.load();
+       
     }
 
     /**
@@ -143,6 +144,14 @@ initsceneCameras(){
 
             // Displays the scene (MySceneGraph function).
             this.graph.displayScene();
+            this.gameOrchestrator.display();
+            //let piece=new MyPiece(this,"pieceOrange","purple");
+            //let cell =new MyCell(this,1,1,10,10);
+            //piece.setholdingCell(cell);
+            //piece.display();
+            //let b =new GameBoard(this);
+            //b.display();
+
         }
         else
         {

@@ -67,15 +67,21 @@ class Graph{
 class Node{
     constructor(id){
         this.id=id;
+        console.log('id:'+ id);
         this.material=null;
+       
+        
         this.texture=null;
         this.transformations=mat4.create(); //final transformation matrix after all multiplications
+       
         this.descendants=[];
+       
         this.visited = false;
         this.animation=null;
         mat4.identity(this.transformations);
     }
 
+ 
     getID(){
         return this.id;
     }
@@ -147,14 +153,17 @@ class Node{
         
         let material = this.material; 
         if(material == null){
+
             material = materialStack.pop();
             materialStack.push(material);
         }
         materialStack.push(material);
 
         let texture = this.texture;
+       
         if(texture == null){
             texture = textureStack.pop();
+           // if(this.id=="OrangePiece1")console.log(texture);
             textureStack.push(texture);
         }
         textureStack.push(texture);
@@ -208,6 +217,8 @@ class Leaf extends Node{
                 return new MySpriteAnimation(scene,args[0],args[1],args[2],args[3]);
             case "defbarrel":
                 return new Defbarrel(scene,args[0],args[1],args[2], args[3], args[4]);
+            case "piece":
+                return new Piece(scene);
             }
 
     }
