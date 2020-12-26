@@ -11,7 +11,7 @@ constructor(scene, nodeId, material) {
 
 setholdingCell(tile){
     this.holdingCell=tile;
-    this.node.addTransformation("translation",[this.holdingCell.x,0,this.holdingCell.z]);
+    this.node.addTransformation("translation",[this.holdingCell.x,this.holdingCell.y,this.holdingCell.z]);
 }
 unsetholdingCell(){
     this.holdingCell = null;

@@ -2,7 +2,7 @@
  * MyTile
  */
 class MyCell extends CGFobject {
-	constructor(scene, line,column,x,z, aux) {
+	constructor(scene, line,column,x,y,z, aux) {
         super(scene);
         this.piece = null;
         this.line=line;
@@ -10,6 +10,7 @@ class MyCell extends CGFobject {
         this.aux=aux;
         this.x=x;
         this.z=z;
+        this.y=y;
         if (aux)
             this.selectable=false;
         else
