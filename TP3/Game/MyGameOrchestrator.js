@@ -4,7 +4,7 @@
 class MyGameOrchestrator extends CGFobject {
 	constructor(scene) {
         super(scene);
-        var filename=getUrlVars()['file'] ||"LAIG_TP1_T3_G03.xml";
+        var filename=getUrlVars()['file'] ||"park.xml";
         this.graph = new MySceneGraph(filename, scene);
         this.gameboard = new MyGameboard(scene);
 
