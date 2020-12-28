@@ -19,6 +19,8 @@ class XMLscene extends CGFscene {
     init(application) {
         super.init(application);
 
+        // enable picking
+
         this.sceneInited = false;
 
       
@@ -41,8 +43,25 @@ class XMLscene extends CGFscene {
         this.loadingProgress=0;
 
         this.defaultAppearance=new CGFappearance(this);
-     
+
+        this.setPickEnabled(true);
+
     }
+
+    logPicking() {
+		if (this.pickMode == false) {
+			if (this.pickResults != null && this.pickResults.length > 0) {
+				for (var i = 0; i < this.pickResults.length; i++) {
+					var obj = this.pickResults[i][0];
+					if (obj) {
+						var customId = this.pickResults[i][1];
+						console.log("Picked object: " + obj + ", with pick id " + customId);						
+					}
+				}
+				this.pickResults.splice(0, this.pickResults.length);
+			}
+		}
+	}
 
     
     /**
@@ -117,6 +136,8 @@ initsceneCameras(){
      * Displays the scene.
      */
     display() {
+        this.logPicking();
+        this.clearPickRegistration();
         // ---- BEGIN Background, camera and axis setup
 
         // Clear image and depth buffer everytime we update the scene
@@ -193,6 +214,5 @@ initsceneCameras(){
         this.camera = this.graph.views[this.selectedCamera];
         this.interface.setActiveCamera(this.camera);
     }
-
    
 }
