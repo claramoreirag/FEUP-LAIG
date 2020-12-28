@@ -1025,6 +1025,8 @@ class MySceneGraph {
                         case "defbarrel":
                             args = this.parseBarrel(primitive);
                             break;
+                        case "piece":
+                            args = [];
                     }
 
                     let leaf = new Leaf(this.scene,type,args,afs,aft);
