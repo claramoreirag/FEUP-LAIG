@@ -54,7 +54,8 @@
 
         <light id="Light1">            <!-- light identifier -->
             <enable value="1" />
-            <!-- enable/disable -->
+
+			U
             <position x="4" y="2" z="1" w="1.0" /><!-- light position; w=1: point light; w=0: directional light -->
             <ambient r="0." g="0." b="0." a="1.0" />                   <!-- ambient component -->
             <diffuse r=".5" g=".5" b=".5" a="1.0" />             <!-- diffuse component -->
@@ -971,50 +972,6 @@
 
 
 
-		<!--Porta-->
-		<node id="tapete">
-
-            <material id="null" />
-            <texture id="rug">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-        <transformations>
-           
-           <translation x="10" y="0.01" z="10" />
-        
-          <scale sx="14" sy="14" sz="14" />
-          
-           
-        </transformations>
-
-		<descendants>
-            <leaf type="plane" npartsU="5" npartsV="5"/>
-        
-		
-		</descendants>
-
-		</node>
-
-<!--Janela-->
-		<node id="janela">
-
-            <material id="null" />
-            <texture id="windowTexture">
-                <amplification afs="9" aft="6" />
-            </texture>
-
-       
-            <transformations>
-                <translation x="0.05" y="13" z="10"/>
-                <scale sx="1" sy="8" sz="11" />
-                 <rotation axis="x" angle="-90"/>
-                <rotation axis="z" angle="-90"/>
-            </transformations>
-
-            <descendants>
-                 <leaf type="plane" npartsU="5" npartsV="5" />
-            </descendants>
-		</node>
 
 	 	<!--teto-->
 		<node id="teto">
@@ -1320,24 +1277,6 @@
             </descendants>
 		</node>
 
-
-          <node id="poster2">
-			 <material id="null" />
-            <texture id="poster">
-                <amplification afs="1" aft="0.1" />
-            </texture>
-
-
-            <transformations>
-                <translation x="0.05" y="0.075" z="0.01"/>
-                <rotation axis="x" angle="90"/>
-                <scale sx="0.4" sy="1" sz="0.6" />
-            </transformations>
-
-            <descendants>
-                 <leaf type="plane" npartsU="5" npartsV="5" />
-            </descendants>
-		</node>
         
         <node id="vaso">
 			 <material id="null" />
