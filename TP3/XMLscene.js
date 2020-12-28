@@ -145,8 +145,8 @@ initsceneCameras(){
             // Displays the scene (MySceneGraph function).
             //this.graph.displayScene();
             this.gameOrchestrator.display();
-            let button = new MyButton(this,"hello","orange","rug");
-            button.display();
+            //let button = new MyButton(this,"hello","orange","rug");
+            //button.display();
             //let text=new MySpriteText(this,"hello");
             //text.display();
         }
