@@ -14,6 +14,7 @@ setholdingCell(tile){
     this.node.addTransformation("translation",[this.holdingCell.x,this.holdingCell.y,this.holdingCell.z]);
 }
 unsetholdingCell(){
+    this.node.addTransformation("translation",[-this.holdingCell.x,-this.holdingCell.y,-this.holdingCell.z]);
     this.holdingCell = null;
 }
 

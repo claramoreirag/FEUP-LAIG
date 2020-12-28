@@ -4,15 +4,20 @@
         <root id="root" />
        
     </initials>
-    <views default="CameraFront">
+    <views default="Up view">
       
          <perspective id="CameraSide" near="0.1" far="500" angle="45">
             <from x="-2" y="10" z="20" />
             <to x="10" y="2" z="5" />
         </perspective>
-  <perspective id="CameraFront" near="0.1" far="500" angle="45">
+        <perspective id="CameraFront" near="0.1" far="500" angle="45">
             <from x="17" y="8" z="24" />
             <to x="11" y="2" z="-5" />
+        </perspective>
+
+          <perspective id="Up view" near="0.1" far="500" angle="45">
+            <from x="5" y="15" z="5" />
+            <to x="5" y="5" z="6" />
         </perspective>
 
         <ortho id="ZoomOrtho" near="0.1" far="200" left="-1" right="10" top="10" bottom="-0.2">
@@ -160,8 +165,6 @@
             <noderef id="sala" />
             <noderef id="board"/>
           
-            
-                
             </descendants>
         </node> 
 
@@ -203,9 +206,6 @@
         <descendants>
             <noderef id="mesa" />
            
-            <!-- <noderef id= "piece"/> -->
-        
-        
         </descendants>
     </node>
 
@@ -1040,7 +1040,7 @@
         </transformations>
 
         <descendants>
-                <leaf type="cylinder" height="7" topRadius="0.40" bottomRadius="0.45" stacks="8" slices="16"/>
+                <leaf type="cylinder" height="7" topRadius="0.40" bottomRadius="0.55" stacks="8" slices="16"/>
         </descendants>
     </node>
 
@@ -1105,9 +1105,6 @@
                     <leaf type="sphere" radius="0.9" slices="20" stacks="20"/>
             </descendants>
 		</node>
-
-
-
 
 
  
