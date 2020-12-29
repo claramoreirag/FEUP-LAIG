@@ -5,7 +5,6 @@ class Piece extends CGFobject {
 	constructor(scene) {
         super(scene);
         this.cilinder= new MyCylinder(scene,0.15,0.25,0.25,4,16);
-      
         
 	}
    

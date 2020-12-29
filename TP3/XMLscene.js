@@ -135,8 +135,8 @@ initsceneCameras(){
      * Displays the scene.
      */
     display() {
-        this.logPicking();
-        this.clearPickRegistration();
+        //this.logPicking();
+        //this.clearPickRegistration();
         // ---- BEGIN Background, camera and axis setup
 
         // Clear image and depth buffer everytime we update the scene
@@ -201,6 +201,7 @@ initsceneCameras(){
     }
 
     update(t){
+        //this.gameOrchestrator.changeTheme();
         this.updateAnimations(t/1000);
     }
 
