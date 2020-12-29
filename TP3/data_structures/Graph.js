@@ -228,139 +228,139 @@ class Leaf extends Node{
         if(this.isSet()){
             let material = materialStack.pop();
             let texture = textureStack.pop();
-
+            
 			//picking for each hexagon in board
-			if(this.type=="plane"){
-				let d = -1/12; //space between 2 hexagons
-				let h = d+0.02; //space between 2 lines
-				let square = new Plane(scene,1,1);
-				let lineLengths = [8,9,10,11,12]; //[5,8,9,10,11,12,11,12,11,10,9,8,5];
-				let k=1;
+			// if(this.type=="plane"){
+			// 	let d = -1/12; //space between 2 hexagons
+			// 	let h = d+0.02; //space between 2 lines
+			// 	let square = new Plane(scene,1,1);
+			// 	let lineLengths = [8,9,10,11,12]; //[5,8,9,10,11,12,11,12,11,10,9,8,5];
+			// 	let k=1;
 
-				scene.pushMatrix();
-				scene.translate(0.5,0,0.5); //translate to 0,0
-				scene.translate(4*d,0.001,d-0.033); //translate to first hexagon
+			// 	scene.pushMatrix();
+			// 	scene.translate(0.5,0,0.5); //translate to 0,0
+			// 	scene.translate(4*d,0.001,d-0.033); //translate to first hexagon
 
-				scene.pushMatrix();
-				scene.scale(0.05,0.05,0.05);
-				scene.registerForPick(k,square);
-				square.display();
-				scene.popMatrix();
+			// 	scene.pushMatrix();
+			// 	scene.scale(0.05,0.05,0.05);
+			// 	scene.registerForPick(k,square);
+			// 	square.display();
+			// 	scene.popMatrix();
 
-				//line1
-				for(let i=1;i<5;i++){
-					scene.translate(d,0,0);
-					scene.pushMatrix();
-					scene.scale(0.05,0.05,0.05);
-					scene.registerForPick(i+k,square);
-					square.display();
-					scene.popMatrix();
-				}
-				k+=5;
+			// 	//line1
+			// 	for(let i=1;i<5;i++){
+			// 		scene.translate(d,0,0);
+			// 		scene.pushMatrix();
+			// 		scene.scale(0.05,0.05,0.05);
+			// 		scene.registerForPick(i+k,square);
+			// 		square.display();
+			// 		scene.popMatrix();
+			// 	}
+			// 	k+=5;
 
-				//lines 2 to 6
-				scene.translate(0,0,h);
-				scene.translate(-5*d-d/2,0,0);
+			// 	//lines 2 to 6
+			// 	scene.translate(0,0,h);
+			// 	scene.translate(-5*d-d/2,0,0);
 
-				for(let len of lineLengths){
-					scene.pushMatrix();
-					scene.scale(0.05,0.05,0.05);
-					scene.registerForPick(k,square);
-					square.display();
-					scene.popMatrix();
+			// 	for(let len of lineLengths){
+			// 		scene.pushMatrix();
+			// 		scene.scale(0.05,0.05,0.05);
+			// 		scene.registerForPick(k,square);
+			// 		square.display();
+			// 		scene.popMatrix();
 
-					for(let i=1;i<len;i++){
-						scene.translate(d,0,0);
-						scene.pushMatrix();
-						scene.scale(0.05,0.05,0.05);
-						scene.registerForPick(k+i,square);
-						square.display();
-						scene.popMatrix();
-					}
+			// 		for(let i=1;i<len;i++){
+			// 			scene.translate(d,0,0);
+			// 			scene.pushMatrix();
+			// 			scene.scale(0.05,0.05,0.05);
+			// 			scene.registerForPick(k+i,square);
+			// 			square.display();
+			// 			scene.popMatrix();
+			// 		}
 
-					k+=len;
-					if(len!=12){
-						scene.translate(0,0,h);
-						scene.translate(-len*d+d/2,0,0);
-					}
-				}	
+			// 		k+=len;
+			// 		if(len!=12){
+			// 			scene.translate(0,0,h);
+			// 			scene.translate(-len*d+d/2,0,0);
+			// 		}
+			// 	}	
 
-				//line 7
-				scene.translate(0,0,h);
-				scene.translate(-11*d+d/2,0,0);
+			// 	//line 7
+			// 	scene.translate(0,0,h);
+			// 	scene.translate(-11*d+d/2,0,0);
 
-				scene.pushMatrix();
-				scene.scale(0.05,0.05,0.05);
-				scene.registerForPick(k,square);
-				square.display();
-				scene.popMatrix();
-				k++;
+			// 	scene.pushMatrix();
+			// 	scene.scale(0.05,0.05,0.05);
+			// 	scene.registerForPick(k,square);
+			// 	square.display();
+			// 	scene.popMatrix();
+			// 	k++;
 				
 
-				for(let i=1;i<11;i++){
-					scene.translate(d,0,0);
-					scene.pushMatrix();
-					scene.scale(0.05,0.05,0.05);
-					scene.registerForPick(i+k,square);
-					square.display();
-					scene.popMatrix();
-				}
-				k+=11;
+			// 	for(let i=1;i<11;i++){
+			// 		scene.translate(d,0,0);
+			// 		scene.pushMatrix();
+			// 		scene.scale(0.05,0.05,0.05);
+			// 		scene.registerForPick(i+k,square);
+			// 		square.display();
+			// 		scene.popMatrix();
+			// 	}
+			// 	k+=11;
 
 
-				//line 8 to 12
-				scene.translate(0,0,h);
-				scene.translate(-10*d-d/2,0,0);
+			// 	//line 8 to 12
+			// 	scene.translate(0,0,h);
+			// 	scene.translate(-10*d-d/2,0,0);
 
-				for(let len of lineLengths.reverse()){
-					scene.pushMatrix();
-					scene.scale(0.05,0.05,0.05);
-					scene.registerForPick(k,square);
-					square.display();
-					scene.popMatrix();
+			// 	for(let len of lineLengths.reverse()){
+			// 		scene.pushMatrix();
+			// 		scene.scale(0.05,0.05,0.05);
+			// 		scene.registerForPick(k,square);
+			// 		square.display();
+			// 		scene.popMatrix();
 
-					for(let i=1;i<len;i++){
-						scene.translate(d,0,0);
-						scene.pushMatrix();
-						scene.scale(0.05,0.05,0.05);
-						scene.registerForPick(k+i,square);
-						square.display();
-						scene.popMatrix();
-					}
+			// 		for(let i=1;i<len;i++){
+			// 			scene.translate(d,0,0);
+			// 			scene.pushMatrix();
+			// 			scene.scale(0.05,0.05,0.05);
+			// 			scene.registerForPick(k+i,square);
+			// 			square.display();
+			// 			scene.popMatrix();
+			// 		}
 
-					k+=len;
-					if(len!=8){
-						scene.translate(0,0,h);
-						scene.translate(-len*d+d+d/2,0,0);
-					}
-				}
+			// 		k+=len;
+			// 		if(len!=8){
+			// 			scene.translate(0,0,h);
+			// 			scene.translate(-len*d+d+d/2,0,0);
+			// 		}
+			// 	}
 
 
-				//line 13
-				scene.translate(0,0,h);
-				scene.translate(-5*d-d/2,0,0);
+			// 	//line 13
+			// 	scene.translate(0,0,h);
+			// 	scene.translate(-5*d-d/2,0,0);
 
-				scene.pushMatrix();
-				scene.scale(0.05,0.05,0.05);
-				scene.registerForPick(k,square);
-				square.display();
-				scene.popMatrix();
+			// 	scene.pushMatrix();
+			// 	scene.scale(0.05,0.05,0.05);
+			// 	scene.registerForPick(k,square);
+			// 	square.display();
+			// 	scene.popMatrix();
 
 				
-				for(let i=1;i<5;i++){
-					scene.translate(d,0,0);
-					scene.pushMatrix();
-					scene.scale(0.05,0.05,0.05);
-					scene.registerForPick(i+k,square);
-					square.display();
-					scene.popMatrix();
-				}
+			// 	for(let i=1;i<5;i++){
+			// 		scene.translate(d,0,0);
+			// 		scene.pushMatrix();
+			// 		scene.scale(0.05,0.05,0.05);
+			// 		scene.registerForPick(i+k,square);
+			// 		square.display();
+			// 		scene.popMatrix();
+			// 	}
 
-				scene.clearPickRegistration();
+			// 	scene.clearPickRegistration();
 
-				scene.popMatrix();
-			}
-
+			// 	scene.popMatrix();
+			// }
+            
             if(texture.getID()!="clear")
                 texture.apply();
             else

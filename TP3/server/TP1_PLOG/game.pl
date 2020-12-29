@@ -302,7 +302,7 @@ checkBlockWin(Player,Board,Wins,PlayerAlliances,Color):-
 /*Checks to see if player blocked the color orange*/
 checkBlockOrangeWin(Board,OrangeWin,OrangeAlly):-
     OrangeWin=:= -1,
-    Alliances=['O ','  ',OrangeAlly],
+    Alliances=['O',' ',OrangeAlly],
     StartCells=[[9,0],[13,0],[7,0],[11,0],[15,0]],
     EndCells=[[9,6],[13,6],[7,6],[11,6],[15,6]],
     getPaths(StartCells,EndCells,PossiblePaths),
@@ -311,7 +311,7 @@ checkBlockOrangeWin(Board,OrangeWin,OrangeAlly):-
 /*Checks to see if player blocked the color purple*/
 checkBlockPurpleWin(Board,PurpleWin,PurpleAlly):-
     PurpleWin=:= -1,
-    Alliances=['P ','  ',PurpleAlly],
+    Alliances=['P',' ',PurpleAlly],
     StartCells=[[1,0],[3,0],[0,0],[2,0],[4,0]],
     EndCells=[[19,4],[21,2],[18,5],[20,3],[22,1]],
     getPaths(StartCells,EndCells,PossiblePaths),
@@ -320,7 +320,7 @@ checkBlockPurpleWin(Board,PurpleWin,PurpleAlly):-
 /*Checks to see if player blocked the color green*/
 checkBlockGreenWin(Board,GreenWin,GreenAlly):-
     GreenWin=:= -1,
-    Alliances=['G ','  ',GreenAlly],
+    Alliances=['G',' ',GreenAlly],
     StartCells=[[19,0],[21,0],[18,0],[20,0],[22,0]],
     EndCells=[[1,2],[3,4],[0,1],[2,3],[4,5]],
     getPaths(StartCells,EndCells,PossiblePaths),

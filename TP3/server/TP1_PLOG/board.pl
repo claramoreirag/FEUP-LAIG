@@ -335,7 +335,7 @@ incrementValue(X,Y):-
     Y is X+1.
 
 /* Matches color code with color symbol */
-symbol(0,'  ').
-symbol(1,'O ').
-symbol(2,'P ').
-symbol(3,'G ').
+symbol(0,' ').
+symbol(1,'O').
+symbol(2,'P').
+symbol(3,'G').
