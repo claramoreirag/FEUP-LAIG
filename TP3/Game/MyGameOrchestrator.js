@@ -20,6 +20,10 @@ class MyGameOrchestrator extends CGFobject {
 
     display(){
         this.graph.displayScene();
+        
+        //example of request to prolog
+        let prolog = new MyPrologInterface();
+        prolog.requestCheckConnection();
     }
     
    

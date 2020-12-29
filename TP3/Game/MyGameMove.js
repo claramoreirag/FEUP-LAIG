@@ -1,7 +1,7 @@
 /**
  * MyGameMove
  */
-class MyGameMove extends CGFObject{
+class MyGameMove extends CGFobject{
   constructor(scene,piece,origin,dest,gameboard){
     super(scene);
     this.movedPiece = piece;
