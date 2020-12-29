@@ -19,7 +19,7 @@ class MyStack extends CGFobject {
     
     display(){
         this.scene.pushMatrix();this.scene.translate(this.x,this.y,this.z);
-        this.scene.scale(1,this.pieces.length,1);
+        this.scene.scale(1.1,this.pieces.length*1.1,1.1);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.node.display(this.scene,[],[]);
         this.scene.popMatrix();

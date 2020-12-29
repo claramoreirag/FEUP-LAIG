@@ -26,8 +26,12 @@ class MyGameOrchestrator extends CGFobject {
         this.managePick();
 
         this.gameboard.display();
-        this.scene.clearPickRegistration();
+       
         this.graph.displayScene();
+        
+        //example of request to prolog
+        let prolog = new MyPrologInterface();
+        //prolog.requestCheckConnection();
     }
     
     managePick() {

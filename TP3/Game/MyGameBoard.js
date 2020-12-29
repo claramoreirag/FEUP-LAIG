@@ -147,7 +147,7 @@ class MyGameboard extends CGFobject {
                 this.scene.registerForPick(numberRegistered + 1, this.tiles[i]);
                 this.tiles[i].display();
                 numberRegistered++;
-               
+                this.scene.clearPickRegistration();
             }
             else
             this.tiles[i].display();
@@ -156,6 +156,7 @@ class MyGameboard extends CGFobject {
             this.scene.registerForPick(numberRegistered + 1, this.stacks[i]);
             this.stacks[i].display();
             numberRegistered++;
+            this.scene.clearPickRegistration();
         }
         this.scene.popMatrix();
     }
