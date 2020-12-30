@@ -44,7 +44,7 @@ class MyGameOrchestrator extends CGFobject {
 
 
     orquestrate() {
-        console.log("state: " + this.state);
+        // console.log("state: " + this.state);
         switch (this.state) {
             case "make player move":
                 this.makeMove();
@@ -148,7 +148,7 @@ class MyGameOrchestrator extends CGFobject {
 
         //TODO animation
         
-        this.state = "animation";
+        this.state = "choose piece human";
     }
 
 }
