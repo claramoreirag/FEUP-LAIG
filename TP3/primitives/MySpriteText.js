@@ -33,7 +33,7 @@ class MySpriteText extends MySpriteSheet{
         this.appearance.apply();
 
         for(let i=0;i<this.text.length;i++){
-            this.scene.translate(1,0,0);
+            this.scene.translate(0.75,0,0);
             let pos=this.getCharacterPosition(this.text[i]);
             this.activateCellP(pos);
             this.geometry.display();

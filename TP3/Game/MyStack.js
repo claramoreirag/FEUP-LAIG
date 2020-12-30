@@ -15,6 +15,9 @@ class MyStack extends CGFobject {
         this.node.addEdge(new Leaf(this.scene,"cylinder",[0.15,0.25,0.25,4,16],1.0,1.0));
     }
     
+    getTopPiece(){
+        return this.pieces.pop();
+    }
     
     
     display(){

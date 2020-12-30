@@ -104,7 +104,7 @@ class MyGameboard extends CGFobject {
 
     addPieceToCell(piece, cell){
         cell.setPiece(piece);
-        piece.setHoldingCell(cell);
+        piece.setholdingCell(cell);
     }
 
     removePieceFromCell(cell){
@@ -113,7 +113,7 @@ class MyGameboard extends CGFobject {
     }
 
     removeCellFromPiece(piece){
-        piece.unsetHoldingCell();
+        piece.unsetholdingCell();
         
     }
 
@@ -121,13 +121,10 @@ class MyGameboard extends CGFobject {
         return cell.getPiece();
     }
 
-    getCellHoldingPiece(piece){
-        return piece.getHoldingCell();
-    }
-
+    
 
     movePiece(piece, destinationCell){
-        let fromCell = this.getCellHoldingPiece(piece);
+        let fromCell = piece.getholdingCell();
         this.removePieceFromCell(fromCell);
         this.addPieceToCell(piece, destinationCell);
     }
@@ -159,5 +156,6 @@ class MyGameboard extends CGFobject {
             this.scene.clearPickRegistration();
         }
         this.scene.popMatrix();
+        return numberRegistered;
     }
 }
