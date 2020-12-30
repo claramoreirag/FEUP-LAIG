@@ -5,12 +5,15 @@ class MyTile extends CGFobject {
 	constructor(scene, line,column,x,y,z, aux,nodeId) {
         super(scene);
         this.piece = null;
-        this.id=nodeId
-        this.node= new Node(nodeId);
+        this.id=nodeId;
+        this.selected=false;
+        //this.node= new Node(nodeId);
+        this.mat = new CGFappearance(this.scene);
+        this.selectmat= this.scene.graph.materialList.getMaterial("materialBranco");
         this.obj=new Plane(this.scene,1,1);
-        this.node.addEdge(new Leaf(this.scene,"plane",[1,1],1.0,1.0));
-        this.node.changeMaterial(scene.graph.materialList.getMaterial("materialBranco"));
-        this.node.changeTexture(new Texture("clear"));
+        //this.node.addEdge(new Leaf(this.scene,"plane",[1,1],1.0,1.0));
+       // this.node.changeMaterial(scene.graph.materialList.getMaterial("materialBranco"));
+        //this.node.changeTexture(new Texture("clear"));
         this.line=line;
         this.column=column;
         this.aux=aux;
@@ -40,11 +43,12 @@ class MyTile extends CGFobject {
     }
 
     display(){
-        let mat = new CGFappearance(this.scene);
+        
         this.scene.pushMatrix();
         this.scene.translate(this.x,this.y,this.z);
         this.scene.scale(0.5,1,0.5);
-        mat.apply();
+        if(this.selected)this.selectmat.apply();
+        else this.mat.apply();
         this.obj.display();
         //this.node.display(this.scene,[],[]);
         this.scene.popMatrix();

@@ -82,7 +82,10 @@ class MyGameOrchestrator extends CGFobject {
 
         //example of request to prolog
         let prolog = new MyPrologInterface();
-        //prolog.requestCheckConnection();
+
+        let gamestate = [[[0,0],[0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0],[0,0]],[42,42,42],[['P','G','O'],['G','O','P']],[-1,0,-1],['Player1','Player2'],1];
+
+        prolog.requestInitial();
     }
 
     managePick() {
@@ -108,6 +111,7 @@ class MyGameOrchestrator extends CGFobject {
             if (this.state == "choose tile human") {
                 console.log("picked tile " + obj.id);
                 this.movetomake.push(obj);
+                obj.selected=true;
                 this.state = "wait confirm";
             }
         }
@@ -121,9 +125,15 @@ class MyGameOrchestrator extends CGFobject {
         }
         if (obj instanceof MyButton) {
             console.log("picked button " + obj.id);
-            if (this.state == "wait confirm") {
-                if (obj.id == "Confirm") {
+            if (obj.id == "Confirm") {
+                if (this.state == "wait confirm") {
                     this.state = "make player move";
+                }
+            }else if (obj.id=="Remove"){
+                if (this.state == "wait confirm" || this.state == "choose tile human"){
+                    if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
+                    this.moveToExecute = [];
+                    this.state = "choose piece human";
                 }
             }
         }
@@ -134,7 +144,7 @@ class MyGameOrchestrator extends CGFobject {
     makeMove() {
 
         let destTile = this.movetomake[1];
-        //destTile.selected=false; TODO highlight selection
+        destTile.selected=false; 
         destTile.selectable = false;
         let pieceToMove = this.movetomake[0].getTopPiece();
         let originTile = pieceToMove.getholdingCell();

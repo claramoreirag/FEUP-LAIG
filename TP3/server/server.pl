@@ -143,18 +143,25 @@ moves_to_array([L-C|Rest],[[L,C]|T]):-
 
 moves_to_array([],[]).
 
+playersToStr([P1,P2],PlayerStr):-
+  atom_chars(P1,P1List),
+  atom_chars(P2,P2List),
+  Aux = [['"'],P1List,['"',',','"'],P2List,['"']],
+  append(Aux,L),
+  atom_chars(PlayerStr,L).
+
 %gamestate JSON 
 gamestateJson(Gamestate,JsonGamestate):-
 	Gamestate=[Board,Pecas,Alliances,Wins,Players,Mode],
 	Board_json = '"board"' : Board,
 	Pecas_json = '"pecas"' : Pecas,
-	Alliances_json = '"alliances"' : Alliances,
+	Alliances_json = '"alliances"' : [['"P"','"G"','"O"'],['"G"','"O"','"P"']],
 	Wins_json = '"wins"' : Wins,
+  
+  playersToStr(Players,PlayersStr),
+	Players_json = '"players"' : [PlayersStr],
 
-	Players_json = '"players"' : Players,
 	Mode_json = '"mode"' : Mode,
-
-  write(Gamestate),
 
 	JsonGamestate = { '"gamestate"' : { Board_json, Pecas_json, Alliances_json, Wins_json, Players_json, Mode_json }}.
 
