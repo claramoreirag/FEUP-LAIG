@@ -53,4 +53,10 @@ class MyTile extends CGFobject {
         //this.node.display(this.scene,[],[]);
         this.scene.popMatrix();
     }
+
+    setCoordinates(line,column){
+      this.line = line; 
+      this.column = column;
+      console.log('Coordinates: ' + this.line + ',' + this.column);
+    }
 }

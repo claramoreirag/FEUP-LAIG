@@ -4,6 +4,7 @@ class MyStack extends CGFobject {
         this.holdingCell=null;
         this.nodeId = nodeId;
         this.node= new Node(nodeId);
+        this.color = material;
         
         this.x=x;
         this.y=y;

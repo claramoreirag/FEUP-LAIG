@@ -4,6 +4,7 @@
 class MyPrologInterface{
   constructor() {
     this.port = 8081;
+    this.reply = null;
   }
 
   setPort(port){
@@ -15,6 +16,8 @@ class MyPrologInterface{
     request.onload = requestListener;
 
     let argument=[],func;
+
+    self = this;
 
 
     if(args!=null){
@@ -94,7 +97,8 @@ class MyPrologInterface{
   }
 
   requestMoveBot(gamestate,difficulty){
-    let gs = this.strRequest(gamestate);
+    let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
+    let gs = this.strRequest(g);
     this.sendRequest('choose_move',[gs,difficulty],this.replyMoveBot);
   }
 
@@ -102,36 +106,32 @@ class MyPrologInterface{
     this.sendRequest('quit',[],this.replyQuit);
   }
 
-
   /** Replies */
   replyCheckConnection(data){
-    console.log(data.target.response);
+    this.reply = data.target.response;
   }
-
     
   replyInitial(data){
-    let j = JSON.parse(data.target.response);
-    console.log(j);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyValidMoves(data){
-    let j = JSON.parse(data.target.response);
-    console.log(j.moves);
+    this.reply = JSON.parse(data.target.response);
   }
 
   replyMove(data){
-    console.log(data.target.response);
+    this.reply = JSON.parse(data.target.response);
   }
 
   replyValue(data){
-    console.log(data.target.response);
+    this.reply = JSON.parse(data.target.response);
   }
 
   replyMoveBot(data){
-    console.log(data.target.response);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyQuit(data){
-    console.log(data.target.response);
+    this.reply = data.target.response;
   }
 }

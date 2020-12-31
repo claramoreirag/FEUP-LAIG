@@ -8,12 +8,14 @@ class MyGameOrchestrator extends CGFobject {
         this.graph = new MySceneGraph(filename, scene);
         this.gameboard = new MyGameboard(scene);
         this.gameSequence= new MyGameSequence(scene);
-        this.state = "choose piece human";
+        //this.state = "choose piece human";
+        this.state="request initial gamestate";
         this.player = 1;
         this.movetomake = [];
         //TODO scoreBoard
         //this.scoreboard=
 
+        this.prolog = new MyPrologInterface();
 
     }
 
@@ -48,11 +50,47 @@ class MyGameOrchestrator extends CGFobject {
         switch (this.state) {
             case "make player move":
                 this.makeMove();
+                this.state = "choose bot move";
+                break;
+
+            case "make bot move":
+                if(this.prolog.reply != null){
+                  console.log(this.prolog.reply);
+                  this.makeBotMove(this.prolog.reply);
+                  this.state = "choose piece human";
+                  this.prolog.reply=null;
+                }
+
+                break;
+
+            case "choose bot move":
+                this.prolog.requestMoveBot(this.gamestate,1);
+                this.state = "make bot move"; 
+                break;
+
+            case "start game":
+                this.state = "choose bot move";
+                break;
+                  
+            case "request initial gamestate":
+                this.prolog.requestInitial();
+                this.state = "get initial gamestate";
+                break;
+
+            case "get initial gamestate":
+                if(this.prolog.reply!=null){
+                  this.gamestate = this.prolog.reply.gamestate; 
+                  console.log(this.gamestate);
+                  this.state = "start game";
+                  this.prolog.reply=null;
+                }
                 break;
 
             default:
                 break;
         }
+
+        console.log(this.state);
     }
 
     changeTheme() {
@@ -81,11 +119,11 @@ class MyGameOrchestrator extends CGFobject {
         this.graph.displayScene();
 
         //example of request to prolog
-        let prolog = new MyPrologInterface();
+        /*let prolog = new MyPrologInterface();
 
         let gamestate = [[[0,0],[0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0],[0,0]],[42,42,42],[['P','G','O'],['G','O','P']],[-1,0,-1],['Player1','Player2'],1];
 
-        prolog.requestInitial();
+        prolog.requestInitial();*/
     }
 
     managePick() {
@@ -132,11 +170,27 @@ class MyGameOrchestrator extends CGFobject {
             }else if (obj.id=="Remove"){
                 if (this.state == "wait confirm" || this.state == "choose tile human"){
                     if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
-                    this.moveToExecute = [];
+                    this.movetomake = [];
                     this.state = "choose piece human";
                 }
             }
         }
+    }
+
+    makeBotMove(move){
+      let colors = ['orange', 'purple', 'green'];
+      let line = move[0];
+      let column = move[1];
+      let colorCode = move[2];
+      let color = colors[colorCode-1]
+
+      let tile = this.gameboard.findTile(line,column);
+      let stack = this.gameboard.findStack(color);
+
+      this.movetomake[0] = stack;
+      this.movetomake[1] = tile;
+
+      this.makeMove(); 
     }
 
 

@@ -38,39 +38,175 @@ class MyGameboard extends CGFobject {
         let id=0;
         let lineLengths = [8,9,10,11,12];
 
+        /** Add Tiles to board */
+
         for(let i=0;i<5;i++){
-        this.tiles.push(new MyTile(this.scene,line,i,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
+            this.tiles.push(new MyTile(this.scene,null,null,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
         }
         beginx-=1*xInc;
         for(let len of lineLengths){
-            line++;
             beginx-=xInc/2;
             beginz+=zInc;
             for(let i=0;i<len;i++){
-                this.tiles.push(new MyTile(this.scene,line,i,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
+                this.tiles.push(new MyTile(this.scene,null,null,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
             }
         }
-        line++;
         beginx+=0.5*xInc;beginz+=zInc;
         for(let i=0;i<11;i++){
-            this.tiles.push(new MyTile(this.scene,line,i,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
+            this.tiles.push(new MyTile(this.scene,null,null,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
         }	
         beginx-=1*xInc;
         for(let len of lineLengths.reverse()){
-            line++;
             beginz+=zInc-0.01;
             beginx+=xInc/2;
             for(let i=0;i<len;i++){
-                this.tiles.push(new MyTile(this.scene,line,i,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
+                this.tiles.push(new MyTile(this.scene,null,null,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
             }
         }
         beginx+=1.5*xInc;
         beginz+=zInc;
-        line++;
         for(let i=0;i<5;i++){
-            this.tiles.push(new MyTile(this.scene,line,i,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
+            this.tiles.push(new MyTile(this.scene,null,null,beginx+xInc*i,0.02,beginz,1,"tile"+id.toString()));id++;
         }
+
+        /** Attribute Lines/Columns for tiles */
+        let startLine;
+        let aux1;
+        let aux2;
+        let i=0;
+
+        startLine = 7;
+        for(let a=i;a<i+5;a++){
+          this.tiles[a].setCoordinates(startLine+(a-i)*2,6);
+        }
+        i+=5;
+
+        startLine = 4;
+        for(let a=i;a<i+8;a++){
+          this.tiles[a].setCoordinates(startLine+(a-i)*2,5);
+        }
+        i+=8;
+
+        startLine = 3;
+        aux1 = [3,5,17,19];
+        for(let a=i;a<i+9;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,4);
+          else 
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,5);
+        }
+        i+=9;
+
+        startLine = 2;
+        aux1=[2,20];
+        for(let a=i;a<i+10;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,3);
+          else 
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,4);
+        }
+        i+=10;
         
+        startLine = 1;
+        aux1=[1,21];
+        aux2=[3,5,17,19];
+        for(let a=i;a<i+11;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,2);
+          else if(aux2.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,3);
+          else
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,4);
+        }
+        i+=11;
+
+        startLine = 0;
+        aux1=[0,22];
+        aux2=[2,20];
+        for(let a=i;a<i+12;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,1);
+          else if(aux2.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,2);
+          else
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,3);
+        }
+        i+=12;
+
+        // Middle Column
+        startLine = 1;
+        aux1=[1,21];
+        aux2=[3,5,17,19];
+        for(let a=i;a<i+11;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,1);
+          else if(aux2.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,2);
+          else
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,3);
+        }
+        i+=11;
+
+        startLine = 0;
+        aux1=[0,22];
+        aux2=[2,20];
+        for(let a=i;a<i+12;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,0);
+          else if(aux2.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,1);
+          else
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,2);
+        }
+        i+=12;
+        
+        startLine = 1;
+        aux1=[1,21];
+        aux2=[3,5,17,19];
+        for(let a=i;a<i+11;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,0);
+          else if(aux2.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,1);
+          else
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,2);
+        }
+        i+=11;
+
+        startLine = 2;
+        aux1=[2,20];
+        for(let a=i;a<i+10;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,0);
+          else 
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,1);
+        }
+        i+=10;
+        
+        startLine = 3;
+        aux1 = [3,5,17,19];
+        for(let a=i;a<i+9;a++){
+          if(aux1.includes(startLine+(a-i)*2))
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,0);
+          else 
+            this.tiles[a].setCoordinates(startLine+(a-i)*2,1);
+        }
+        i+=9;
+
+        startLine = 4;
+        for(let a=i;a<i+8;a++){
+          this.tiles[a].setCoordinates(startLine+(a-i)*2,0);
+        }
+        i+=8;
+
+        startLine = 7;
+        for(let a=i;a<i+5;a++){
+          this.tiles[a].setCoordinates(startLine+(a-i)*2,0);
+        }
+        i+=5;
+
+
+
         console.log(this.tiles);
 
         for(let j=1;j<5;j++){
@@ -127,6 +263,22 @@ class MyGameboard extends CGFobject {
         let fromCell = piece.getholdingCell();
         this.removePieceFromCell(fromCell);
         this.addPieceToCell(piece, destinationCell);
+    }
+
+    /** Finds Tile given a line and a column */
+    findTile(line,column){
+      for(let tile of this.tiles){
+        if(tile.line == line && tile.column == column)
+          return tile;
+      }
+    }
+
+    /** Finds Stack given it's pieces color */
+    findStack(color){
+      for(let stack of this.stacks){
+        if(stack.color == color)
+          return stack;
+      }
     }
 
     
