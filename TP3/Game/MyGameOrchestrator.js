@@ -4,7 +4,9 @@
 class MyGameOrchestrator extends CGFobject {
     constructor(scene) {
         super(scene);
-        var filename = getUrlVars()['file'] || "LAIG_TP1_T3_G03.xml";
+        this.themes=["LAIG_TP1_T3_G03.xml","park.xml"];
+        this.currentTheme=0;
+        var filename = getUrlVars()['file'] ||this.themes[0];
         this.graph = new MySceneGraph(filename, scene);
         this.gameboard = new MyGameboard(scene);
         this.gameSequence= new MyGameSequence(scene);
@@ -34,11 +36,11 @@ class MyGameOrchestrator extends CGFobject {
         this.scene.registerForPick(numberPickedObjects++, this.movieButton);
         this.movieButton.display();
         this.scene.translate(1.5, 0, 0);
+        this.scene.registerForPick(numberPickedObjects++, this.cameraButton);
+        this.cameraButton.display();
+        this.scene.translate(1.5, 0, 0);
         this.scene.registerForPick(numberPickedObjects++, this.exitButton);
         this.exitButton.display();
-        this.scene.translate(1.5, 0, 0);
-        //this.scene.registerForPick(numberPickedObjects++, this.cameraButton);
-        // this.cameraButton.display();
         this.scene.popMatrix();
     }
 
@@ -67,9 +69,9 @@ class MyGameOrchestrator extends CGFobject {
     }
 
     changeTheme() {
-
-        this.graph = new MySceneGraph("park.xml", this.scene);
+        this.currentTheme=((this.currentTheme+1) % 2) ;
         this.scene.sceneInited = false;
+        this.graph = new MySceneGraph(this.themes[this.currentTheme], this.scene);
     }
 
     load() {
@@ -79,31 +81,33 @@ class MyGameOrchestrator extends CGFobject {
         this.movieButton = new MyButton(this.scene, "Movie", "orange", "poster");
         this.confirmButton = new MyButton(this.scene, "Confirm", "orange", "curtains");
         this.removeButton = new MyButton(this.scene, "Remove", "orange", "grass");
-
+        this.cameraButton = new MyButton(this.scene, "Camera","purple","grass");
         this.gameboard.load();
     }
 
     display() {
-        this.orquestrate();
-        this.managePick();
-        this.graph.displayScene();
-        let numberPickedObjects=1;
-        if(this.state == "animation"){
-            this.gameboard.display(false, this.animator.pieces);
-            this.animator.display();
-            numberPickedObjects++;
-            this.displayButtons(numberPickedObjects);
-        }
-        else{
-        let numberpicked = this.gameboard.display();
-        this.displayButtons(numberpicked);
-        }
+        if(this.scene.sceneInited){
+            this.orquestrate();
+            this.managePick();
+            this.graph.displayScene();
+            let numberPickedObjects=1;
+            if(this.state == "animation"){
+                this.gameboard.display(false, this.animator.pieces);
+                this.animator.display();
+                numberPickedObjects++;
+                this.displayButtons(numberPickedObjects);
+            }
+            else{
+            let numberpicked = this.gameboard.display();
+            this.displayButtons(numberpicked);
+            }
         // //example of request to prolog
         // let prolog = new MyPrologInterface();
 
         // let gamestate = [[[0,0],[0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0],[0,0]],[42,42,42],[['P','G','O'],['G','O','P']],[-1,0,-1],['Player1','Player2'],1];
 
         // prolog.requestInitial();
+        }
     }
 
 
@@ -161,6 +165,12 @@ class MyGameOrchestrator extends CGFobject {
                     this.movetomake = [];
                     this.state = "choose piece human";
                 }
+            }
+            else if (obj.id=="Exit"){
+                //if (this.state == "wait confirm" || this.state == "choose tile human"){
+                this.scene.hasChangedgraph=true;
+                   this.changeTheme();
+                
             }
         }
     }

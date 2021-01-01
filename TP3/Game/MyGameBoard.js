@@ -150,10 +150,12 @@ class MyGameboard extends CGFobject {
             this.tiles[i].display();
         }
         for(let i=0; i<this.stacks.length;i++){
+            if(this.stacks[i].pieces.length!=0){
             this.scene.registerForPick(numberRegistered + 1, this.stacks[i]);
             this.stacks[i].display();
             numberRegistered++;
             this.scene.clearPickRegistration();
+            }
         }
         this.scene.popMatrix();
         return numberRegistered;

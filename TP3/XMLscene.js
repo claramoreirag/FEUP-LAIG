@@ -8,7 +8,7 @@ class XMLscene extends CGFscene {
      */
     constructor(myinterface) {
         super();
-
+        this.hasChangedgraph=false;
         this.interface = myinterface;
     }
 
@@ -21,7 +21,7 @@ class XMLscene extends CGFscene {
         this.gameOrchestrator= new MyGameOrchestrator(this);
         this.sceneInited = false;
 
-      
+       
         this.interfaceViews= new Object();
         this.lightsInterface = {};
         this.initCameras();
@@ -121,13 +121,14 @@ initsceneCameras(){
 
         this.setGlobalAmbientLight(...this.graph.ambient);
         this.sceneInited = true;
+        if(!this.hasChangedgraph){
         this.interface.addCamerasFolder();
         this.interface.addLightsFolder();
-        
+        }
         this.initLights();
         this.initsceneCameras();
         console.log(this.gameOrchestrator);
-        this.gameOrchestrator.load();
+        if(!this.hasChangedgraph)this.gameOrchestrator.load();
        
     }
 
@@ -154,7 +155,7 @@ initsceneCameras(){
 
         if (this.sceneInited) {
             // Draw axis
-            this.axis.display();
+            //this.axis.display();
          
             this.defaultAppearance.apply();
             this.updateCameras();
@@ -164,9 +165,7 @@ initsceneCameras(){
             // Displays the scene (MySceneGraph function).
             //this.graph.displayScene();
             this.gameOrchestrator.display();
-           
-            //let text=new MySpriteText(this,"hello");
-            //text.display();
+         
         }
         else
         {
