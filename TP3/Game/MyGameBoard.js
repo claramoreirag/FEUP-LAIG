@@ -131,12 +131,12 @@ class MyGameboard extends CGFobject {
 
     
 
-    display(){
+    display(pick,animatedPieces){
         this.scene.pushMatrix();
         this.scene.scale(0.5,0.5,0.5);
         this.scene.translate(10,5,10);
         for(let i=0;i<this.pieces.length;i++){
-            this.pieces[i].display();
+            if((animatedPieces==undefined) || (!animatedPieces.includes(this.pieces[i])))this.pieces[i].display();
         }
         let numberRegistered=1;
         for(let i=0; i<this.tiles.length; i++){

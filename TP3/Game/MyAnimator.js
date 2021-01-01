@@ -1,35 +1,15 @@
 /**
  * MyAnimator
  */
-class MyAnimator extends CGFobject{
-  constructor(scene,orchestrator,gameSequence){
-    super(scene);
-    this.gameSequence = gameSequence; //MyGameSequence object
-    this.orchestrator = orchestrator; //MyGameOrchestrator
-  }
+class MyAnimator extends CGFobject {
+	constructor(scene) {
+        super(scene);
+        
+    }
 
-  setGameSequence(gameSequence){
-    this.gameSequence = gameSequence;
-  }
+    update(t){
+    }
 
-  setGameOrchestrator(orchestrator){
-    this.orchestrator = orchestrator;
-  }
-  
-  start(){
-    //TODO
-  }
-
-  reset(){
-    //TODO
-  }
-
-  update(time){
-    //TODO  
-  }
-
-  display(){
-    //TODO
-  }
-
+    display(){
+    }
 }

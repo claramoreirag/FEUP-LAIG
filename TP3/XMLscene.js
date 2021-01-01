@@ -200,7 +200,7 @@ initsceneCameras(){
     }
 
     update(t){
-        //this.gameOrchestrator.changeTheme();
+        this.gameOrchestrator.update(t);
         this.updateAnimations(t/1000);
     }
 

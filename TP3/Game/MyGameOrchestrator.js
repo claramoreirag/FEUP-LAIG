@@ -50,6 +50,17 @@ class MyGameOrchestrator extends CGFobject {
                 this.makeMove();
                 break;
 
+            case "animation":
+                this.scene.setPickEnabled(false);
+               
+                //verificar se já atingiu stoping_time da animação
+                if (this.animator.over){
+                    this.animator=null;
+                    this.scene.setPickEnabled(true);
+                    this.state = "choose piece human";
+                    
+                }
+                break;
             default:
                 break;
         }
@@ -75,20 +86,33 @@ class MyGameOrchestrator extends CGFobject {
     display() {
         this.orquestrate();
         this.managePick();
-
+        this.graph.displayScene();
+        let numberPickedObjects=1;
+        if(this.state == "animation"){
+            this.gameboard.display(false, this.animator.pieces);
+            this.animator.display();
+            numberPickedObjects++;
+            this.displayButtons(numberPickedObjects);
+        }
+        else{
         let numberpicked = this.gameboard.display();
         this.displayButtons(numberpicked);
-        this.graph.displayScene();
+        }
+        // //example of request to prolog
+        // let prolog = new MyPrologInterface();
 
-        //example of request to prolog
-        let prolog = new MyPrologInterface();
+        // let gamestate = [[[0,0],[0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0],[0,0]],[42,42,42],[['P','G','O'],['G','O','P']],[-1,0,-1],['Player1','Player2'],1];
 
-        let gamestate = [[[0,0],[0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0],[0,0]],[42,42,42],[['P','G','O'],['G','O','P']],[-1,0,-1],['Player1','Player2'],1];
-
-        prolog.requestInitial();
+        // prolog.requestInitial();
     }
 
+
+    update(t) {
+        if (this.animator != undefined)
+            this.animator.update(t);
+    }
     managePick() {
+    
         if (this.scene.pickMode == false /* && some other game conditions */) {
             if (this.scene.pickResults != null && this.scene.pickResults.length > 0) { // any results?
                 for (var i = 0; i < this.scene.pickResults.length; i++) {
@@ -132,7 +156,7 @@ class MyGameOrchestrator extends CGFobject {
             }else if (obj.id=="Remove"){
                 if (this.state == "wait confirm" || this.state == "choose tile human"){
                     if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
-                    this.moveToExecute = [];
+                    this.movetomake = [];
                     this.state = "choose piece human";
                 }
             }
@@ -157,8 +181,9 @@ class MyGameOrchestrator extends CGFobject {
         this.movetomake = [];
 
         //TODO animation
-        
-        this.state = "choose piece human";
+        this.animator = new MyMoveAnimator(this.scene, move);
+        this.state = "animation";
+        //this.state = "choose piece human";
     }
 
 }
