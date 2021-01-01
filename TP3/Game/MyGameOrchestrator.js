@@ -41,6 +41,7 @@ class MyGameOrchestrator extends CGFobject {
         this.scene.translate(1.5, 0, 0);
         this.scene.registerForPick(numberPickedObjects++, this.exitButton);
         this.exitButton.display();
+        this.scene.clearPickRegistration();
         this.scene.popMatrix();
     }
 
@@ -94,7 +95,7 @@ class MyGameOrchestrator extends CGFobject {
             if(this.state == "animation"){
                 this.gameboard.display(false, this.animator.pieces);
                 this.animator.display();
-                numberPickedObjects++;
+                //numberPickedObjects++;
                 this.displayButtons(numberPickedObjects);
             }
             else{

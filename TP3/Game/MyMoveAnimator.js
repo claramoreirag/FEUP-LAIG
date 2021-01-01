@@ -13,21 +13,15 @@ class MyMoveAnimator extends CGFobject{
         this.dist=Math.sqrt(tx*tx+ty*ty+tz*tz);
         this.pieces=[];
         this.over=false; 
-       
-        
         this.keyframes=[new Keyframe(0,[0,0.15,0],0,0,0,[1,1,1]),new Keyframe(this.dist/6,[tx/2,ty/2+0.15,tz/2],0,0,0,[1,1,1])];
 
-        
         this.animation = new MyCurvedAnimation(scene,this.keyframes);
         this.pieces.push(gameMove.movedPiece);
 
         this.animation.started=true;
     }
 
-    //calculates animation time according to distance between tiles
-    calculateAnimTime(){
-        return this.dist/6;
-    }
+   
 
     update(t){
        

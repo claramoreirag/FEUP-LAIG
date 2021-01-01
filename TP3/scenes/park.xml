@@ -15,9 +15,9 @@
             <to x="11" y="2" z="-5" />
         </perspective>
 
-          <perspective id="Up view" near="0.1" far="500" angle="45">
-            <from x="5" y="15" z="5" />
-            <to x="5" y="5" z="6" />
+         <perspective id="Up view" near="0.1" far="500" angle="45">
+            <from x="5" y="10" z="5" />
+            <to x="5" y="5" z="4.5" />
         </perspective>
 
         <ortho id="ZoomOrtho" near="0.1" far="200" left="-1" right="10" top="10" bottom="-0.2">
@@ -147,7 +147,7 @@
             <specular r="0.0" g="0.0" b="0.0" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
-        
+
          <material id="skyBlue">
             <shininess value="1" />
             <ambient r="0.40" g="0.70" b="0.80" a="1.0" />
