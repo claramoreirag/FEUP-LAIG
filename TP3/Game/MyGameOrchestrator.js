@@ -47,7 +47,7 @@ class MyGameOrchestrator extends CGFobject {
 
 
     orquestrate() {
-        // console.log("state: " + this.state);
+        console.log("state: " + this.state);
         switch (this.state) {
             case "make player move":
                 this.makeMove();
@@ -62,6 +62,16 @@ class MyGameOrchestrator extends CGFobject {
                     this.scene.setPickEnabled(true);
                     this.state = "choose piece human";
                     
+                }
+                break;
+            case "camera animation":
+                this.scene.setPickEnabled(false);
+                if (this.animator.over){
+                    this.animator=null;
+                    this.state = this.prevState;
+                    this.scene.setPickEnabled(true);
+                    this.scene.camera = this.scene.cameras[this.scene.camerasID[this.scene.selectedCamera]];
+                    this.scene.interface.setActiveCamera(this.scene.camera);
                 }
                 break;
             default:
@@ -173,6 +183,11 @@ class MyGameOrchestrator extends CGFobject {
                    this.changeTheme();
                 
             }
+            else if(obj.id == "Camera"){
+                this.prevState=this.state;
+                this.state="camera animation";
+                this.changeCamera();
+            }
         }
     }
 
@@ -199,5 +214,20 @@ class MyGameOrchestrator extends CGFobject {
         this.state = "animation";
         //this.state = "choose piece human";
     }
+
+    changeCamera(){
+        let origCamID=this.scene.camerasID[this.scene.selectedCamera];
+        console.log(origCamID);
+        let originCamera = this.scene.cameras[origCamID];
+        let destCamID =(origCamID+1)%this.scene.cameras.length;
+        console.log(destCamID);
+        this.scene.selectedCamera = this.scene.getCameraKey(destCamID);
+        let destination = this.scene.cameras[destCamID];
+        this.animator = new MyCameraAnimator(this.scene, originCamera, destination, 3);
+
+      
+        console.log(this.scene.getCameraKey(destCamID));
+    }
+
 
 }
