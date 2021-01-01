@@ -4,7 +4,7 @@ class MyStack extends CGFobject {
         this.holdingCell=null;
         this.nodeId = nodeId;
         this.node= new Node(nodeId);
-        
+        this.selected=false;
         this.x=x;
         this.y=y;
         this.z=z;
@@ -22,7 +22,8 @@ class MyStack extends CGFobject {
     
     display(){
         this.scene.pushMatrix();this.scene.translate(this.x,this.y,this.z);
-        this.scene.scale(1.1,this.pieces.length*1.1,1.1);
+        if(!this.selected)this.scene.scale(1.1,this.pieces.length*1.1,1.1);
+        else this.scene.scale(1.3,this.pieces.length*1.3,1.3);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.node.display(this.scene,[],[]);
         this.scene.popMatrix();

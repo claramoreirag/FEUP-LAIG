@@ -143,6 +143,7 @@ class MyGameOrchestrator extends CGFobject {
             if (this.state == "choose piece human") {
                 console.log("picked stack " + obj.nodeId);
                 this.movetomake.push(obj);
+                obj.selected=true;
                 this.state = "choose tile human";
             }
 
@@ -156,6 +157,7 @@ class MyGameOrchestrator extends CGFobject {
             }else if (obj.id=="Remove"){
                 if (this.state == "wait confirm" || this.state == "choose tile human"){
                     if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
+                    this.movetomake[0].selected=false;
                     this.movetomake = [];
                     this.state = "choose piece human";
                 }
@@ -170,6 +172,7 @@ class MyGameOrchestrator extends CGFobject {
         let destTile = this.movetomake[1];
         destTile.selected=false; 
         destTile.selectable = false;
+        this.movetomake[0].selected=false;
         let pieceToMove = this.movetomake[0].getTopPiece();
         let originTile = pieceToMove.getholdingCell();
         this.gameboard.movePiece(pieceToMove, destTile);
