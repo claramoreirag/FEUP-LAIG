@@ -4,7 +4,7 @@
         <root id="root" />
        
     </initials>
-    <views default="Side view">
+    <views default="Up view">
       
          <perspective id="CameraSide" near="0.1" far="500" angle="45">
             <from x="-2" y="10" z="20" />
