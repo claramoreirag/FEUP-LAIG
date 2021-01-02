@@ -114,9 +114,10 @@ class MyPrologInterface{
   }
 
   requestValue(gamestate,player){
+    let playerStr = "'"+ player + "'";
     let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
     let gs = this.strRequest(g);
-    this.sendRequest('value',[gs,player],this.replyValue);
+    this.sendRequest('value',[gs,playerStr],this.replyValue);
   }
 
   requestMoveBot(gamestate,difficulty){
