@@ -26,8 +26,5 @@ class MyGameMove extends CGFobject{
     this.gameBoardState = gameboard;
   }
 
-  animate(){
-    //TODO 
-  }
   
 }

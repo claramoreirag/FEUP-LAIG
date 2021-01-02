@@ -228,13 +228,13 @@ class MyGameboard extends CGFobject {
         let cell=0;
         for(let i=0; i<40;i++){
             let stackIndex=Math.floor(i/10);
-            let pieceOrange= new MyPiece(this.scene,'OrangePiece'+i.toString(),'orange');
+            let pieceOrange= new MyPiece(this.scene,'OrangePiece'+i.toString(),'orange',this.stacks[stackIndex*3]);
             pieceOrange.setholdingCell(this.auxBoard[cell++]);
             this.stacks[stackIndex*3].pieces.push(pieceOrange);
-            let piecePurple= new MyPiece(this.scene,'PurplePiece'+i.toString(),'purple');
+            let piecePurple= new MyPiece(this.scene,'PurplePiece'+i.toString(),'purple',this.stacks[stackIndex*3+1]);
             piecePurple.setholdingCell(this.auxBoard[cell++]);
             this.stacks[stackIndex*3+1].pieces.push(piecePurple);
-            let pieceGreen= new MyPiece(this.scene,'GreenPiece'+i.toString(),'green');
+            let pieceGreen= new MyPiece(this.scene,'GreenPiece'+i.toString(),'green',this.stacks[stackIndex*3+2]);
             pieceGreen.setholdingCell(this.auxBoard[cell++]);
             this.stacks[stackIndex*3+2].pieces.push(pieceGreen);
             //pieceGreen.setholdingCell(this.tiles[0]);
@@ -291,12 +291,12 @@ class MyGameboard extends CGFobject {
 
     
 
-    display(){
+    display(pick,animatedPieces){
         this.scene.pushMatrix();
         this.scene.scale(0.5,0.5,0.5);
         this.scene.translate(10,5,10);
         for(let i=0;i<this.pieces.length;i++){
-            this.pieces[i].display();
+            if((animatedPieces==undefined) || (!animatedPieces.includes(this.pieces[i])))this.pieces[i].display();
         }
         let numberRegistered=1;
         for(let i=0; i<this.tiles.length; i++){
@@ -310,10 +310,12 @@ class MyGameboard extends CGFobject {
             this.tiles[i].display();
         }
         for(let i=0; i<this.stacks.length;i++){
+            if(this.stacks[i].pieces.length!=0){
             this.scene.registerForPick(numberRegistered + 1, this.stacks[i]);
             this.stacks[i].display();
             numberRegistered++;
             this.scene.clearPickRegistration();
+            }
         }
         this.scene.popMatrix();
         return numberRegistered;
