@@ -65,6 +65,14 @@ class MyPrologInterface{
 
   }
 
+  popReply(){
+    let reply = this.reply;
+
+    if(reply != null)
+      this.reply=null;
+    return reply;
+  }
+
   /** Requests */
   requestCheckConnection(){
     this.sendRequest('handshake',null,this.replyCheckConnection);
@@ -76,23 +84,38 @@ class MyPrologInterface{
     if(mode==undefined) 
       gameMode = "'1'";
 
+    switch (mode){
+      case 1:
+        gameMode = "'1'";
+        break;
+      case 2:
+        gameMode = "'2'";
+        break;
+      case 3:
+        gameMode = "'3'";
+        break;
+    }
+
     this.sendRequest('initial',[gameMode,'_'],this.replyInitial);
   }
 
   //working
   requestValidMoves(gamestate){
-    let gs = this.strRequest(gamestate);
+    let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
+    let gs = this.strRequest(g);
     this.sendRequest('valid_moves',[gs],this.replyValidMoves);
   }
 
   requestMove(gamestate,move){
-    let gs = this.strRequest(gamestate);
+    let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
+    let gs = this.strRequest(g);
     let mv = this.strRequest(move);
     this.sendRequest('move',[gs,mv],this.replyMove);
   }
 
   requestValue(gamestate,player){
-    let gs = this.strRequest(gamestate);
+    let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
+    let gs = this.strRequest(g);
     this.sendRequest('value',[gs,player],this.replyValue);
   }
 
@@ -108,7 +131,7 @@ class MyPrologInterface{
 
   /** Replies */
   replyCheckConnection(data){
-    this.reply = data.target.response;
+    self.reply = data.target.response;
   }
     
   replyInitial(data){
@@ -116,15 +139,15 @@ class MyPrologInterface{
   }
 
   replyValidMoves(data){
-    this.reply = JSON.parse(data.target.response);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyMove(data){
-    this.reply = JSON.parse(data.target.response);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyValue(data){
-    this.reply = JSON.parse(data.target.response);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyMoveBot(data){
@@ -132,6 +155,6 @@ class MyPrologInterface{
   }
 
   replyQuit(data){
-    this.reply = data.target.response;
+    self.reply = data.target.response;
   }
 }

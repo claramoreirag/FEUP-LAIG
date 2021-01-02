@@ -20,6 +20,14 @@ class MyGameboard extends CGFobject {
         this.stacks=[];
 
     }
+
+    reset(){
+      this.tiles=[];
+      this.auxBoard=[];
+      this.pieces=[];
+      this.stacks=[];
+      this.load();
+    }
     
     load(){
         this.yInc=0.15;
@@ -276,7 +284,7 @@ class MyGameboard extends CGFobject {
     /** Finds Stack given it's pieces color */
     findStack(color){
       for(let stack of this.stacks){
-        if(stack.color == color)
+        if(stack.color == color && !stack.pieces.empty)
           return stack;
       }
     }
