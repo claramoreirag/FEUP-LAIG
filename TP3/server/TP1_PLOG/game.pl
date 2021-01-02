@@ -40,7 +40,7 @@ initial(GameState,Mode,Players):-
 
     %orange,purple,green
     Pecas=[42,42,42],
-    Wins=[-1,0,-1], %rounds
+    Wins=[-1,-1,-1], %rounds
     Alliances=[['P ','G ','O '],['G ','O ','P ']],
     GameState=[Board,Pecas,Alliances,Wins,Players,Mode].
 

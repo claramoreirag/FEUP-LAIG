@@ -20,18 +20,20 @@ setPlayers('1', Players,'1'):-
 
 
 setPlayers('2', Players,Mode):-
-    chooseLevel(Bot),
-    chooseOrder( Players,Bot,Mode).
+    Players=['Player','Bot'].
+    %chooseLevel(Bot),
+    %chooseOrder( Players,Bot,Mode).
 
 
 setPlayers('3', Players,'3'):-
-    write('\n\n Computer 1:'),
-    chooseLevel(Bot1),
-    write('\n\n Computer 2:'),
-    chooseLevel(Bot2),
-    atom_concat(Bot1,'1',Player1),
-    atom_concat(Bot2,'2',Player2),
-    Players=[Player1,Player2].
+    Players=['Bot1','Bot2'].
+    %write('\n\n Computer 1:'),
+    %chooseLevel(Bot1),
+    %write('\n\n Computer 2:'),
+    %chooseLevel(Bot2),
+    %atom_concat(Bot1,'1',Player1),
+    %atom_concat(Bot2,'2',Player2),
+    %Players=[Player1,Player2].
 
 setPlayers(_, Players,Mode):-
     write('\nInvalid choice, try again:'),

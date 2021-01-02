@@ -4,6 +4,7 @@
 class MyPrologInterface{
   constructor() {
     this.port = 8081;
+    this.reply = null;
   }
 
   setPort(port){
@@ -15,6 +16,8 @@ class MyPrologInterface{
     request.onload = requestListener;
 
     let argument=[],func;
+
+    self = this;
 
 
     if(args!=null){
@@ -62,6 +65,14 @@ class MyPrologInterface{
 
   }
 
+  popReply(){
+    let reply = this.reply;
+
+    if(reply != null)
+      this.reply=null;
+    return reply;
+  }
+
   /** Requests */
   requestCheckConnection(){
     this.sendRequest('handshake',null,this.replyCheckConnection);
@@ -73,28 +84,44 @@ class MyPrologInterface{
     if(mode==undefined) 
       gameMode = "'1'";
 
+    switch (mode){
+      case 1:
+        gameMode = "'1'";
+        break;
+      case 2:
+        gameMode = "'2'";
+        break;
+      case 3:
+        gameMode = "'3'";
+        break;
+    }
+
     this.sendRequest('initial',[gameMode,'_'],this.replyInitial);
   }
 
   //working
   requestValidMoves(gamestate){
-    let gs = this.strRequest(gamestate);
+    let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
+    let gs = this.strRequest(g);
     this.sendRequest('valid_moves',[gs],this.replyValidMoves);
   }
 
   requestMove(gamestate,move){
-    let gs = this.strRequest(gamestate);
+    let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
+    let gs = this.strRequest(g);
     let mv = this.strRequest(move);
     this.sendRequest('move',[gs,mv],this.replyMove);
   }
 
   requestValue(gamestate,player){
-    let gs = this.strRequest(gamestate);
+    let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
+    let gs = this.strRequest(g);
     this.sendRequest('value',[gs,player],this.replyValue);
   }
 
   requestMoveBot(gamestate,difficulty){
-    let gs = this.strRequest(gamestate);
+    let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
+    let gs = this.strRequest(g);
     this.sendRequest('choose_move',[gs,difficulty],this.replyMoveBot);
   }
 
@@ -102,36 +129,32 @@ class MyPrologInterface{
     this.sendRequest('quit',[],this.replyQuit);
   }
 
-
   /** Replies */
   replyCheckConnection(data){
-    console.log(data.target.response);
+    self.reply = data.target.response;
   }
-
     
   replyInitial(data){
-    let j = JSON.parse(data.target.response);
-    console.log(j);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyValidMoves(data){
-    let j = JSON.parse(data.target.response);
-    console.log(j.moves);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyMove(data){
-    console.log(data.target.response);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyValue(data){
-    console.log(data.target.response);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyMoveBot(data){
-    console.log(data.target.response);
+    self.reply = JSON.parse(data.target.response);
   }
 
   replyQuit(data){
-    console.log(data.target.response);
+    self.reply = data.target.response;
   }
 }
