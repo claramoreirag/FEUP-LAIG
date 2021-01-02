@@ -152,6 +152,13 @@
             <specular r="0.06" g="0.06" b="0.06" a="1.0" />
             <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
         </material>
+         <material id="red">
+            <shininess value="1" />
+            <ambient r=".35" g="0.0" b="0.05" a="1.0" />
+            <diffuse r=".70" g="0.0" b="0.05" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0" g="0" b="0" a="0" />
+        </material>
 
         <material id="materialAmarelo">
             <shininess value="2" />

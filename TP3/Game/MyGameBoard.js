@@ -284,7 +284,7 @@ class MyGameboard extends CGFobject {
     /** Finds Stack given it's pieces color */
     findStack(color){
       for(let stack of this.stacks){
-        if(stack.color == color && !stack.pieces.empty)
+        if(stack.color == color && stack.pieces.length!=0)
           return stack;
       }
     }

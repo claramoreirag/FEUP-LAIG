@@ -11,7 +11,10 @@ class MyButton extends CGFobject {
         this.material = new CGFappearance(this.scene);
         this.setTexture();
         this.text = new MySpriteText(scene,text);
-      
+        this.isBig=text.length>7;
+        if(!this.isBig)this.padding=7-text.length;
+        else this.padding=16-text.length;
+        console.log("HEHEHEH + " + this.padding+ text);
         this.rectangle = new MyRectangle(scene, 0, -0.5, 1, 0,1,0.5);
     }
 
@@ -24,14 +27,17 @@ class MyButton extends CGFobject {
 
     display(){
         this.scene.pushMatrix();
+        if(this.isBig) this.scene.scale(3.75,0.4,1);
+        else this.scene.scale(1.7,0.4,1);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.material.apply();
         this.rectangle.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
-        this.scene.translate(0.75,0.01,0.25);
+        if(!this.isBig)this.scene.translate(0.12*this.padding,0.01,0.25);
+        else this.scene.translate(0.15*this.padding,0.01,0.25);
         this.scene.rotate(-Math.PI/2,1,0,0);
-        this.scene.scale(0.20,0.4,0.35);
+        this.scene.scale(0.30,0.6,0.45);
         this.text.display();
         this.scene.popMatrix();
     }
