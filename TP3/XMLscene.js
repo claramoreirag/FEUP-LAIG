@@ -123,6 +123,7 @@ initsceneCameras(){
         this.sceneInited = true;
         this.interface.addCamerasFolder();
         this.interface.addLightsFolder();
+        this.interface.addValueToggle();
         
         this.initLights();
         this.initsceneCameras();
