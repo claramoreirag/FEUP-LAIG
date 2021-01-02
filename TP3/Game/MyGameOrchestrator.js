@@ -21,6 +21,8 @@ class MyGameOrchestrator extends CGFobject {
         this.mode = null;
         this.wins = null;
         this.difficulty = null;
+        this.valueInterface=[];
+        this.valueInterface['check win']=true;
 
         this.prolog = new MyPrologInterface();
 
@@ -58,7 +60,6 @@ class MyGameOrchestrator extends CGFobject {
 
 
     orquestrate() {
-        console.log("state: " + this.state);
         switch (this.state) {
             case "make player move":
                 this.state = "request update move";
@@ -70,10 +71,10 @@ class MyGameOrchestrator extends CGFobject {
                 this.reply = this.prolog.popReply();
                 if(this.reply != null){
                   console.log(this.reply);
+                  this.state = "request update move";
                   this.makeBotMove(this.reply);
                   this.lastMove = this.reply;
                   console.log(this.lastMove);
-                  this.state = "request update move";
                 }
                 break;
             
@@ -87,8 +88,12 @@ class MyGameOrchestrator extends CGFobject {
                 if(this.reply != null){
                   this.gamestate = this.reply.gamestate;
                   console.log(this.gamestate);
-                  this.state = 'request value';
-                
+                  console.log(this.valueInterface['check win']);
+
+                  if(this.valueInterface['check win'])
+                    this.state = 'request value';
+                  else 
+                    this.state = 'switch player';
                 }
                 break;
 

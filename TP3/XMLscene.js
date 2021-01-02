@@ -149,8 +149,9 @@ getCameraKey(id){
         this.setGlobalAmbientLight(...this.graph.ambient);
         this.sceneInited = true;
         if(!this.hasChangedgraph){
-        this.interface.addCamerasFolder();
-        this.interface.addLightsFolder();
+          this.interface.addCamerasFolder();
+          this.interface.addLightsFolder();
+          this.interface.addValueToggle();
         }
         this.initLights();
         this.initsceneCameras();

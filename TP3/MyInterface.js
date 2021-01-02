@@ -65,6 +65,13 @@ class MyInterface extends CGFinterface {
         }
     }
 
+    addValueToggle(){
+      let valueInterface= this.scene.gameOrchestrator.valueInterface;
+      let valueFolder = this.gui.addFolder('Value');
+
+      valueFolder.add(valueInterface,'check win');
+    }
+
     addCamerasFolder(){
 
         for(var key in this.scene.graph.views) {
