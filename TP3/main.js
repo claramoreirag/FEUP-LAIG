@@ -16,7 +16,7 @@ serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js', 'MyInterface.j
 'primitives/MySphere.js','primitives/MyCylinder.js','primitives/MyTorus.js','primitives/MyTriangle.js', 'animations/Animation.js','primitives/Plane.js','primitives/Patch.js','primitives/Defbarrel.js'
 ,'animations/KeyframeAnimation.js','animations/MySpriteAnimation.js','primitives/MySpriteSheet.js','primitives/MySpriteText.js',
 'Game/MyTile.js','Game/MyAnimator.js','Game/MyMoveAnimator.js','animations/MyCurvedAnimation.js','Game/MyCameraAnimator.js','Game/MyUndoAnimator.js','Game/MyMovieAnimator.js',
-'Game/MyStack.js','Game/MyGameBoard.js','Game/MyGameOrchestrator.js','Game/MyPiece.js','primitives/GameBoard.js','primitives/Piece.js','primitives/MyButton.js','server/MyPrologInterface.js','Game/MyGameMove.js','Game/MyGameSequence.js',
+'Game/MyStack.js','Game/MyGameBoard.js','Game/MyGameOrchestrator.js','Game/MyPiece.js','primitives/GameBoard.js','primitives/Piece.js','primitives/MyButton.js','server/MyPrologInterface.js','Game/MyGameMove.js','Game/MyGameSequence.js','Game/MyGameTimer.js',
 
 main=function()
 {

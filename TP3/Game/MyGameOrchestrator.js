@@ -10,6 +10,7 @@ class MyGameOrchestrator extends CGFobject {
         this.graph = new MySceneGraph(filename, scene);
         this.gameboard = new MyGameboard(scene);
         this.gameSequence= new MyGameSequence(scene);
+        this.gameTimer = new MyGameTimer(scene);
         //this.state = "choose piece human";
         this.state="main menu";
         this.player = 1;
@@ -63,6 +64,7 @@ class MyGameOrchestrator extends CGFobject {
         switch (this.state) {
             case "make player move":
                 this.state = "request update move";
+                this.gameTimer.turnOff();
                 this.makeMove();
                 console.log(this.lastMove);
                 break;
@@ -136,10 +138,12 @@ class MyGameOrchestrator extends CGFobject {
             case "next player":
                 if(this.currentPlayer.includes("Bot"))
                   this.state = "choose bot move";
-                else
+                else{
                   this.state = "choose piece human";
+                  this.gameTimer.turnOn(); 
+                }
                 break;
-
+            
             case "request gamestate":
                 this.prolog.requestInitial(this.mode);
                 this.state = "get initial gamestate";
@@ -179,6 +183,11 @@ class MyGameOrchestrator extends CGFobject {
                 }
                 break;
             default:
+                if(this.gameTimer.on && this.gameTimer.timeoutOcurred()){
+                  this.gameTimer.turnOff();
+                  this.state = "switch player"; 
+                  console.log('TIMEOUT');
+                }
                 break;
         }
 
@@ -277,6 +286,7 @@ class MyGameOrchestrator extends CGFobject {
           default:
             let numberpicked = this.gameboard.display();
             this.displayButtons(numberpicked);
+            this.gameTimer.display();
             this.graph.displayScene();
         }
 
@@ -290,8 +300,10 @@ class MyGameOrchestrator extends CGFobject {
 
 
     update(t) {
-        if (this.animator != undefined)
+        if(this.animator != undefined)
             this.animator.update(t);
+
+        this.gameTimer.update(t);
     }
     managePick() {
     
@@ -406,6 +418,9 @@ class MyGameOrchestrator extends CGFobject {
             }
             else if(obj.id == "Exit"){
                 this.state="main menu";
+                this.wins= null;
+                this.difficulty = null;
+                this.gameTimer.turnOff();
                 this.gameboard.reset();
             }
 
@@ -485,9 +500,9 @@ class MyGameOrchestrator extends CGFobject {
 
     switchPlayers(){
         if(this.gamestate.players[0] == this.currentPlayer)
-          this.currentPlayer = this.gamestate.players[0];
-        else
           this.currentPlayer = this.gamestate.players[1];
+        else
+          this.currentPlayer = this.gamestate.players[0];
     }
 
 }
