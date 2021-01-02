@@ -30,25 +30,25 @@ class MyGameOrchestrator extends CGFobject {
     displayButtons(numberPickedObjects) {
         this.scene.pushMatrix();
         this.scene.scale(0.5, 0.5, 0.5);
-        this.scene.translate(15.5, 5.001, 6);
-        this.scene.registerForPick(numberPickedObjects++, this.undoButton);
-        this.undoButton.display();
-        this.scene.translate(1.5, 0, 0);
+        this.scene.translate(15.5, 5.001, 5.5);
         this.scene.registerForPick(numberPickedObjects++, this.removeButton);
         this.removeButton.display();
-        this.scene.translate(1.5, 0, 0);
+        this.scene.translate(2, 0, 0);
         this.scene.registerForPick(numberPickedObjects++, this.confirmButton);
         this.confirmButton.display();
-        this.scene.translate(-3, 0, 1);
+        this.scene.translate(-2, 0, 1);
+        this.scene.registerForPick(numberPickedObjects++, this.undoButton);
+        this.undoButton.display();
+        this.scene.translate(2, 0, 0);
         this.scene.registerForPick(numberPickedObjects++, this.movieButton);
         this.movieButton.display();
-        this.scene.translate(1.5, 0, 0);
+        this.scene.translate(-1, 0, 6);
         this.scene.registerForPick(numberPickedObjects++, this.cameraButton);
         this.cameraButton.display();
-        this.scene.translate(1.5, 0, 0);
+        this.scene.translate(0, 0, 0.75);
         this.scene.registerForPick(numberPickedObjects++, this.exitButton);
         this.exitButton.display();
-        this.scene.translate(1.5, 0, 0);
+        this.scene.translate(-1, 0, 0.75);
         this.scene.registerForPick(numberPickedObjects++, this.themeButton);
         this.themeButton.display();
         this.scene.clearPickRegistration();
@@ -188,18 +188,18 @@ class MyGameOrchestrator extends CGFobject {
 
     load() {
 
-        this.undoButton = new MyButton(this.scene, "Undo", "purple");
-        this.exitButton = new MyButton(this.scene, "Exit", "orange");
+        this.undoButton = new MyButton(this.scene, "Undo", "orange");
+        this.exitButton = new MyButton(this.scene, "Exit", "purple");
         this.movieButton = new MyButton(this.scene, "Movie", "orange");
-        this.confirmButton = new MyButton(this.scene, "Confirm", "orange");
-        this.removeButton = new MyButton(this.scene, "Remove", "orange");
+        this.confirmButton = new MyButton(this.scene, "Confirm", "green");
+        this.removeButton = new MyButton(this.scene, "Remove", "red");
         this.cameraButton = new MyButton(this.scene, "Camera","purple");
         this.undoButton = new MyButton(this.scene, "Undo", "purple");
         this.themeButton = new MyButton(this.scene, "Change Theme", "purple");
         this.playButton = new MyButton(this.scene,"Play","orange");
-        this.playerVSplayer= new MyButton(this.scene,"Player VS Player","purple");
+        this.playerVSplayer= new MyButton(this.scene,"Player VS Player","orange");
         this.playerVSbot = new MyButton(this.scene,"Player VS Bot","purple");
-        this.botVSbot = new MyButton(this.scene,"Bot VS Bot","purple");
+        this.botVSbot = new MyButton(this.scene,"Bot VS Bot","green");
         this.easyButton= new MyButton(this.scene,"Easy","orange");
         this.hardButton= new MyButton(this.scene,"Hard","orange");
 
@@ -236,15 +236,16 @@ class MyGameOrchestrator extends CGFobject {
             break;
           case "choose mode":
             this.scene.pushMatrix();
-            this.scene.scale(6,6,6);
+            this.scene.scale(4,4,4);
+            this.scene.translate(-0.75,0,0);
             this.scene.registerForPick(1,this.playerVSplayer);
             this.playerVSplayer.display();
             this.scene.clearPickRegistration();
-            this.scene.translate(0,0,0.5);
+            this.scene.translate(0,0,0.75);
             this.scene.registerForPick(2,this.playerVSbot);
             this.playerVSbot.display();
             this.scene.clearPickRegistration();
-            this.scene.translate(0,0,0.5);
+            this.scene.translate(0,0,0.75);
             this.scene.registerForPick(3,this.botVSbot);
             this.botVSbot.display();
             this.scene.clearPickRegistration();

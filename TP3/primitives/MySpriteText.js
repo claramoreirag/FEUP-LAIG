@@ -29,7 +29,7 @@ class MySpriteText extends MySpriteSheet{
         this.scene.setActiveShaderSimple(this.shader);
 
         let start = -this.text.length/2 - 0.5;
-        this.scene.translate(start,0,0);
+        this.scene.translate(0,0,0);
         this.appearance.apply();
 
         for(let i=0;i<this.text.length;i++){
