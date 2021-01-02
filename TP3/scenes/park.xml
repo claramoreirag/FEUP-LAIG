@@ -24,7 +24,7 @@
                 <from x="-3" y="9" z="5" />
                 <to x="8" y="4" z="5" />
         </perspective>
-
+<!-- 
         <ortho id="ZoomOrtho" near="0.1" far="200" left="-1" right="10" top="10" bottom="-0.2">
             <from x="0" y="0" z="10" />
             <to x="1" y="1" z="1" />
@@ -36,7 +36,7 @@
             <to x="10" y="0" z="0" />
             <up x="0" y="3" z="0"/>
         </ortho>
-    
+     -->
     </views>
 
     <illumination>
@@ -620,7 +620,7 @@
 
 
  <!--Candeeiro-->
-    <node id="candeeiro">
+    <!-- <node id="candeeiro">
 
         <material id="null" />
         <texture id="lampshade">
@@ -637,7 +637,7 @@
              
             
         </descendants>
-    </node>
+    </node> -->
 
   <!--Cadeira-->
     <node id="cadeira">    

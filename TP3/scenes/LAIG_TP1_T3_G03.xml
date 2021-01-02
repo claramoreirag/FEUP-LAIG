@@ -654,7 +654,7 @@
 
 
  <!--Candeeiro-->
-    <node id="candeeiro">
+    <!-- <node id="candeeiro">
 
         <material id="null" />
         <texture id="lampshade">
@@ -671,7 +671,7 @@
              
             
         </descendants>
-    </node>
+    </node> -->
 
   <!--Cadeira-->
     <node id="cadeira">    
@@ -966,7 +966,7 @@
            
         </transformations>
 
-   
+        
       
 
 		<descendants>
@@ -976,6 +976,26 @@
 		</node>
 
 
+
+<node id="janela">
+
+            <material id="null" />
+            <texture id="windowTexture">
+                <amplification afs="9" aft="6" />
+            </texture>
+
+       
+            <transformations>
+                <translation x="0.05" y="13" z="10"/>
+                <scale sx="1" sy="8" sz="10" />
+                 <rotation axis="x" angle="-90"/>
+                <rotation axis="z" angle="-90"/>
+            </transformations>
+
+            <descendants>
+                 <leaf type="plane" npartsU="5" npartsV="5" />
+            </descendants>
+		</node>
 
 
 	 	<!--teto-->
@@ -1134,25 +1154,25 @@
             </descendants>
 		</node>
 
-
-        <node id="piece">
-			 <material id="orange" />
-            <texture id="clear">
-                <amplification afs="1.0" aft="1.0" />
+          <node id="poster2">
+			 <material id="null" />
+            <texture id="poster">
+                <amplification afs="1" aft="0.1" />
             </texture>
 
+
             <transformations>
-                <!-- <translation x="10.0" y="5.0" z="10.0" /> -->
-                <!-- <scale sx="1.0" sy="2.0" sz="2.0"/> -->
-                 <rotation axis="x" angle="-90" />  
+                <translation x="0.05" y="0.075" z="0.01"/>
+                <rotation axis="x" angle="90"/>
+                <scale sx="0.4" sy="1" sz="0.6" />
             </transformations>
 
-
             <descendants>
-                <leaf type="piece" />
+                 <leaf type="plane" npartsU="5" npartsV="5" />
             </descendants>
 		</node>
 
+      
 
 
  <!--Pizza -->
@@ -1173,24 +1193,7 @@
             </descendants>
 		</node>
 
-        <node id="poster">
-			 <material id="null" />
-            <texture id="stripesTexture">
-                <amplification afs="1" aft="0.1" />
-            </texture>
-
-
-            <transformations>
-                <rotation axis="z" angle="180"/>
-                <translation x="-0.2" y="-0.075" z="0.01"/>
-                <scale sx="0.4" sy="0.85" sz="1" />
-            </transformations>
-
-            <descendants>
-                <leaf type="triangle" x1="-0.5" y1="-0.5" x2="0.5" y2="-0.5"  x3="0" y3="0.3"/>
-            </descendants>
-		</node>
-
+      
 
 
 
@@ -1223,10 +1226,10 @@
 
 
             <transformations>
-                <translation x="0.2" y="18" z="10"/>
+                <translation x="0.2" y="18" z="11"/>
              <rotation axis="x" angle="90"/>
              <rotation axis="z" angle="-90"/>
-                <scale sx="0.5" sy="0.2" sz="1.7" /> 
+                <scale sx="0.35" sy="0.2" sz="1.7" /> 
             </transformations>
 
 
@@ -1257,10 +1260,10 @@
 
 
             <transformations>
-             <translation x="0.2" y="18" z="4"/>
+             <translation x="0.2" y="18" z="2"/>
              <rotation axis="x" angle="90"/>
              <rotation axis="z" angle="-90"/>
-             <scale sx="0.5" sy="0.2" sz="1.7" /> 
+             <scale sx="0.35" sy="0.2" sz="1.7" /> 
             </transformations>
 
 

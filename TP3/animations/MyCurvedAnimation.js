@@ -1,5 +1,5 @@
 class MyCurvedAnimation extends Animation{
-    constructor(scene,keyframeList){
+    constructor(scene,keyframeList,undo){
        super(scene);
        this.keyframes=keyframeList;
        this.initialT=0;
@@ -7,7 +7,7 @@ class MyCurvedAnimation extends Animation{
        this.isActive=false;
        this.isdone=false;
        this.matrix=mat4.create();
-      
+       this.isUndo=undo;
        //sorting the keyframes by instant to make sure we calculate the right animation
        this.keyframes.sort((a, b) => (a.instant > b.instant) ? 1 : -1);
        
@@ -65,9 +65,12 @@ class MyCurvedAnimation extends Animation{
        let frame2 = this.keyframes[currentFrame];  
 
        let deltaT=(elapsedTime-frame1.instant)/(frame2.instant-frame1.instant);
+       let factor=-1;
+       if(this.isUndo)factor=1;
+      // sqrt(1 - pow(x - 1, 2))
        //linear interpolation of transformations
        let tx=frame1.translate[0] + (frame2.translate[0] - frame1.translate[0])*deltaT;
-       let ty=frame1.translate[1] + (frame2.translate[0] - frame1.translate[0])*-(Math.pow(Math.sin(Math.PI*deltaT),1)*0.3);
+       let ty=frame1.translate[1] + (frame2.translate[0] - frame1.translate[0])*factor*(Math.pow(Math.sin(Math.PI*deltaT),1)*0.4);
        let tz=frame1.translate[2] + (frame2.translate[2] - frame1.translate[2])*deltaT;
        
        let rx=frame1.rotateX*Math.PI/180 + (frame2.rotateX - frame1.rotateX)*Math.PI/180*deltaT;

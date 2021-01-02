@@ -1,10 +1,11 @@
 class MyPiece extends CGFobject {
-constructor(scene, nodeId, material) {
+constructor(scene, nodeId, material,stack) {
     super(scene);
     this.holdingCell=null;
     this.nodeId = nodeId;
     this.node= new Node(nodeId);
     this.scene.graph.graph.addNode(this.node);
+    this.stack=stack;
     //this.node.changeMaterial(scene.graph.materialList.getMaterial(material));
     //this.node.changeTexture(new Texture("clear"));
     //this.node.addEdge(new Leaf(this.scene,"piece",[],1.0,1.0));

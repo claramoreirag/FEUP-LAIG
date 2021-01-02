@@ -19,12 +19,16 @@ class MyStack extends CGFobject {
         return this.pieces.pop();
     }
     
+
+    putPieceBack(piece){
+         this.pieces.push(piece);
+    }
     
     display(){
         
         this.scene.pushMatrix();this.scene.translate(this.x,this.y,this.z);
-        if(!this.selected)this.scene.scale(1.1,this.pieces.length*1.1,1.1);
-        else this.scene.scale(1.3,this.pieces.length*1.3,1.3);
+        if(!this.selected)this.scene.scale(1.05,this.pieces.length*1.05,1.05);
+        else this.scene.scale(1.2,this.pieces.length*1.2,1.2);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.node.display(this.scene,[],[]);
         this.scene.popMatrix();

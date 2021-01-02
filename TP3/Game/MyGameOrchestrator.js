@@ -56,12 +56,11 @@ class MyGameOrchestrator extends CGFobject {
             case "animation":
                 this.scene.setPickEnabled(false);
                
-                //verificar se já atingiu stoping_time da animação
                 if (this.animator.over){
+                    if(this.animator instanceof MyUndoAnimator)this.animator.finish();
                     this.animator=null;
                     this.scene.setPickEnabled(true);
-                    this.state = "choose piece human";
-                    
+                    this.state = "choose piece human";       
                 }
                 break;
             case "camera animation":
@@ -188,6 +187,32 @@ class MyGameOrchestrator extends CGFobject {
                 this.state="camera animation";
                 this.changeCamera();
             }
+            else if (obj.id == "Undo"){
+                if (this.state == "wait confirm" || this.state == "choose tile human"){
+                    if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
+                    this.movetomake[0].selected=false;
+                    this.movetomake = [];
+                    this.state = "choose piece human";
+                }
+                this.state="choose piece human";
+                if (this.gameSequence.gameMoves.length != 0){
+                    this.undo();
+                }
+                
+            }
+            else if(obj.id == "Movie"){
+                if (this.state == "wait confirm" || this.state == "choose tile human"){
+                    if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
+                    this.movetomake[0].selected=false;
+                    this.movetomake = [];
+                    this.prevState = "choose piece human";
+                }
+                if (this.gameSequence.gameMoves.length != 0){
+                    this.state="movie";
+                    this.movie();
+                }
+            
+            }
         }
     }
 
@@ -209,24 +234,35 @@ class MyGameOrchestrator extends CGFobject {
         this.currentPlayer = (this.currentPlayer % 2) + 1;
         this.movetomake = [];
 
-        //TODO animation
         this.animator = new MyMoveAnimator(this.scene, move);
         this.state = "animation";
         //this.state = "choose piece human";
     }
 
+
+    undo(){
+        let reverseMove = this.gameSequence.undo(this.gameboard);
+        this.currentPlayer = (this.currentPlayer % 2) + 1;
+        
+        //activate animation 
+        this.animator = new MyUndoAnimator(this.scene, reverseMove);
+        this.state="animation";
+    }
+
+    movie(){
+        this.animator = new MyMovieAnimator(this.scene, this.gameSequence.gameMoves);
+        this.state="animation";
+    }
+
     changeCamera(){
         let origCamID=this.scene.camerasID[this.scene.selectedCamera];
-        console.log(origCamID);
         let originCamera = this.scene.cameras[origCamID];
         let destCamID =(origCamID+1)%this.scene.cameras.length;
-        console.log(destCamID);
+
         this.scene.selectedCamera = this.scene.getCameraKey(destCamID);
         let destination = this.scene.cameras[destCamID];
         this.animator = new MyCameraAnimator(this.scene, originCamera, destination, 3);
 
-      
-        console.log(this.scene.getCameraKey(destCamID));
     }
 
 

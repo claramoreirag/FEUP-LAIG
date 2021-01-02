@@ -84,13 +84,13 @@ class MyGameboard extends CGFobject {
         let cell=0;
         for(let i=0; i<40;i++){
             let stackIndex=Math.floor(i/10);
-            let pieceOrange= new MyPiece(this.scene,'OrangePiece'+i.toString(),'orange');
+            let pieceOrange= new MyPiece(this.scene,'OrangePiece'+i.toString(),'orange',this.stacks[stackIndex*3]);
             pieceOrange.setholdingCell(this.auxBoard[cell++]);
             this.stacks[stackIndex*3].pieces.push(pieceOrange);
-            let piecePurple= new MyPiece(this.scene,'PurplePiece'+i.toString(),'purple');
+            let piecePurple= new MyPiece(this.scene,'PurplePiece'+i.toString(),'purple',this.stacks[stackIndex*3+1]);
             piecePurple.setholdingCell(this.auxBoard[cell++]);
             this.stacks[stackIndex*3+1].pieces.push(piecePurple);
-            let pieceGreen= new MyPiece(this.scene,'GreenPiece'+i.toString(),'green');
+            let pieceGreen= new MyPiece(this.scene,'GreenPiece'+i.toString(),'green',this.stacks[stackIndex*3+2]);
             pieceGreen.setholdingCell(this.auxBoard[cell++]);
             this.stacks[stackIndex*3+2].pieces.push(pieceGreen);
             //pieceGreen.setholdingCell(this.tiles[0]);
