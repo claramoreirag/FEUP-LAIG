@@ -14,7 +14,7 @@ class MyButton extends CGFobject {
         this.isBig=text.length>7;
         if(!this.isBig)this.padding=7-text.length;
         else this.padding=16-text.length;
-        console.log("HEHEHEH + " + this.padding+ text);
+      
         this.rectangle = new MyRectangle(scene, 0, -0.5, 1, 0,1,0.5);
     }
 

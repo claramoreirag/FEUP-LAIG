@@ -116,13 +116,18 @@ class MyGameOrchestrator extends CGFobject {
                 this.reply = this.prolog.popReply();
                 if(this.reply!=null){
                   this.wins = this.reply; 
+                  this.wins=[1,1,-1];
                   console.log("wins : " + this.wins);
                   console.log("gs wins: " + this.gamestate.wins);
                   if(this.wins.toString() != this.gamestate.wins.toString()){
-                    //TODO
-                    alert(this.currentPlayer + "won");
-                    this.gameBoard.reset();
-                    this.state = "request gamestate"; 
+                    let message= this.checkWins(this.wins,this.gamestate.wins);
+                    console.log(message);
+                    alert(message[0]);
+                    if(message[1]){
+                    this.gameboard.reset();
+                    this.state = "main menu";
+                    } 
+                    else this.state = "switch player";
                   }
                   else this.state = "switch player";
                 }
@@ -281,12 +286,6 @@ class MyGameOrchestrator extends CGFobject {
             this.graph.displayScene();
         }
 
-        //example of request to prolog
-        /*let prolog = new MyPrologInterface();
-
-        // let gamestate = [[[0,0],[0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0],[0,0]],[42,42,42],[['P','G','O'],['G','O','P']],[-1,0,-1],['Player1','Player2'],1];
-
-        prolog.requestInitial();*/
     }
 
 
@@ -429,6 +428,31 @@ class MyGameOrchestrator extends CGFobject {
       this.makeMove(); 
     }
 
+    checkWins(newWins,oldWins){
+        let color;
+        let winner;
+       
+        if(newWins[0]!=oldWins[0]){
+            color="orange";
+            winner=newWins[0];
+        }
+        else if(newWins[1]!=oldWins[1]){
+            color="purple";
+            winner=newWins[1];
+        }
+        else if(newWins[2]!=oldWins[2]){
+            color="green";
+            winner=newWins[2];
+        }
+        let winnerName=this.gamestate.players[winner];
+
+        let n = 0;
+        for(let i = 0; i < newWins.length; i++){
+            if(newWins[i] == winner){n++}
+        }
+        if(n>=2)return  [winnerName + " just won the game!",true];
+        return [winnerName + " just won color " + color+"!",false];
+    }
 
 
     makeMove() {
@@ -486,9 +510,9 @@ class MyGameOrchestrator extends CGFobject {
 
     switchPlayers(){
         if(this.gamestate.players[0] == this.currentPlayer)
-          this.currentPlayer = this.gamestate.players[0];
-        else
           this.currentPlayer = this.gamestate.players[1];
+        else
+          this.currentPlayer = this.gamestate.players[0];
     }
 
 }
