@@ -8,9 +8,11 @@ class Piece extends CGFobject {
         
 	}
    
-    display(){
+    display(anim){
         this.scene.pushMatrix();
-        this.scene.rotate(Math.PI/2,1,0,0);
+     
+        if (anim != undefined)this.scene.multMatrix(anim);
+        else{   this.scene.rotate(Math.PI/2,1,0,0);}
         this.cilinder.display();
         this.scene.popMatrix();
     }

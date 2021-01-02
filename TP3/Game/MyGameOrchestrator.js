@@ -4,8 +4,10 @@
 class MyGameOrchestrator extends CGFobject {
     constructor(scene) {
         super(scene);
-        var filename = getUrlVars()['file'] || "LAIG_TP1_T3_G03.xml";
-        this.graph = new MySceneGraph(filename, scene); //theme
+        this.themes=["LAIG_TP1_T3_G03.xml","park.xml"];
+        this.currentTheme=0;
+        var filename = getUrlVars()['file'] ||this.themes[0];
+        this.graph = new MySceneGraph(filename, scene);
         this.gameboard = new MyGameboard(scene);
         this.gameSequence= new MyGameSequence(scene);
         //this.state = "choose piece human";
@@ -43,22 +45,25 @@ class MyGameOrchestrator extends CGFobject {
         this.scene.registerForPick(numberPickedObjects++, this.movieButton);
         this.movieButton.display();
         this.scene.translate(1.5, 0, 0);
+        this.scene.registerForPick(numberPickedObjects++, this.cameraButton);
+        this.cameraButton.display();
+        this.scene.translate(1.5, 0, 0);
         this.scene.registerForPick(numberPickedObjects++, this.exitButton);
         this.exitButton.display();
+        this.scene.translate(1.5, 0, 0);
+        this.scene.registerForPick(numberPickedObjects++, this.themeButton);
+        this.themeButton.display();
         this.scene.clearPickRegistration();
         this.scene.translate(1.5, 0, 0);
-        //this.scene.registerForPick(numberPickedObjects++, this.cameraButton);
-        // this.cameraButton.display();
         this.scene.popMatrix();
     }
 
 
     orquestrate() {
-        // console.log("state: " + this.state);
         switch (this.state) {
             case "make player move":
-                this.makeMove();
                 this.state = "request update move";
+                this.makeMove();
                 console.log(this.lastMove);
                 break;
 
@@ -153,6 +158,26 @@ class MyGameOrchestrator extends CGFobject {
                 }
                 break;
 
+            case "animation":
+                this.scene.setPickEnabled(false);
+               
+                if (this.animator.over){
+                    if(this.animator instanceof MyUndoAnimator)this.animator.finish();
+                    this.animator=null;
+                    this.scene.setPickEnabled(true);
+                    this.state =this.prevState;       
+                }
+                break;
+            case "camera animation":
+                this.scene.setPickEnabled(false);
+                if (this.animator.over){
+                    this.animator=null;
+                    this.state = this.prevState;
+                    this.scene.setPickEnabled(true);
+                    this.scene.camera = this.scene.cameras[this.scene.camerasID[this.scene.selectedCamera]];
+                    this.scene.interface.setActiveCamera(this.scene.camera);
+                }
+                break;
             default:
                 break;
         }
@@ -161,18 +186,21 @@ class MyGameOrchestrator extends CGFobject {
     }
 
     changeTheme() {
-
-        this.graph = new MySceneGraph("park.xml", this.scene);
+        this.currentTheme=((this.currentTheme+1) % 2) ;
         this.scene.sceneInited = false;
+        this.graph = new MySceneGraph(this.themes[this.currentTheme], this.scene);
     }
 
     load() {
 
-        this.undoButton = new MyButton(this.scene, "Undo", "purple", "rug");
-        this.exitButton = new MyButton(this.scene, "Exit", "orange", "lampshade");
-        this.movieButton = new MyButton(this.scene, "Movie", "orange", "poster");
-        this.confirmButton = new MyButton(this.scene, "Confirm", "orange", "curtains");
-        this.removeButton = new MyButton(this.scene, "Remove", "orange", "grass");
+        this.undoButton = new MyButton(this.scene, "Undo", "purple");
+        this.exitButton = new MyButton(this.scene, "Exit", "orange");
+        this.movieButton = new MyButton(this.scene, "Movie", "orange");
+        this.confirmButton = new MyButton(this.scene, "Confirm", "orange");
+        this.removeButton = new MyButton(this.scene, "Remove", "orange");
+        this.cameraButton = new MyButton(this.scene, "Camera","purple");
+        this.undoButton = new MyButton(this.scene, "Undo", "purple");
+        this.themeButton = new MyButton(this.scene, "Change Theme", "purple");
         this.playButton = new MyButton(this.scene,"Play","orange");
         this.playerVSplayer= new MyButton(this.scene,"Player VS Player","purple");
         this.playerVSbot = new MyButton(this.scene,"Player VS Bot","purple");
@@ -186,6 +214,21 @@ class MyGameOrchestrator extends CGFobject {
     display() {
         this.orquestrate();
         this.managePick();
+
+        //this.graph.displayScene();
+        let numberPickedObjects=1;
+        // if(this.state == "animation"){
+        //     this.gameboard.display(false, this.animator.pieces);
+        //     this.animator.display();
+        //     numberPickedObjects++;
+        //     this.displayButtons(numberPickedObjects);
+        // }
+        // else{
+        // let numberpicked = this.gameboard.display();
+        // this.displayButtons(numberpicked);
+        // }
+        // //example of request to prolog
+        // let prolog = new MyPrologInterface();
 
         switch(this.state){
           case "main menu":
@@ -224,6 +267,13 @@ class MyGameOrchestrator extends CGFobject {
             this.scene.clearPickRegistration();
             this.scene.popMatrix();
             break;
+         case "animation":
+            this.gameboard.display(false, this.animator.pieces);
+            this.animator.display();
+            this.graph.displayScene();
+            numberPickedObjects++;
+            this.displayButtons(numberPickedObjects);
+            break;
           default:
             let numberpicked = this.gameboard.display();
             this.displayButtons(numberpicked);
@@ -233,12 +283,18 @@ class MyGameOrchestrator extends CGFobject {
         //example of request to prolog
         /*let prolog = new MyPrologInterface();
 
-        let gamestate = [[[0,0],[0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0],[0,0]],[42,42,42],[['P','G','O'],['G','O','P']],[-1,0,-1],['Player1','Player2'],1];
+        // let gamestate = [[[0,0],[0,0,0],[0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0],[0,0,0,0],[0,0,0],[0,0]],[42,42,42],[['P','G','O'],['G','O','P']],[-1,0,-1],['Player1','Player2'],1];
 
         prolog.requestInitial();*/
     }
 
+
+    update(t) {
+        if (this.animator != undefined)
+            this.animator.update(t);
+    }
     managePick() {
+    
         if (this.scene.pickMode == false /* && some other game conditions */) {
             if (this.scene.pickResults != null && this.scene.pickResults.length > 0) { // any results?
                 for (var i = 0; i < this.scene.pickResults.length; i++) {
@@ -269,6 +325,7 @@ class MyGameOrchestrator extends CGFobject {
             if (this.state == "choose piece human") {
                 console.log("picked stack " + obj.nodeId);
                 this.movetomake.push(obj);
+                obj.selected=true;
                 this.state = "choose tile human";
             }
 
@@ -282,9 +339,48 @@ class MyGameOrchestrator extends CGFobject {
             }else if (obj.id=="Remove"){
                 if (this.state == "wait confirm" || this.state == "choose tile human"){
                     if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
+                    this.movetomake[0].selected=false;
                     this.movetomake = [];
                     this.state = "choose piece human";
                 }
+            }
+            else if (obj.id=="Change Theme"){
+                //if (this.state == "wait confirm" || this.state == "choose tile human"){
+                this.scene.hasChangedgraph=true;
+                   this.changeTheme();
+                
+            }
+            else if(obj.id == "Camera"){
+                this.prevState=this.state;
+                this.state="camera animation";
+                this.changeCamera();
+            }
+            else if (obj.id == "Undo"){
+                if (this.state == "wait confirm" || this.state == "choose tile human"){
+                    if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
+                    this.movetomake[0].selected=false;
+                    this.movetomake = [];
+                    this.state = "choose piece human";
+                }
+                this.state="choose piece human";
+                if (this.gameSequence.gameMoves.length != 0){
+                    this.undo();
+                }
+                
+            }
+            else if(obj.id == "Movie"){
+                if (this.state == "wait confirm" || this.state == "choose tile human"){
+                    if(this.movetomake[1]!=null)this.movetomake[1].selected=false;
+                    this.movetomake[0].selected=false;
+                    this.movetomake = [];
+                    this.prevState = "choose piece human";
+                }
+                else{this.prevState=this.state;}
+                if (this.gameSequence.gameMoves.length != 0){
+                    this.state="movie";
+                    this.movie();
+                }
+            
             }else if (obj.id=="Play"){
                 this.state="choose mode";
             }
@@ -343,6 +439,7 @@ class MyGameOrchestrator extends CGFobject {
         let destTile = this.movetomake[1];
         destTile.selected=false; 
         destTile.selectable = false;
+        this.movetomake[0].selected=false;
         let pieceToMove = this.movetomake[0].getTopPiece();
         let originTile = pieceToMove.getholdingCell();
         this.gameboard.movePiece(pieceToMove, destTile);
@@ -353,7 +450,36 @@ class MyGameOrchestrator extends CGFobject {
         //this.currentPlayer = (this.currentPlayer % 2) + 1;
         this.movetomake = [];
 
-        //TODO animation
+        this.animator = new MyMoveAnimator(this.scene, move);
+        this.prevState=this.state;
+        this.state = "animation";
+        //this.state = "choose piece human";
+    }
+
+
+    undo(){
+        let reverseMove = this.gameSequence.undo(this.gameboard);
+        this.currentPlayer = (this.currentPlayer % 2) + 1;
+        
+        //activate animation 
+        this.animator = new MyUndoAnimator(this.scene, reverseMove);
+        this.state="animation";
+    }
+
+    movie(){
+        this.animator = new MyMovieAnimator(this.scene, this.gameSequence.gameMoves);
+        this.state="animation";
+    }
+
+    changeCamera(){
+        let origCamID=this.scene.camerasID[this.scene.selectedCamera];
+        let originCamera = this.scene.cameras[origCamID];
+        let destCamID =(origCamID+1)%this.scene.cameras.length;
+
+        this.scene.selectedCamera = this.scene.getCameraKey(destCamID);
+        let destination = this.scene.cameras[destCamID];
+        this.animator = new MyCameraAnimator(this.scene, originCamera, destination, 3);
+
     }
 
 

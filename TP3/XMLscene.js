@@ -8,7 +8,7 @@ class XMLscene extends CGFscene {
      */
     constructor(myinterface) {
         super();
-
+        this.hasChangedgraph=false;
         this.interface = myinterface;
     }
 
@@ -21,7 +21,7 @@ class XMLscene extends CGFscene {
         this.gameOrchestrator= new MyGameOrchestrator(this);
         this.sceneInited = false;
 
-      
+       
         this.interfaceViews= new Object();
         this.lightsInterface = {};
         this.initCameras();
@@ -41,7 +41,8 @@ class XMLscene extends CGFscene {
         this.loadingProgress=0;
 
         this.defaultAppearance=new CGFappearance(this);
-
+        this.camerasID = {};
+        this.cameras = [];
         this.setPickEnabled(true);
 
     }
@@ -105,11 +106,37 @@ class XMLscene extends CGFscene {
             this.camera = new CGFcamera(0.8, 0.1, 500, vec3.fromValues(15,15, 15), vec3.fromValues(0, 0, 0));
 }
 
-initsceneCameras(){
-    this.selectedCamera=this.graph.defaultView;
-    this.camera = this.graph.views[this.graph.defaultView];
+
+
+initsceneCameras() {
+    var i=0;
+    
+
+    // Reads the cameras from the scene graph.
+    for (var key in this.gameOrchestrator.graph.views) {
+        var view = this.gameOrchestrator.graph.views[key];
+        this.cameras[i] = view;
+        this.camerasID[key] = i;
+        i++;
+    }
+    this.selectedCamera = this.gameOrchestrator.graph.defaultView;
+    this.camera = this.cameras[this.camerasID[this.gameOrchestrator.graph.defaultView]];
     this.interface.setActiveCamera(this.camera);
+   
 }
+
+getCameraKey(id){
+    for(let key in this.camerasID )
+        {
+            if(this.camerasID[key]==id)return key;
+        }
+}
+
+// initsceneCameras(){
+//     this.selectedCamera=this.graph.defaultView;
+//     this.camera = this.graph.views[this.graph.defaultView];
+//     this.interface.setActiveCamera(this.camera);
+// }
 
     /** Handler called when the graph is finally loaded. 
      * As loading is asynchronous, this may be called already after the application has started the run loop
@@ -121,14 +148,15 @@ initsceneCameras(){
 
         this.setGlobalAmbientLight(...this.graph.ambient);
         this.sceneInited = true;
-        this.interface.addCamerasFolder();
-        this.interface.addLightsFolder();
-        this.interface.addValueToggle();
-        
+        if(!this.hasChangedgraph){
+          this.interface.addCamerasFolder();
+          this.interface.addLightsFolder();
+          this.interface.addValueToggle();
+        }
         this.initLights();
         this.initsceneCameras();
         console.log(this.gameOrchestrator);
-        this.gameOrchestrator.load();
+        if(!this.hasChangedgraph)this.gameOrchestrator.load();
        
     }
 
@@ -155,19 +183,17 @@ initsceneCameras(){
 
         if (this.sceneInited) {
             // Draw axis
-            this.axis.display();
+            //this.axis.display();
          
             this.defaultAppearance.apply();
-            this.updateCameras();
+            //this.updateCameras();
             this.updateLights();
 
 
             // Displays the scene (MySceneGraph function).
             //this.graph.displayScene();
             this.gameOrchestrator.display();
-           
-            //let text=new MySpriteText(this,"hello");
-            //text.display();
+         
         }
         else
         {
@@ -201,7 +227,7 @@ initsceneCameras(){
     }
 
     update(t){
-        //this.gameOrchestrator.changeTheme();
+        this.gameOrchestrator.update(t);
         this.updateAnimations(t/1000);
     }
 

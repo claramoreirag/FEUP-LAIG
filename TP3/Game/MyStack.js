@@ -4,6 +4,7 @@ class MyStack extends CGFobject {
         this.holdingCell=null;
         this.nodeId = nodeId;
         this.node= new Node(nodeId);
+        this.selected=false;
         this.color = material;
         
         this.x=x;
@@ -20,12 +21,19 @@ class MyStack extends CGFobject {
         return this.pieces.pop();
     }
     
+
+    putPieceBack(piece){
+         this.pieces.push(piece);
+    }
     
     display(){
+        
         this.scene.pushMatrix();this.scene.translate(this.x,this.y,this.z);
-        this.scene.scale(1.1,this.pieces.length*1.1,1.1);
+        if(!this.selected)this.scene.scale(1.05,this.pieces.length*1.05,1.05);
+        else this.scene.scale(1.2,this.pieces.length*1.2,1.2);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.node.display(this.scene,[],[]);
         this.scene.popMatrix();
+        
     }
     }
