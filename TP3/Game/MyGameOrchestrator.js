@@ -118,7 +118,7 @@ class MyGameOrchestrator extends CGFobject {
                 this.reply = this.prolog.popReply();
                 if(this.reply!=null){
                   this.wins = this.reply; 
-                  this.wins=[-1,1,-1];
+                  //this.wins=[-1,1,-1];
                   console.log("wins : " + this.wins);
                   console.log("gs wins: " + this.gamestate.wins);
                   if(this.wins.toString() != this.gamestate.wins.toString()){
@@ -157,7 +157,8 @@ class MyGameOrchestrator extends CGFobject {
             case "get initial gamestate":
                 this.reply = this.prolog.popReply();
                 if(this.reply!=null){
-                  this.gamestate = this.reply.gamestate; 
+                  this.gamestate = this.reply.gamestate;
+                  this.loadPlayersButtons(); 
                   if(this.wins == null){
                     this.currentPlayer = this.gamestate.players[0];
                     this.wins = this.gamestate.wins;
@@ -205,8 +206,13 @@ class MyGameOrchestrator extends CGFobject {
         this.graph = new MySceneGraph(this.themes[this.currentTheme], this.scene);
     }
 
-    load() {
+    loadPlayersButtons(){
+        this.Player1Button = new MyButton(this.scene, this.gamestate.players[0]+"'s turn", "cinza");
+        this.Player2Button = new MyButton(this.scene, this.gamestate.players[1]+"'s turn", "cinza");
+    }
 
+    load() {
+     
         this.undoButton = new MyButton(this.scene, "Undo", "orange");
         this.exitButton = new MyButton(this.scene, "Exit", "purple");
         this.movieButton = new MyButton(this.scene, "Movie", "orange");
@@ -230,20 +236,8 @@ class MyGameOrchestrator extends CGFobject {
         this.orquestrate();
         this.managePick();
 
-        //this.graph.displayScene();
         let numberPickedObjects=1;
-        // if(this.state == "animation"){
-        //     this.gameboard.display(false, this.animator.pieces);
-        //     this.animator.display();
-        //     numberPickedObjects++;
-        //     this.displayButtons(numberPickedObjects);
-        // }
-        // else{
-        // let numberpicked = this.gameboard.display();
-        // this.displayButtons(numberpicked);
-        // }
-        // //example of request to prolog
-        // let prolog = new MyPrologInterface();
+ 
 
         switch(this.state){
           case "main menu":
@@ -289,6 +283,7 @@ class MyGameOrchestrator extends CGFobject {
             this.graph.displayScene();
             this.scoreboard.display();
             this.gameTimer.display();
+            this.displayPlayers();
             numberPickedObjects++;
             this.displayButtons(numberPickedObjects);
             break;
@@ -298,6 +293,7 @@ class MyGameOrchestrator extends CGFobject {
             this.scoreboard.display();
             this.gameTimer.display();
             this.graph.displayScene();
+            if(this.gamestate!=null)this.displayPlayers();
         }
 
     }
@@ -526,7 +522,21 @@ class MyGameOrchestrator extends CGFobject {
 
     }
 
+    displayPlayers(){
+        if(this.currentPlayer == this.gamestate.players[0]){
+            this.scene.pushMatrix();
+            this.scene.translate(3.2,3.5,1.5);
+            this.Player1Button.display();
+            this.scene.popMatrix();
+        }
+        else {
+            this.scene.pushMatrix();
+            this.scene.translate(3.2,3.5,7.5);
+            this.Player2Button.display();
+            this.scene.popMatrix();
+        }
 
+    }
     switchPlayers(){
         if(this.gamestate.players[0] == this.currentPlayer)
           this.currentPlayer = this.gamestate.players[1];
