@@ -6,17 +6,9 @@
     </initials>
     <views default="Up view">
       
-         <perspective id="CameraSide" near="0.1" far="500" angle="45">
-            <from x="-2" y="10" z="20" />
-            <to x="10" y="2" z="5" />
-        </perspective>
-        
-        <perspective id="CameraFront" near="0.1" far="500" angle="45">
-            <from x="17" y="8" z="24" />
-            <to x="11" y="2" z="-5" />
-        </perspective>
+     
 
-         <perspective id="Up view" near="0.1" far="500" angle="45">
+        <perspective id="Up view" near="0.1" far="500" angle="45">
             <from x="5" y="10" z="5" />
             <to x="5" y="5" z="4.9" />
         </perspective>
@@ -26,17 +18,21 @@
                 <to x="8" y="4" z="5" />
         </perspective>
 
-        <!-- <ortho id="ZoomOrtho" near="0.1" far="200" left="-1" right="10" top="10" bottom="-0.2">
-            <from x="0" y="0" z="10" />
-            <to x="1" y="1" z="1" />
-             <up x="0" y="3" z="0"/>
-        </ortho>
+        <perspective id="ScoreBoard view" near="0.1" far="500" angle="45">
+                <from x="14" y="6" z="5" />
+                    <to x="-2" y="4" z="5" />
+        </perspective>
 
-        <ortho id="FrontOrtho"  near="0.1" far="200" left="-2" right="13" top="10" bottom="-2" >
-            <from x="-10" y="0" z="0" />
-            <to x="10" y="0" z="0" />
-            <up x="0" y="3" z="0"/>
-        </ortho> -->
+            <perspective id="CameraSide" near="0.1" far="500" angle="45">
+            <from x="-2" y="10" z="20" />
+            <to x="10" y="2" z="5" />
+        </perspective>
+        
+        <perspective id="CameraFront" near="0.1" far="500" angle="45">
+            <from x="17" y="8" z="24" />
+            <to x="11" y="2" z="-5" />
+        </perspective>
+
     
     </views>
 
@@ -248,7 +244,7 @@
 
             <transformations>
             
-                 <translation x="13" y="17" z="0.01"/>
+                 <translation x="6.5" y="17" z="0.01"/>
                  <scale sx="1.8" sy="1.8" sz="1.8"/>
                  
             </transformations>
@@ -952,6 +948,31 @@
          </descendants>
      </node>
 
+    
+
+		<!--Porta-->
+		<node id="tapete">
+
+            <material id="null" />
+            <texture id="rug">
+                <amplification afs="1.0" aft="1.0" />
+            </texture>
+        <transformations>
+           
+           <translation x="10" y="0.01" z="10" />
+        
+          <scale sx="16" sy="14" sz="16" />
+          
+           
+        </transformations>
+
+		<descendants>
+            <leaf type="plane" npartsU="5" npartsV="5"/>
+        
+		
+		</descendants>
+
+		</node>
 
 		<!--Porta-->
 		<node id="portaAberta">

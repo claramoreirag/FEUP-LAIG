@@ -6,14 +6,7 @@
     </initials>
     <views default="Up view">
       
-         <perspective id="CameraSide" near="0.1" far="500" angle="45">
-            <from x="-2" y="10" z="20" />
-            <to x="10" y="2" z="5" />
-        </perspective>
-        <perspective id="CameraFront" near="0.1" far="500" angle="45">
-            <from x="17" y="8" z="24" />
-            <to x="11" y="2" z="-5" />
-        </perspective>
+       
 
          <perspective id="Up view" near="0.1" far="500" angle="45">
             <from x="5" y="10" z="5" />
@@ -21,22 +14,24 @@
         </perspective>
 
         <perspective id="Side view" near="0.1" far="500" angle="45">
-                <from x="-3" y="9" z="5" />
+                    <from x="-3" y="9" z="5" />
                 <to x="8" y="4" z="5" />
         </perspective>
-<!-- 
-        <ortho id="ZoomOrtho" near="0.1" far="200" left="-1" right="10" top="10" bottom="-0.2">
-            <from x="0" y="0" z="10" />
-            <to x="1" y="1" z="1" />
-             <up x="0" y="3" z="0"/>
-        </ortho>
 
-        <ortho id="FrontOrtho"  near="0.1" far="200" left="-2" right="13" top="10" bottom="-2" >
-            <from x="-10" y="0" z="0" />
-            <to x="10" y="0" z="0" />
-            <up x="0" y="3" z="0"/>
-        </ortho>
-     -->
+        <perspective id="ScoreBoard view" near="0.1" far="500" angle="45">
+                <from x="14" y="6" z="5" />
+                    <to x="-2" y="4" z="5" />
+        </perspective>
+
+            <perspective id="CameraSide" near="0.1" far="500" angle="45">
+            <from x="-2" y="10" z="20" />
+            <to x="10" y="2" z="5" />
+        </perspective>
+        
+        <perspective id="CameraFront" near="0.1" far="500" angle="45">
+            <from x="17" y="8" z="24" />
+            <to x="11" y="2" z="-5" />
+        </perspective>
     </views>
 
     <illumination>
@@ -92,8 +87,10 @@
 		<texture id="woodTexture2" path="./scenes/images/wood/wood2.jpg" />
         <texture id="pizzaTexture" path="./scenes/images/pizza.jpg" />
         <texture id="stripesTexture" path="./scenes/images/stripes.png" />
+        <texture id="nuvem" path="./scenes/images/cloud.png" />
         <texture id="background" path="./scenes/images/background.png" />
-       
+        <texture id="bush" path="./scenes/images/berry_bush.jpg" />
+         <texture id="terracotta" path="./scenes/images/terracotta.jpg" />
         <texture id="rug" path="./scenes/images/outdoor_tile.jpg" />
         <texture id="curtains" path="./scenes/images/curtains.jpg" />
         <texture id="poster" path="./scenes/images/poster.jpg" />
@@ -225,7 +222,10 @@
             <noderef id="arvore"/>
             <noderef id="arvore2"/>
             <noderef id="arvore3"/>
-            <noderef id="text"/>
+              <noderef id="arvore4"/>
+            <noderef id="arbusto1"/>
+          <noderef id="nuvens"/>
+
           
             </descendants>
         </node> 
@@ -870,7 +870,7 @@
            
            <translation x="11" y="0.01" z="10" />
         
-          <scale sx="20" sy="14" sz="20" />
+          <scale sx="30" sy="14" sz="20" />
           
            
         </transformations>
@@ -943,85 +943,6 @@
             </descendants>
 		</node>
 
-	<!--Parede -->
-		<node id="paredeFrente">
-			<material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="1.0" y="1.0" z="2.0" />
-                <scale sx="2.0" sy="2.0" sz="1.0"/>
-                <rotation axis="x" angle="-180" />
-            </transformations>
-
-
-            <descendants>
-                <noderef id="poster"/>
-                <leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
-            </descendants>
-		</node>
-
-        <!--Parede -->
-		<node id="paredeTras">
-			 <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="1.0" y="1.0" z="0.0" />
-                <scale sx="2.0" sy="2.0" sz="1.0"/>
-                <rotation axis="z" angle="180" />
-            </transformations>
-
-
-            <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
-            </descendants>
-		</node>
-
-
-        <!--Parede -->
-		<node id="paredeDireita">
-			 <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-                <translation x="2.0" y="1.0" z="1.0" />
-                <scale sx="1.0" sy="2.0" sz="2.0"/>
-                <rotation axis="y" angle="-90" />
-            </transformations>
-
-
-            <descendants>
-                <noderef id="poster2"/>
-                <leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
-            </descendants>
-		</node>
-
-        <!--Parede -->
-		<node id="paredeEsquerda">
-			 <material id="null" />
-            <texture id="null">
-                <amplification afs="1.0" aft="1.0" />
-            </texture>
-
-            <transformations>
-             <translation x="0.0" y="1.0" z="1.0" />
-                <scale sx="1.0" sy="2.0" sz="2.0"/>
-                <rotation axis="y" angle="90" /> 
-            </transformations>
-
-
-            <descendants>
-                <leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
-            </descendants>
-		</node>
-
           <!--chao teto e paredes -->
 		<node id="estruturaSala">
 			 <material id="null" />
@@ -1030,37 +951,99 @@
             </texture>
 
             <transformations>
-                <translation x="-50" y="0" z="-50"/>
+                <translation x="-70" y="0" z="-70"/>
                 <scale sx="100.0" sy="30.0" sz="100.0"/>
             </transformations>
 
 
             <descendants>
-                <!-- <noderef id="paredes" /> -->
+           
                 <noderef id="chao" />
-                <!-- <noderef id="teto" /> -->
+            
             </descendants>
+
+
 		</node>
 
-    <!--chao teto e paredes -->
-		<node id="paredes">
-			<material id="skyBlue" />
-            <texture id="clear">
-                <amplification afs="1.0" aft="1.0" />
+
+        
+
+         <node id="nuvens">
+			 <material id="null" />
+            <texture id="nuvem">
+                <amplification afs="10" aft="10" />
             </texture>
 
+
             <transformations>
+            
             </transformations>
 
             <descendants>
-                <noderef id="paredeFrente" />
-                <noderef id="paredeTras" />
-                <noderef id="paredeDireita" />
-                <noderef id="paredeEsquerda" />
+                 <noderef id="nuvem"/>
+                 <noderef id="nuvem1"/>
+                 <noderef id="nuvem2"/>
             </descendants>
 		</node>
 
 
+
+         <node id="nuvem">
+			 <material id="null" />
+            <texture id="nuvem">
+                <amplification afs="10" aft="10" />
+            </texture>
+
+
+            <transformations>
+               <translation x="2" y="30" z="-50"/> 
+                <rotation axis="x" angle="90"/>
+                <scale sx="12" sy="10" sz="10" />
+            </transformations>
+
+            <descendants>
+                 <leaf type="plane" npartsU="5" npartsV="5" />
+            </descendants>
+		</node>
+        
+         <node id="nuvem1">
+			 <material id="null" />
+            <texture id="nuvem">
+                <amplification afs="10" aft="10" />
+            </texture>
+
+
+            <transformations>
+               <translation x="-60" y="40" z="-100"/> 
+                <rotation axis="y" angle="20"/>
+                <rotation axis="x" angle="90"/>
+                <scale sx="36" sy="30" sz="30" />
+            </transformations>
+
+            <descendants>
+                 <leaf type="plane" npartsU="5" npartsV="5" />
+            </descendants>
+		</node>
+
+
+ <node id="nuvem2">
+			 <material id="null" />
+            <texture id="nuvem">
+                <amplification afs="10" aft="10" />
+            </texture>
+
+
+            <transformations>
+               <translation x="120" y="70" z="-250"/> 
+                <rotation axis="y" angle="-30"/>
+                <rotation axis="x" angle="90"/>
+                <scale sx="75" sy="30" sz="60" />
+            </transformations>
+
+            <descendants>
+                 <leaf type="plane" npartsU="5" npartsV="5" />
+            </descendants>
+		</node>
     
 
 
@@ -1143,6 +1126,26 @@
 		</node>
 
 
+
+        <node id="arvore4">
+			 <material id="null" />
+            <texture id="grass">
+                <amplification afs="1" aft="0.1" />
+            </texture>
+
+
+            <transformations>
+                <translation x="-10" y="0" z="50"/>
+                <rotation axis="x" angle="-90"/>
+               <scale sx="3" sy="3" sz="3" />
+            </transformations>
+
+            <descendants>
+                <noderef id="tronco"/>
+                <noderef id="planta3"/>
+            </descendants>
+		</node>
+
  
         <node id="arvore3">
 			 <material id="null" />
@@ -1176,6 +1179,68 @@
                 <translation x="0" y="0" z="6"/>
               
                  <scale sx="2.5" sy="2.5" sz="4" />
+            </transformations>
+
+            <descendants>
+                    <leaf type="sphere" radius="0.9" slices="20" stacks="20"/>
+            </descendants>
+		</node>
+
+
+         <node id="arbusto1">
+			 <material id="null" />
+            <texture id="grass">
+                <amplification afs="1" aft="0.1" />
+            </texture>
+
+
+            <transformations>
+                <translation x="25" y="0" z="20"/>
+                <rotation axis="x" angle="-90"/>
+               <scale sx="1.4" sy="1.4" sz="1.4" />
+            </transformations>
+
+            <descendants>
+                <noderef id="vaso"/>
+                <noderef id="planta5"/>
+            </descendants>
+		</node>
+
+
+
+  <node id="vaso">         
+        
+        <material id="null" />
+        <texture id="terracotta">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+       
+        </transformations>
+
+        <descendants>
+            <leaf type="defbarrel" base="1" middle="1.3" height="2" slices="20" stacks="20" />
+                <!-- <leaf type="cylinder" height="7" topRadius="0.40" bottomRadius="0.55" stacks="8" slices="16"/> -->
+        </descendants>
+    </node>
+
+
+
+
+
+          
+        <node id="planta5">
+			 <material id="null" />
+            <texture id="bush">
+                <amplification afs="1" aft="0.1" />
+            </texture>
+
+
+            <transformations>
+                <translation x="0" y="0" z="3.6"/>
+              
+                 <scale sx="1.7" sy="1.7" sz="2.4" />
             </transformations>
 
             <descendants>
