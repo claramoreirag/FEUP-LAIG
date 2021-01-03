@@ -22,11 +22,13 @@ class MyGameOrchestrator extends CGFobject {
         this.mode = null;
         this.wins = null;
         this.difficulty = null;
+
         this.valueInterface=[];
+        this.timeoutInterface=[];
         this.valueInterface['check win']=true;
+        this.timeoutInterface['timeout']=30;
 
         this.prolog = new MyPrologInterface();
-
     }
 
 
@@ -189,6 +191,7 @@ class MyGameOrchestrator extends CGFobject {
                 }
                 break;
             default:
+                this.gameTimer.setTimeout(this.timeoutInterface['timeout']);
                 if(this.gameTimer.on && this.gameTimer.timeoutOcurred()){
                   this.gameTimer.turnOff();
                   this.state = "switch player"; 

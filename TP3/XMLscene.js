@@ -151,7 +151,7 @@ getCameraKey(id){
         if(!this.hasChangedgraph){
           this.interface.addCamerasFolder();
           this.interface.addLightsFolder();
-          this.interface.addValueToggle();
+          this.interface.addOptionsFolder();
         }
         this.initLights();
         this.initsceneCameras();

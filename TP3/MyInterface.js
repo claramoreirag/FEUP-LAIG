@@ -65,11 +65,13 @@ class MyInterface extends CGFinterface {
         }
     }
 
-    addValueToggle(){
+    addOptionsFolder(){
       let valueInterface= this.scene.gameOrchestrator.valueInterface;
-      let valueFolder = this.gui.addFolder('Value');
+      let timeoutInterface= this.scene.gameOrchestrator.timeoutInterface;
+      let optionsFolder = this.gui.addFolder('Game Options');
 
-      valueFolder.add(valueInterface,'check win');
+      optionsFolder.add(valueInterface,'check win');
+      optionsFolder.add(timeoutInterface,'timeout');
     }
 
     addCamerasFolder(){
