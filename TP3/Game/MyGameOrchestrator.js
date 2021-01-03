@@ -499,10 +499,19 @@ class MyGameOrchestrator extends CGFobject {
 
     undo(){
         let reverseMove = this.gameSequence.undo(this.gameboard);
-        this.currentPlayer = (this.currentPlayer % 2) + 1;
+
+        let column = reverseMove.originTile.column;
+        let line = reverseMove.originTile.line;
+        this.gamestate.board[line][column]=0;
+
+        console.log("updated: ");
+        console.log(this.gamestate);
+
+        //this.currentPlayer = (this.currentPlayer % 2) + 1;
         
         //activate animation 
         this.animator = new MyUndoAnimator(this.scene, reverseMove);
+        this.prevState = "switch player";
         this.state="animation";
     }
 
