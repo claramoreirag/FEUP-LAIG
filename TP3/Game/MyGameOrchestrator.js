@@ -525,13 +525,13 @@ class MyGameOrchestrator extends CGFobject {
     displayPlayers(){
         if(this.currentPlayer == this.gamestate.players[0]){
             this.scene.pushMatrix();
-            this.scene.translate(3.2,3.5,1.5);
+            this.scene.translate(3.2,2.5,1.5);
             this.Player1Button.display();
             this.scene.popMatrix();
         }
         else {
             this.scene.pushMatrix();
-            this.scene.translate(3.2,3.5,7.5);
+            this.scene.translate(3.2,2.5,8);
             this.Player2Button.display();
             this.scene.popMatrix();
         }
