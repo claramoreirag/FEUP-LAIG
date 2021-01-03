@@ -12,6 +12,7 @@ class MyCameraAnimator extends MyAnimator {
         this.destinationCamera=destinationCamera;
     }
 
+    /** Updates camera */
     update(t){
         t=t/1000;
         if (this.initial_time==0){
@@ -37,6 +38,4 @@ class MyCameraAnimator extends MyAnimator {
         this.scene.camera=camera;
     }
 
-    display(){
-    }
 }

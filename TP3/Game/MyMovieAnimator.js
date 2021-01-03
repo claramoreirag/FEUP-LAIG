@@ -13,6 +13,7 @@ class MyMovieAnimator extends MyAnimator {
         }
     }
 
+    /** Update movie */
     update(t){
         for (let i=0; i<this.animations.length; i++){
             if(!this.animations[i].over){
@@ -24,6 +25,7 @@ class MyMovieAnimator extends MyAnimator {
             this.over=true;
     }
 
+    /** Display movie */
     display(){
         for (let i=0; i<this.animations.length; i++)
             this.animations[i].display();

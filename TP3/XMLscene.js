@@ -47,22 +47,6 @@ class XMLscene extends CGFscene {
 
     }
 
-    logPicking() {
-		if (this.pickMode == false) {
-			if (this.pickResults != null && this.pickResults.length > 0) {
-				for (var i = 0; i < this.pickResults.length; i++) {
-					var obj = this.pickResults[i][0];
-					if (obj) {
-						var customId = this.pickResults[i][1];
-						console.log("Picked object: " + obj + ", with pick id " + customId);						
-					}
-				}
-				this.pickResults.splice(0, this.pickResults.length);
-			}
-		}
-	}
-
-    
     /**
      * Initializes the scene lights with the values read from the XML file.
      */
@@ -83,7 +67,6 @@ class XMLscene extends CGFscene {
                 this.lights[i].setDiffuse(...graphLight[3]);
                 this.lights[i].setSpecular(...graphLight[4]);
         
-               // this.lights[i].setSpotCutOff(0);
                 this.lights[i].setVisible(false); // disable light geometry
                 if (graphLight[i]){
                     this.lights[i].enable();
@@ -101,10 +84,8 @@ class XMLscene extends CGFscene {
     }
 
     initCameras() {
-       
-        
             this.camera = new CGFcamera(0.8, 0.1, 500, vec3.fromValues(15,15, 15), vec3.fromValues(0, 0, 0));
-}
+    }
 
 
 
@@ -150,7 +131,6 @@ getCameraKey(id){
         }
         this.initLights();
         this.initsceneCameras();
-        console.log(this.gameOrchestrator);
         if(!this.hasChangedgraph)this.gameOrchestrator.load();
        
     }
@@ -159,7 +139,7 @@ getCameraKey(id){
      * Displays the scene.
      */
     display() {
-        
+        // ---- BEGIN Background, camera and axis setup
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -174,15 +154,9 @@ getCameraKey(id){
         this.pushMatrix();
 
         if (this.sceneInited) {
-            // Draw axis
-            //this.axis.display();
-         
             this.defaultAppearance.apply();
-            //this.updateCameras();
             this.updateLights();
-
             this.gameOrchestrator.display();
-         
         }
         else
         {

@@ -8,20 +8,24 @@ class MyGameTimer{
     this.timeSprite = new MySpriteText(scene,"00:00");
   }
 
+  /** Set timeout to s seconds */
   setTimeout(s){
     this.timeout = s;
   }
 
+  /** Turn timer on */
   turnOn(){
     this.on=true;
   }
 
+  //* Turn timer off */
   turnOff(){
     this.on=false;
     this.seconds = 0;
     this.start = 0;
   }
    
+  /** Updates elapsed time */
   update(t){
     if(this.on){
       if(this.start == 0)
@@ -32,14 +36,17 @@ class MyGameTimer{
     }
   }
 
+  /** True if time limit was reached */
   timeoutOcurred(){
     return this.timeout <= this.seconds;
   }
 
+  /** Resets current time to 0 */
   reset(){
     this.seconds = 0;
   }
 
+  /** Updates time spritetext */
   updateSprites(){
     let seconds = ("0" + (this.seconds%60).toString()).slice(-2);
     let remainder = Math.floor(this.seconds/60);
@@ -47,6 +54,7 @@ class MyGameTimer{
     this.timeSprite.setText(minutes + ":" + seconds);
   }
 
+  /** Displays timer */
   display(){
     this.scene.pushMatrix();
     this.scene.translate(1.64,4.2,6.25);
