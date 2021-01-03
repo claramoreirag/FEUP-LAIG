@@ -132,11 +132,6 @@ getCameraKey(id){
         }
 }
 
-// initsceneCameras(){
-//     this.selectedCamera=this.graph.defaultView;
-//     this.camera = this.graph.views[this.graph.defaultView];
-//     this.interface.setActiveCamera(this.camera);
-// }
 
     /** Handler called when the graph is finally loaded. 
      * As loading is asynchronous, this may be called already after the application has started the run loop
@@ -164,10 +159,7 @@ getCameraKey(id){
      * Displays the scene.
      */
     display() {
-        //this.logPicking();
-        //this.clearPickRegistration();
-        // ---- BEGIN Background, camera and axis setup
-
+        
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -189,9 +181,6 @@ getCameraKey(id){
             //this.updateCameras();
             this.updateLights();
 
-
-            // Displays the scene (MySceneGraph function).
-            //this.graph.displayScene();
             this.gameOrchestrator.display();
          
         }

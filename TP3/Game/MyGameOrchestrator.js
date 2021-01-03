@@ -238,7 +238,6 @@ class MyGameOrchestrator extends CGFobject {
     display() {
         this.orquestrate();
         this.managePick();
-
         let numberPickedObjects=1;
  
 

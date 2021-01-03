@@ -1292,6 +1292,8 @@ class MySceneGraph {
      */
     displayScene() {
         let rootNode = this.graph.getRootNode();
+        if(rootNode!=null){
         rootNode.display(this.scene,this.materialStack,this.textureStack);
+        }
     }
 }

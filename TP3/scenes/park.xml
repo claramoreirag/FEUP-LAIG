@@ -17,7 +17,7 @@
 
          <perspective id="Up view" near="0.1" far="500" angle="45">
             <from x="5" y="10" z="5" />
-            <to x="5" y="5" z="4.5" />
+            <to x="5" y="5" z="4.9" />
         </perspective>
 
         <perspective id="Side view" near="0.1" far="500" angle="45">
