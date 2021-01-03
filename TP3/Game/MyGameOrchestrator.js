@@ -126,7 +126,7 @@ class MyGameOrchestrator extends CGFobject {
                     let message= this.checkWins(this.wins,this.gamestate.wins);
                     alert(message[0]);
                     if(message[1]){
-                    this.gameboard.reset();
+                    this.reset();
                     this.state = "main menu";
                     } 
                     else this.state = "switch player";
@@ -421,7 +421,7 @@ class MyGameOrchestrator extends CGFobject {
                 this.wins= null;
                 this.difficulty = null;
                 this.gameTimer.turnOff();
-                this.gameboard.reset();
+                this.reset();
             }
 
         }
@@ -544,4 +544,8 @@ class MyGameOrchestrator extends CGFobject {
           this.currentPlayer = this.gamestate.players[0];
     }
 
+    reset(){
+        this.gameboard.reset();
+        this.gameSequence=new MyGameSequence(this.scene);
+    }
 }
