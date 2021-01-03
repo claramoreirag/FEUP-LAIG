@@ -10,12 +10,13 @@ class MyGameOrchestrator extends CGFobject {
         this.graph = new MySceneGraph(filename, scene);
         this.gameboard = new MyGameboard(scene);
         this.gameSequence= new MyGameSequence(scene);
+        this.gameTimer = new MyGameTimer(scene);
         //this.state = "choose piece human";
         this.state="main menu";
         this.player = 1;
         this.movetomake = [];
         //TODO scoreBoard
-        //this.scoreboard=
+       
 
         this.currentPlayer = null;
         this.mode = null;
@@ -63,6 +64,7 @@ class MyGameOrchestrator extends CGFobject {
         switch (this.state) {
             case "make player move":
                 this.state = "request update move";
+                this.gameTimer.turnOff();
                 this.makeMove();
                 console.log(this.lastMove);
                 break;
@@ -116,12 +118,12 @@ class MyGameOrchestrator extends CGFobject {
                 this.reply = this.prolog.popReply();
                 if(this.reply!=null){
                   this.wins = this.reply; 
-                  this.wins=[1,1,-1];
+                  this.wins=[-1,1,-1];
                   console.log("wins : " + this.wins);
                   console.log("gs wins: " + this.gamestate.wins);
                   if(this.wins.toString() != this.gamestate.wins.toString()){
+                    this.scoreboard.update(this.gamestate.players,this.wins);
                     let message= this.checkWins(this.wins,this.gamestate.wins);
-                    console.log(message);
                     alert(message[0]);
                     if(message[1]){
                     this.gameboard.reset();
@@ -141,10 +143,12 @@ class MyGameOrchestrator extends CGFobject {
             case "next player":
                 if(this.currentPlayer.includes("Bot"))
                   this.state = "choose bot move";
-                else
+                else{
                   this.state = "choose piece human";
+                  this.gameTimer.turnOn(); 
+                }
                 break;
-
+            
             case "request gamestate":
                 this.prolog.requestInitial(this.mode);
                 this.state = "get initial gamestate";
@@ -184,6 +188,11 @@ class MyGameOrchestrator extends CGFobject {
                 }
                 break;
             default:
+                if(this.gameTimer.on && this.gameTimer.timeoutOcurred()){
+                  this.gameTimer.turnOff();
+                  this.state = "switch player"; 
+                  console.log('TIMEOUT');
+                }
                 break;
         }
 
@@ -213,6 +222,7 @@ class MyGameOrchestrator extends CGFobject {
         this.easyButton= new MyButton(this.scene,"Easy","orange");
         this.hardButton= new MyButton(this.scene,"Hard","orange");
 
+        this.scoreboard=new MyScoreBoard(this.scene,this.gamestate,30);
         this.gameboard.load();
     }
 
@@ -277,12 +287,16 @@ class MyGameOrchestrator extends CGFobject {
             this.gameboard.display(false, this.animator.pieces);
             this.animator.display();
             this.graph.displayScene();
+            this.scoreboard.display();
+            this.gameTimer.display();
             numberPickedObjects++;
             this.displayButtons(numberPickedObjects);
             break;
           default:
             let numberpicked = this.gameboard.display();
             this.displayButtons(numberpicked);
+            this.scoreboard.display();
+            this.gameTimer.display();
             this.graph.displayScene();
         }
 
@@ -290,8 +304,10 @@ class MyGameOrchestrator extends CGFobject {
 
 
     update(t) {
-        if (this.animator != undefined)
+        if(this.animator != undefined)
             this.animator.update(t);
+
+        this.gameTimer.update(t);
     }
     managePick() {
     
@@ -406,6 +422,9 @@ class MyGameOrchestrator extends CGFobject {
             }
             else if(obj.id == "Exit"){
                 this.state="main menu";
+                this.wins= null;
+                this.difficulty = null;
+                this.gameTimer.turnOff();
                 this.gameboard.reset();
             }
 

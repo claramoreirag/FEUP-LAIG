@@ -168,6 +168,22 @@
             <specular r="0." g="0." b="0." a="1.0" />
             <emissive r="0" g="0." b="0" a="0" />
         </material>
+
+           <material id="branco">
+            <shininess value="1" />
+            <ambient r="0.3" g="0.3" b="0.3" a="1.0" />
+             <diffuse r="0.6" g="0.6" b="0.6" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
+
+          <material id="cinza">
+            <shininess value="1" />
+            <ambient r="0.1" g="0.1" b="0.1" a="1.0" />
+             <diffuse r="0.1" g="0.1" b="0.1" a="1.0" />
+            <specular r="0.0" g="0.0" b="0.0" a="1.0" />
+            <emissive r="0.0" g="0.0" b="0.0" a="1.0" />
+        </material>
     </materials>
 
 
@@ -238,8 +254,8 @@
         </texture>
 
         <transformations>
-            <translation x="5" y="0" z="0.1" />
-            <scale sx="1.6" sy="1" sz="2" />
+            <translation x="3.8" y="0" z="0.1" />
+            <scale sx="1.8" sy="1" sz="2" />
         </transformations>
         <descendants>
             <noderef id="pernasMesa" />
@@ -248,7 +264,6 @@
          
         </descendants>
     </node>
-
 
 
     <node id="pernasMesa">

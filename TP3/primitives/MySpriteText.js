@@ -8,6 +8,10 @@ class MySpriteText extends MySpriteSheet{
         this.geometry = new MyRectangle(scene,-0.5,-0.5,0.5,0.5);
     }
 
+    setText(text){
+      this.text=text;
+    }
+
     getCharacterPosition(character){
         // valor de '!' = valor ascii (ascii=33)
         // ate '~' (ascii = 126) 
