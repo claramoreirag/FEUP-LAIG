@@ -89,6 +89,7 @@
         <texture id="stripesTexture" path="./scenes/images/stripes.png" />
         <texture id="nuvem" path="./scenes/images/cloud.png" />
         <texture id="background" path="./scenes/images/background.png" />
+         <texture id="alliances" path="./scenes/images/Alliances.png" />
         <texture id="bush" path="./scenes/images/berry_bush.jpg" />
          <texture id="terracotta" path="./scenes/images/terracotta.jpg" />
         <texture id="rug" path="./scenes/images/outdoor_tile.jpg" />
@@ -218,7 +219,7 @@
             <noderef id="estruturaSala" />
             <noderef id="porta"/>
             <noderef id="tapete"/>
-              
+                 <noderef id="alliances"/>
             <noderef id="arvore"/>
             <noderef id="arvore2"/>
             <noderef id="arvore3"/>
@@ -854,6 +855,82 @@
 
 
 
+         
+    <node id="alliances">         
+        <material id="null" />
+        <texture id="null">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+        <translation x="-5" y="0" z="-5"/>
+          <rotation axis="y" angle="20"/>
+         <scale sx="1.4" sy="1.4" sz="1.4" />
+        </transformations>
+
+        <descendants>
+                <noderef id="cartaz" />
+             <noderef id="suporte" />
+            <noderef id="imagem" />
+        </descendants>
+    </node>
+
+<node id="imagem">
+			 <material id="null" />
+            <texture id="alliances">
+                <amplification afs="1" aft="0.1" />
+            </texture>
+
+
+            <transformations>
+                <translation x="3" y="5" z="1.5"/>
+                   <rotation axis="x" angle="70"/>
+            
+                <scale sx="4" sy="1" sz="6" />
+            </transformations>
+
+            <descendants>
+                 <leaf type="plane" npartsU="5" npartsV="5" />
+            </descendants>
+		</node>
+  <node id="suporte">            
+        <material id="null" />
+
+        <texture id="woodTexture1">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="3.0" y="0.0" z="0.35" />
+              <scale sx="1" sy="1" sz="0.5" />
+        </transformations>
+
+
+        <descendants>
+            <noderef id="pernaMesa" />
+        
+        </descendants>
+    </node>
+
+         
+    <node id="cartaz">         
+        <material id="null" />
+        <texture id="woodTexture1">
+            <amplification afs="1.0" aft="1.0" />
+        </texture>
+
+        <transformations>
+            <translation x="3" y="4.2" z="1.5" />
+              <rotation axis="x" angle="70"/>
+                 <rotation axis="y" angle="-90"/>
+            <scale sx="10" sy="0.4" sz="5" />
+        </transformations>
+
+        <descendants>
+                <noderef id="cubo" />
+            
+        </descendants>
+    </node>
 
 
       

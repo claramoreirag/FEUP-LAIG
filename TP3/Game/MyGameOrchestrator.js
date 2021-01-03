@@ -6,7 +6,7 @@ class MyGameOrchestrator extends CGFobject {
         super(scene);
         this.themes=["LAIG_TP1_T3_G03.xml","park.xml"];
         this.currentTheme=0;
-        var filename = getUrlVars()['file'] ||this.themes[0];
+        var filename = getUrlVars()['file'] ||this.themes[1];
         this.graph = new MySceneGraph(filename, scene);
         this.gameboard = new MyGameboard(scene);
         this.gameSequence= new MyGameSequence(scene);

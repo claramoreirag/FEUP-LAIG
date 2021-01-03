@@ -90,6 +90,7 @@
 		<texture id="woodTexture2" path="./scenes/images/wood/wood2.jpg" />
         <texture id="pizzaTexture" path="./scenes/images/pizza.jpg" />
         <texture id="stripesTexture" path="./scenes/images/stripes.png" />
+        <texture id="alliances" path="./scenes/images/Alliances.png" />
         <texture id="background" path="./scenes/images/background.png" />
         <texture id="lampshade" path="./scenes/images/lampshade.jpg" />
         <texture id="rug" path="./scenes/images/rug.jpg" />
@@ -1116,6 +1117,7 @@
 
 
             <descendants>
+              <noderef id="alliances"/>
                 <leaf type="rectangle" x1="-0.5" y1="-0.5" x2="0.5" y2="0.5" />
             </descendants>
 		</node>
@@ -1216,6 +1218,24 @@
             </descendants>
 		</node>
 
+ <node id="alliances">
+			 <material id="null" />
+            <texture id="alliances">
+                <amplification afs="1" aft="0.1" />
+            </texture>
+
+
+            <transformations>
+                <translation x="0.15" y="0" z="0.01"/>
+                 <rotation axis="z" angle="180"/>
+               <rotation axis="x" angle="90"/>
+                <scale sx="0.3" sy="1" sz="0.5" />
+            </transformations>
+
+            <descendants>
+                 <leaf type="plane" npartsU="5" npartsV="5" />
+            </descendants>
+		</node>
       
 
 
