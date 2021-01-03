@@ -604,11 +604,6 @@ class MySceneGraph {
             if(sizeN==null)
                 return "sizeN not defined for spritesheet";
 
-            console.log("id: ", spritesheetID);
-            console.log("path: ", spritesheetPath);
-            console.log("m: ", sizeM);
-            console.log("n: ", sizeN);
-
             let newTexture = new CGFtexture(this.scene, spritesheetPath);
             let newSpritesheet = new MySpriteSheet(this.scene,newTexture,sizeM,sizeN);
 
@@ -1292,6 +1287,8 @@ class MySceneGraph {
      */
     displayScene() {
         let rootNode = this.graph.getRootNode();
+        if(rootNode!=null){
         rootNode.display(this.scene,this.materialStack,this.textureStack);
+        }
     }
 }

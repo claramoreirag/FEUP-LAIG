@@ -47,22 +47,6 @@ class XMLscene extends CGFscene {
 
     }
 
-    logPicking() {
-		if (this.pickMode == false) {
-			if (this.pickResults != null && this.pickResults.length > 0) {
-				for (var i = 0; i < this.pickResults.length; i++) {
-					var obj = this.pickResults[i][0];
-					if (obj) {
-						var customId = this.pickResults[i][1];
-						console.log("Picked object: " + obj + ", with pick id " + customId);						
-					}
-				}
-				this.pickResults.splice(0, this.pickResults.length);
-			}
-		}
-	}
-
-    
     /**
      * Initializes the scene lights with the values read from the XML file.
      */
@@ -129,11 +113,6 @@ getCameraKey(id){
         }
 }
 
-// initsceneCameras(){
-//     this.selectedCamera=this.graph.defaultView;
-//     this.camera = this.graph.views[this.graph.defaultView];
-//     this.interface.setActiveCamera(this.camera);
-// }
 
     /** Handler called when the graph is finally loaded. 
      * As loading is asynchronous, this may be called already after the application has started the run loop
@@ -152,7 +131,6 @@ getCameraKey(id){
         }
         this.initLights();
         this.initsceneCameras();
-        console.log(this.gameOrchestrator);
         if(!this.hasChangedgraph)this.gameOrchestrator.load();
        
     }
@@ -162,7 +140,6 @@ getCameraKey(id){
      */
     display() {
         // ---- BEGIN Background, camera and axis setup
-
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -179,11 +156,7 @@ getCameraKey(id){
         if (this.sceneInited) {
             this.defaultAppearance.apply();
             this.updateLights();
-
-
-            // Displays the scene (MySceneGraph function).
             this.gameOrchestrator.display();
-         
         }
         else
         {

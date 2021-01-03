@@ -67,7 +67,6 @@ class Graph{
 class Node{
     constructor(id){
         this.id=id;
-        console.log('id:'+ id);
         this.material=null;
        
         
@@ -163,7 +162,6 @@ class Node{
        
         if(texture == null){
             texture = textureStack.pop();
-           // if(this.id=="OrangePiece1")console.log(texture);
             textureStack.push(texture);
         }
         textureStack.push(texture);
