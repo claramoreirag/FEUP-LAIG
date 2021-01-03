@@ -12,12 +12,14 @@ class MyScoreBoard{
         this.greenwinner = new MyButton(this.scene, "No One", "cinza");
     }
   
+   /** Update scoreboard */
    update(players,wins){
        if(wins[0]!=-1) this.orangewinner = new MyButton(this.scene, players[wins[0]], "cinza");
        if(wins[1]!=-1) this.purplewinner = new MyButton(this.scene, players[wins[1]], "cinza");
        if(wins[2]!=-1) this.greenwinner = new MyButton(this.scene, players[wins[2]], "cinza");
    }
   
+   /** Display scoreboard */
     display(){
       this.scene.pushMatrix();
       this.scene.translate(1.7,3.4,5);

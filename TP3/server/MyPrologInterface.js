@@ -3,14 +3,16 @@
  */
 class MyPrologInterface{
   constructor() {
-    this.port = 8081;
+    this.port = 8081; //default port
     this.reply = null;
   }
 
+  /** Change prolog server port */
   setPort(port){
     this.port=port;
   }
 
+  /** Send request to prolog server */
   sendRequest(requestString,args,requestListener){
     let request = new XMLHttpRequest();
     request.onload = requestListener;
@@ -18,7 +20,6 @@ class MyPrologInterface{
     let argument=[],func;
 
     self = this;
-
 
     if(args!=null){
       for(let i=0;i<args.length;i++){
@@ -40,18 +41,20 @@ class MyPrologInterface{
     request.send();
   }
 
+  /** Add string brackets to arrays and apostrophe to strings*/
   strRequest(obj){
     let str = "";
 
     if(Array.isArray(obj)){
       str = '['; 
+
       for(let i=0;i<obj.length;i++){
         str+=this.strRequest(obj[i]);
         if(i<obj.length-1)
           str+=',';
       }
-      str +=']';
 
+      str +=']';
       return str;
     }
     else{
@@ -65,6 +68,7 @@ class MyPrologInterface{
 
   }
 
+  /** Return prolog reply */
   popReply(){
     let reply = this.reply;
 
@@ -78,7 +82,7 @@ class MyPrologInterface{
     this.sendRequest('handshake',null,this.replyCheckConnection);
   }
 
-  // implement for different modes
+  /** Request initial gamestate */
   requestInitial(mode){
     let gameMode=mode;
     if(mode==undefined) 
@@ -99,13 +103,14 @@ class MyPrologInterface{
     this.sendRequest('initial',[gameMode,'_'],this.replyInitial);
   }
 
-  //working
+  /** Request valid moves in a gamestate */
   requestValidMoves(gamestate){
     let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
     let gs = this.strRequest(g);
     this.sendRequest('valid_moves',[gs],this.replyValidMoves);
   }
 
+  /** Request move to be executed in a gamestate */
   requestMove(gamestate,move){
     let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
     let gs = this.strRequest(g);
@@ -113,6 +118,7 @@ class MyPrologInterface{
     this.sendRequest('move',[gs,mv],this.replyMove);
   }
 
+  /** Request evaluation of gamestate's scoreboard */
   requestValue(gamestate,player){
     let playerStr = "'"+ player + "'";
     let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
@@ -120,12 +126,14 @@ class MyPrologInterface{
     this.sendRequest('value',[gs,playerStr],this.replyValue);
   }
 
+  /** Request bot move accordingly to difficulty */
   requestMoveBot(gamestate,difficulty){
     let g = [gamestate.board,gamestate.pecas,gamestate.alliances,gamestate.wins,gamestate.players,gamestate.mode];
     let gs = this.strRequest(g);
     this.sendRequest('choose_move',[gs,difficulty],this.replyMoveBot);
   }
 
+  /** Disconnect from prolog server */
   requestQuit(){
     this.sendRequest('quit',[],this.replyQuit);
   }

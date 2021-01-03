@@ -83,7 +83,6 @@ class XMLscene extends CGFscene {
                 this.lights[i].setDiffuse(...graphLight[3]);
                 this.lights[i].setSpecular(...graphLight[4]);
         
-               // this.lights[i].setSpotCutOff(0);
                 this.lights[i].setVisible(false); // disable light geometry
                 if (graphLight[i]){
                     this.lights[i].enable();
@@ -101,10 +100,8 @@ class XMLscene extends CGFscene {
     }
 
     initCameras() {
-       
-        
             this.camera = new CGFcamera(0.8, 0.1, 500, vec3.fromValues(15,15, 15), vec3.fromValues(0, 0, 0));
-}
+    }
 
 
 
@@ -164,8 +161,6 @@ getCameraKey(id){
      * Displays the scene.
      */
     display() {
-        //this.logPicking();
-        //this.clearPickRegistration();
         // ---- BEGIN Background, camera and axis setup
 
         // Clear image and depth buffer everytime we update the scene
@@ -182,16 +177,11 @@ getCameraKey(id){
         this.pushMatrix();
 
         if (this.sceneInited) {
-            // Draw axis
-            //this.axis.display();
-         
             this.defaultAppearance.apply();
-            //this.updateCameras();
             this.updateLights();
 
 
             // Displays the scene (MySceneGraph function).
-            //this.graph.displayScene();
             this.gameOrchestrator.display();
          
         }

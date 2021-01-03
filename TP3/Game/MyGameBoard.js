@@ -11,16 +11,16 @@ class MyGameboard extends CGFobject {
         this.margin=0.05;
         this.boardNode=null;
 
-        this.tiles=[];
-
         //cells that are not part of the boardGame, are just for holding pieces that are yet not on the board
         this.auxBoard=[];
 
+        this.tiles=[];
         this.pieces=[];
         this.stacks=[];
 
     }
 
+    /** Reset board to it's initial state */
     reset(){
       this.tiles=[];
       this.auxBoard=[];
@@ -29,6 +29,7 @@ class MyGameboard extends CGFobject {
       this.load();
     }
     
+    /** Load board */
     load(){
         this.yInc=0.15;
         this.xInc=1;
@@ -213,18 +214,14 @@ class MyGameboard extends CGFobject {
         }
         i+=5;
 
-
-
-        console.log(this.tiles);
-
         for(let j=1;j<5;j++){
                 this.stacks.push(new MyStack(this.scene, "stackOrange"+j.toString(), "orange",this.x+this.xInc*j,0,-this.z*1/3));
                 this.stacks.push(new MyStack(this.scene, "stackPurple"+j.toString(), "purple",this.x+this.xInc*j,0,0));
                 this.stacks.push(new MyStack(this.scene, "stackGreen"+j.toString(), "green",this.x+this.xInc*j,0,this.z*1/3));
                
         } 
-  
 
+      /** Stacks */
         let cell=0;
         for(let i=0; i<40;i++){
             let stackIndex=Math.floor(i/10);
@@ -237,36 +234,33 @@ class MyGameboard extends CGFobject {
             let pieceGreen= new MyPiece(this.scene,'GreenPiece'+i.toString(),'green',this.stacks[stackIndex*3+2]);
             pieceGreen.setholdingCell(this.auxBoard[cell++]);
             this.stacks[stackIndex*3+2].pieces.push(pieceGreen);
-            //pieceGreen.setholdingCell(this.tiles[0]);
             this.pieces.push(pieceOrange,piecePurple,pieceGreen);
         }
-          
-        console.log(this.pieces);
     }
 
 
-
+    /** Add a piece to a cell */
     addPieceToCell(piece, cell){
         cell.setPiece(piece);
         piece.setholdingCell(cell);
     }
 
+    /** Remove a piece from a cell */
     removePieceFromCell(cell){
         cell.unsetPiece();
-
     }
 
+    /** Stop cell from holding piece */
     removeCellFromPiece(piece){
         piece.unsetholdingCell();
-        
     }
 
+    /** Gets piece in a cell */
     getPieceOnCell(cell){
         return cell.getPiece();
     }
 
-    
-
+    /** moves piece to destination */
     movePiece(piece, destinationCell){
         let fromCell = piece.getholdingCell();
         this.removePieceFromCell(fromCell);
@@ -281,7 +275,7 @@ class MyGameboard extends CGFobject {
       }
     }
 
-    /** Finds Stack given it's pieces color */
+    /** Finds stack given it's pieces color */
     findStack(color){
       for(let stack of this.stacks){
         if(stack.color == color && stack.pieces.length!=0)
@@ -289,8 +283,7 @@ class MyGameboard extends CGFobject {
       }
     }
 
-    
-
+    /** Display board */
     display(pick,animatedPieces){
         this.scene.pushMatrix();
         this.scene.scale(0.5,0.5,0.5);
@@ -320,4 +313,5 @@ class MyGameboard extends CGFobject {
         this.scene.popMatrix();
         return numberRegistered;
     }
+
 }

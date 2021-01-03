@@ -21,32 +21,26 @@ class MyUndoAnimator extends MyAnimator{
         this.animation.started=true;
     }
 
-   
-
+    /** Update undo animation */
     update(t){
-       
         if(this.animation.isdone)
             this.over=true;  
         
         this.animation.update(t/1000);
     }
 
+    /** Display undo animation */
     display(){
         let mat = mat4.create();
         this.animation.apply(mat);
         mat4.scale(mat, mat, [0.5, 0.5, 0.5]);   
         mat4.translate(mat, mat, [10+this.orig.x, 5+this.orig.y, 10+this.orig.z]);
-       
-      
-      
         mat4.rotateX( mat, mat, Math.PI/2);
-        //mat4.rotateY( this.matrix, this.matrix, ry);
-       // mat4.rotateZ( this.matrix, this.matrix, rz);
         this.gameMove.movedPiece.display(mat);
        
     }
 
-    //updates the stack when animation finishes
+    /** Update the stack when animation finishes */
     finish(){
         this.gameMove.movedPiece.stack.putPieceBack(this.gameMove.movedPiece);
     }

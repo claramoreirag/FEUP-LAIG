@@ -23,6 +23,7 @@ class MyMoveAnimator extends MyAnimator{
 
    
 
+    /** Update move animation */
     update(t){
        
         if(this.animation.isdone)
@@ -31,6 +32,7 @@ class MyMoveAnimator extends MyAnimator{
         this.animation.update(t/1000);
     }
 
+    /** Update displayed animation */
     display(){
         let mat = mat4.create();
         this.animation.apply(mat);
