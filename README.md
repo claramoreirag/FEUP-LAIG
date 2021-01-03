@@ -44,6 +44,11 @@
 
 ----
 
-### [TP3 - ...](TP3)
-- (items briefly describing main strong points)
+### [TP3 - Alliances Game](TP3)
+- Main strong points
+  - All necessary features were implemented
+- Scene
+  - Two different scenes:
+    - A game room;
+    - A park;
 
