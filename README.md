@@ -48,6 +48,7 @@ Project developed for the LAIG course, part of the Integrated Master's in Inform
   - [Link to the scene](./TP2/scenes/LAIG_TP1_T3_G03.xml)
 
 **Grade:** 19/20
+  
 ----
 
 ### [TP3 - Alliances Game](TP3)
