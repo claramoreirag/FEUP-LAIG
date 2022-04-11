@@ -1,4 +1,7 @@
 # LAIG 2020/2021
+Project developed for the LAIG course, part of the Integrated Master's in Informatics and Computing Engeneering @FEUP
+
+**Topics:** Graphical Interfaces, Game Development
 
 ## Group T03G03
 | Name             | Number    | E-Mail               |
@@ -23,6 +26,8 @@
   - On top of the table there's a computer screen, a donnut and a slice of pizza.
   - [Link to the scene](./TP1/scenes/LAIG_TP1_T3_G03.xml)
 
+**Grade:** 18/20
+
 -----
 
 ### [TP2 - Animations, Spritesheets and Surfaces](TP2)
@@ -42,6 +47,7 @@
     - Animation of the bat getting inside the room
   - [Link to the scene](./TP2/scenes/LAIG_TP1_T3_G03.xml)
 
+**Grade:** 19/20
 ----
 
 ### [TP3 - Alliances Game](TP3)
@@ -52,3 +58,4 @@
     - A game room;
     - A park;
 
+**Grade:** 18/20
